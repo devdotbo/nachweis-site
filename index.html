@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nachweis</title>
+<meta name="description" content="Nachweis helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#top">Nachweis</a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#copies">Copies</a>
+    <a href="#wallet">The wallet</a>
+    <a href="#demo">Who sees what</a>
+    <a href="#doors">Two doors</a>
+    <a href="#proof">The proof</a>
+    <a href="#why">Why now</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero scene" id="hero">
+  <div class="copies-bg" aria-hidden="true">
+    <div class="doc d0"></div><div class="doc d1"></div><div class="doc d2"></div><div class="doc d3"></div>
+    <div class="doc d4"></div><div class="doc d5"></div><div class="doc d6"></div><div class="doc d7"></div>
+    <div class="doc d8"></div><div class="doc d9"></div>
+  </div>
+  <div class="hero-inner">
+    <p class="eyebrow">Nachweis <span class="dot"></span> ETHOnline 2026</p>
+    <h1 class="hook">How many strangers keep a copy of your <em>passport</em>?</h1>
+    <p class="lede">Every exchange, launchpad and fund asks for your ID and keeps it. Nachweis lets the state ID wallet on your phone do that job once, and puts only the issuer's decision on chain.</p>
+    <p class="spoken">"Your ID wallet should work where you invest."</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#demo" id="cta-demo">See what the chain sees</a>
+      <a class="btn btn-ghost" href="#copies">Why it matters</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span></span></div>
+</section>
+
+<!-- SCENE 1: COPIES -->
+<section class="scene s-copies" id="copies">
+  <div class="wrap">
+    <p class="label reveal">The status quo</p>
+    <h2 class="display reveal">Identity in crypto is still <span class="coral">custodial</span>.</h2>
+    <p class="body reveal">You upload your passport. They keep it. Dozens of copies of you sit in dozens of databases, and every one of them is a target.</p>
+
+    <div class="breaches">
+      <!-- Source: https://www.cm-alliance.com/coinbase-cyber-attack-timeline (69,461 affected, Maine AG filing) and https://www.coinbase.com/blog/protecting-our-customers-standing-up-to-extortionists (government ID images, USD 20 million demand, bribed support contractors) -->
+      <article class="breach reveal">
+        <p class="big">69,461</p>
+        <p class="when">Coinbase, May 2025</p>
+        <p class="what">customers' records, including government ID images, copied by bribed support contractors. The extortion demand: 20 million dollars.</p>
+      </article>
+      <!-- Source: https://www.ledger.com/message-ledgers-ceo-data-leak (1 million email addresses, 272,000 names, home addresses and phone numbers, dumped 2020-12-20) -->
+      <article class="breach reveal">
+        <p class="big">272,000</p>
+        <p class="when">Ledger, December 2020</p>
+        <p class="what">customers' names, home addresses and phone numbers dumped on a public forum, next to more than a million email addresses.</p>
+      </article>
+      <!-- Source: https://cybernews.com/security/iranian-crypto-exchange-leaks-passports/ (230,000 users, passports, ID cards and selfies, misconfigured storage, January 2024) -->
+      <article class="breach reveal">
+        <p class="big">230,000</p>
+        <p class="when">Bit24.cash, January 2024</p>
+        <p class="what">users' passports, ID cards and selfies exposed by an exchange's misconfigured KYC storage.</p>
+      </article>
+    </div>
+
+    <p class="punch reveal">Crypto fixed custodial money. <strong>Your keys, your coins.</strong><br>Identity never got its turn.</p>
+  </div>
+</section>
+
+<!-- SCENE 2: THE WALLET YOU HOLD -->
+<section class="scene s-wallet" id="wallet">
+  <div class="wrap two-col">
+    <div class="col-text">
+      <p class="label reveal">The turn</p>
+      <h2 class="display reveal">The first ID you <span class="yellow">hold yourself</span>.</h2>
+      <p class="body reveal">By 2027 every EU state must offer a digital identity wallet. By accident of law it is the first identity document that lives on your phone and answers to you.</p>
+      <ul class="points">
+        <li class="reveal"><span class="pt">The state signs.</span> Once. Then it hands the credential to you.</li>
+        <li class="reveal"><span class="pt">You hold.</span> It lives on your phone, not on a server.</li>
+        <li class="reveal"><span class="pt">You choose.</span> Show three fields, keep the rest. Selective disclosure is the default.</li>
+        <!-- Source: eIDAS 2, Regulation (EU) 2024/1183, Art. 5a(16)(a): no tracking by the wallet provider. https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1183 -->
+        <li class="reveal"><span class="pt">The provider cannot watch.</span> The law bars the wallet provider from tracking how you use it (eIDAS 2, Art. 5a(16)).</li>
+      </ul>
+      <p class="kicker reveal">The state becomes a <span class="yellow">signer</span>, not a watcher. Less state visibility than today, not more.</p>
+    </div>
+    <div class="col-art reveal">
+      <div class="phone" aria-hidden="true">
+        <div class="phone-notch"></div>
+        <div class="pid">
+          <div class="pid-head"><span class="stars"></span><span>Personal ID (sample)</span></div>
+          <div class="pid-row on"><span>Given name</span><b>Lena</b></div>
+          <div class="pid-row on"><span>Family name</span><b>Vogt</b></div>
+          <div class="pid-row on"><span>Over 18</span><b>yes</b></div>
+          <div class="pid-row off"><span>Date of birth</span><b>kept</b></div>
+          <div class="pid-row off"><span>Address</span><b>kept</b></div>
+          <div class="pid-row off"><span>Nationality</span><b>kept</b></div>
+          <div class="pid-sig">signed by the test wallet <i></i></div>
+        </div>
+        <div class="phone-eye" title="provider cannot watch"><span></span></div>
+      </div>
+      <p class="art-cap">Three fields shared. Everything else stays on the phone. Sample identity from the official test wallet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 3: WHO SEES WHAT (interactive) -->
+<section class="scene s-demo" id="demo">
+  <div class="wrap">
+    <p class="label reveal">Interactive</p>
+    <h2 class="display reveal">Who sees <span class="mint">what</span>.</h2>
+    <p class="body reveal">Click through one onboarding with a sample identity. Watch the right pane. The chain never learns your name.</p>
+
+    <div class="demo" id="demo-app">
+      <div class="steps" role="group" aria-label="Demo steps">
+        <button class="step" data-step="present" type="button"><span class="n">1</span>Present</button>
+        <button class="step" data-step="approve" type="button" disabled><span class="n">2</span>Approve</button>
+        <button class="step" data-step="bind" type="button" disabled><span class="n">3</span>Bind wallet</button>
+        <button class="step" data-step="use" type="button" disabled><span class="n">4</span>Subscribe and swap</button>
+        <button class="step step-revoke" data-step="revoke" type="button" disabled><span class="n">5</span>Revoke</button>
+        <button class="step step-reset" data-step="reset" type="button">Reset</button>
+      </div>
+
+      <div class="panes">
+        <section class="pane pane-you" aria-labelledby="p-you">
+          <h3 id="p-you">You</h3>
+          <div class="pane-body" id="pane-you" aria-live="polite">
+            <p class="empty">The official test wallet, on your phone. Sample identity.</p>
+          </div>
+        </section>
+        <section class="pane pane-issuer" aria-labelledby="p-issuer">
+          <h3 id="p-issuer">The issuer</h3>
+          <div class="pane-body" id="pane-issuer" aria-live="polite">
+            <p class="empty">A fund issuer. It has a customer record, no passport copy.</p>
+          </div>
+        </section>
+        <section class="pane pane-chain" aria-labelledby="p-chain">
+          <h3 id="p-chain">The chain</h3>
+          <div class="pane-body" id="pane-chain" aria-live="polite">
+            <p class="empty">Public. Anyone can read this pane.</p>
+          </div>
+          <div class="doors-mini" id="doors-mini">
+            <div class="mini-door" data-door="fund"><span class="leaf"></span><span class="tag">Fund</span><span class="state">closed</span></div>
+            <div class="mini-door" data-door="pool"><span class="leaf"></span><span class="tag">Pool</span><span class="state">closed</span></div>
+          </div>
+        </section>
+      </div>
+      <p class="demo-note" id="demo-note">Step 1: the test wallet answers the issuer's registered request.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 4: TWO DOORS -->
+<section class="scene s-doors" id="doors">
+  <div class="wrap">
+    <p class="label reveal">One permission</p>
+    <h2 class="display reveal">Two doors, <span class="mint">one</span> permission.</h2>
+    <p class="body reveal">The issuer's approval is a few bits on chain. The fund token reads them. The Uniswap permissioned pool reads the same bits. One revoke, both doors close.</p>
+
+    <div class="doors-stage reveal" id="doors-stage" data-open="true">
+      <div class="door" id="door-fund">
+        <div class="frame"><div class="leaf"><span class="handle"></span></div><div class="light"></div></div>
+        <p class="door-name">Fund subscription</p>
+        <p class="door-state">open</p>
+      </div>
+      <div class="permit" aria-hidden="true">
+        <span class="bit">over18: 1</span><span class="bit">evidence: 1</span><span class="bit">tier A</span><span class="bit">exp 2026-10-07</span>
+      </div>
+      <div class="door" id="door-pool">
+        <div class="frame"><div class="leaf"><span class="handle"></span></div><div class="light"></div></div>
+        <p class="door-name">Uniswap permissioned pool</p>
+        <p class="door-state">open</p>
+      </div>
+    </div>
+    <div class="cta-row center reveal">
+      <button class="btn btn-coral" id="doors-toggle" type="button">Revoke once</button>
+    </div>
+  </div>
+</section>
+
+<!-- SCENE 5: WHAT WE ARE NOT -->
+<section class="scene s-not" id="not">
+  <div class="wrap">
+    <h2 class="display reveal">What we are <span class="coral">not</span>.</h2>
+    <ul class="nots">
+      <li class="reveal"><s>KYC as a service.</s><span>The issuer verifies. The issuer decides.</span></li>
+      <li class="reveal"><s>A data holder.</s><span>We store no document, because we never receive one.</span></li>
+      <li class="reveal"><s>A wallet.</s><span>The state wallet is the wallet.</span></li>
+      <li class="reveal"><em>We carry the decision.</em><span>From the issuer to every venue it controls.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- SCENE 6: HONEST ABOUT THE DEMO -->
+<section class="scene s-honest" id="honest">
+  <div class="wrap">
+    <p class="label reveal">Honest about the demo</p>
+    <ul class="honest-strip reveal">
+      <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in this build.</li>
+      <li><b>Simulated checks</b>Sanctions and other checks are stubs in this build.</li>
+      <li><b>Software prover</b>The zero-knowledge exhibit runs a software prover, not the official wallet.</li>
+      <li><b>Manual withdrawal</b>Revocation is triggered by hand.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SCENE 6b: WHERE THE PROOF LIVES -->
+<section class="scene s-proof" id="proof">
+  <div class="wrap">
+    <p class="label reveal">Deployment</p>
+    <h2 class="display reveal">Where the <span class="blue">proof</span> lives.</h2>
+    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice.</p>
+    <ol class="proof-steps reveal">
+      <li class="proof-step is-now">
+        <span class="proof-when">Today</span>
+        <span class="proof-where">Our verifier</span>
+        <p>Our verifier checks the presentation and generates the zero-knowledge proof. The chain sees policy, tier, expiry and a bound address. Never a name.</p>
+      </li>
+      <li class="proof-step">
+        <span class="proof-when">Next</span>
+        <span class="proof-where">Your device</span>
+        <p>The proof moves to your own device. Our server becomes a blind relay that cannot open the response. Same contract, same chain record.</p>
+      </li>
+      <li class="proof-step">
+        <span class="proof-when">When wallets ship provers</span>
+        <span class="proof-where">The wallet</span>
+        <p>The wallet proves on the phone. Our verifier already accepts Longfellow proofs. Nothing on chain changes.</p>
+      </li>
+    </ol>
+    <p class="proof-close reveal">Three steps, <span class="blue">one interface</span>.</p>
+  </div>
+</section>
+
+<!-- SCENE 7: WHY NOW -->
+<section class="scene s-why" id="why">
+  <div class="wrap">
+    <p class="label reveal">Why now</p>
+    <p class="year reveal" aria-hidden="true">2027</p>
+    <h2 class="display reveal">The wallet arrives. <span class="blue">Finance has to accept it.</span></h2>
+    <div class="why-grid">
+      <!-- Source: eIDAS 2, Art 5a (wallet obligation) and Art 5f(2) mandatory acceptance in banking and financial services. https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1183 -->
+      <p class="reveal">By 2027 every EU state must offer the wallet, and banks and financial services must accept it.</p>
+      <p class="reveal">Every gated venue today filters by residence and sanctions through its own document funnel. Each funnel is another copy.</p>
+      <p class="reveal">Nachweis is the first product to plug the state wallet into on-chain finance without copying a single document.</p>
+    </div>
+    <div class="built reveal">
+      <span class="built-label">Built on</span>
+      <span class="chip">Uniswap Permissioned Pools</span>
+      <span class="chip">Privy</span>
+      <span class="chip">Chainlink CRE</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="brand">Nachweis <span class="foot-domain">nachweis.dev</span></span>
+  <span>ETHOnline 2026</span>
+  <span class="foot-tag">no document on chain</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
