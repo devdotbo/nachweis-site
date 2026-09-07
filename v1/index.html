@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why does every fund need its own copy of your ID?</title>
+<meta name="description" content="Nachweis helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 fill=%27%23003399%27/%3E%3Ccircle cx=%278%27 cy=%278%27 r=%273%27 fill=%27%23FFCC00%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="doc">
+
+  <header class="mast">
+    <span class="wordmark"><span class="mark" aria-hidden="true"></span>Nachweis</span>
+    <span class="file">ETHOnline 2026 &middot; submission 2026-09-13 &middot; state 2026-09-07</span>
+  </header>
+
+  <section class="hero" aria-labelledby="q">
+    <div class="word">
+      <p class="eyebrow">Issuer-side EUDI wallet integration for token issuers</p>
+      <h1 id="q">Why does every fund need its own copy of your ID?</h1>
+      <p class="lead">Nachweis helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.</p>
+      <p class="spoken"><span class="k">Spoken opening</span>Your ID wallet should work where you invest.</p>
+      <div class="cta">
+        <a class="button" href="#scene">Watch the scene</a>
+        <a class="button secondary" href="#real">What is real today</a>
+      </div>
+    </div>
+    <figure class="record" aria-label="What the Sepolia registry stores for one address: predicate bits, tier, expiry, policy id, no name">
+      <figcaption class="k">What the chain sees for one address</figcaption>
+      <dl class="fields">
+        <div><dt>subject</dt><dd>0x7a3f&hellip;c41e</dd></div>
+        <div><dt>predicates</dt><dd class="bits"><span class="on" title="bit 0 over 18">1</span><span title="bit 1">0</span><span title="bit 2">0</span><span title="bit 3">0</span><span class="on" title="bit 4 address bound">1</span><span>0</span><span>0</span><span>0</span></dd></div>
+        <div><dt>tier</dt><dd>1 &middot; state PID, sandbox trust</dd></div>
+        <div><dt>expiresAt</dt><dd>2026-10-07</dd></div>
+        <div><dt>policyId</dt><dd>0x9c02&hellip;e7b8</dd></div>
+        <div><dt>given_name</dt><dd class="none">not stored</dd></div>
+        <div><dt>family_name</dt><dd class="none">not stored</dd></div>
+        <div><dt>document</dt><dd class="none">not stored</dd></div>
+      </dl>
+      <span class="stamp" aria-hidden="true">No document on chain</span>
+    </figure>
+  </section>
+
+  <section class="row" id="person" aria-labelledby="h-person">
+    <h2 class="rail" id="h-person">The person</h2>
+    <div class="body">
+      <p class="big">Lena finished onboarding with a fund issuer last month. Now she wants to subscribe to its tokenized fund share from her own wallet, and later trade it in a pool.</p>
+      <div class="two">
+        <div class="col">
+          <h3>Today</h3>
+          <p>Each issuer identifies her from scratch: a document scan, a video call or a vendor session, and a copy of her ID in each issuer's file. When she brings her own wallet, the address sits on the issuer's allowlist and every venue that lists the token inherits that list.</p>
+        </div>
+        <div class="col">
+          <h3>With Nachweis</h3>
+          <p>The issuer asks her state ID wallet for exactly three things: given name, family name, over 18. It matches them to its own record, approves, and writes a decision for her address to a registry. The fund token and the pool read that decision. Neither learns her name.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="scene" aria-labelledby="h-scene">
+    <h2 class="rail" id="h-scene">The scene<span class="sub">The video, six beats plus one, under three minutes</span></h2>
+    <div class="body">
+      <ol class="beats">
+        <li class="beat">
+          <span class="n">1</span>
+          <div class="frame phone"><div class="screen"><span class="chip red">identity evidence required</span><i class="bar w60"></i><i class="bar w40"></i></div></div>
+          <h3>Lena opens the fund app from her own wallet</h3>
+          <p>Demo fund issuer, test assets. Her address is not yet permitted.</p>
+          <p class="cap">caption: identity evidence required</p>
+        </li>
+        <li class="beat">
+          <span class="n">2</span>
+          <div class="frame phone"><div class="screen"><div class="qr" aria-hidden="true"></div><i class="bar w60"></i><i class="bar w40"></i></div></div>
+          <h3>One tap in the official sandbox wallet</h3>
+          <p>The wallet shows the registered request: given name, family name, over 18. She approves.</p>
+          <p class="cap">caption: sandbox wallet &middot; names go to the issuer, not to the chain</p>
+        </li>
+        <li class="beat">
+          <span class="n">3</span>
+          <div class="frame desk"><div class="screen"><i class="bar w80"></i><span class="chip">record match: name + age</span><span class="chip hatch">sanctions: simulated</span><span class="chip hatch">other CDD: simulated</span><span class="chip blue">Approve</span></div></div>
+          <h3>The issuer matches its record and approves</h3>
+          <p>A separate approval event. Then the address is permitted; the explorer shows bits, tier, expiry, policy id.</p>
+          <p class="cap">caption: remaining checks simulated</p>
+        </li>
+        <li class="beat">
+          <span class="n">3a</span>
+          <div class="frame phone"><div class="screen"><code class="sig">sign(nonce)<br>0x7a3f&hellip;c41e</code><i class="bar w40"></i></div></div>
+          <h3>Address control</h3>
+          <p>Her wallet signs a nonce with the Ethereum key, binding the presentation to the address.</p>
+          <p class="cap">caption: signed by the Privy wallet, not by the EUDI wallet</p>
+        </li>
+        <li class="beat">
+          <span class="n">4</span>
+          <div class="frame phone"><div class="screen"><span class="chip blue">subscribed</span><span class="chip blue">swapped</span><i class="bar w60"></i></div></div>
+          <h3>Subscribe, then swap, no second presentation</h3>
+          <p>Test assets into the fund token, then a swap in the Uniswap permissioned pool.</p>
+          <p class="cap">spoken: one permission, two doors</p>
+        </li>
+        <li class="beat">
+          <span class="n">5</span>
+          <div class="frame term"><div class="screen"><code>verifier-zk<br>over_18 &middot; issuing_country<br>proof: ok</code></div></div>
+          <h3>Ten seconds of zero knowledge</h3>
+          <p>Longfellow proof over Google's unmodified circuit, verified fail-closed. No names in the request.</p>
+          <p class="cap">caption: software prover, the official wallet does not produce this proof</p>
+        </li>
+        <li class="beat">
+          <span class="n">6</span>
+          <div class="frame doors"><div class="door"><span>fund</span><b>refused</b></div><div class="door"><span>pool</span><b>refused</b></div></div>
+          <h3>The issuer withdraws approval</h3>
+          <p>Fund and pool both refuse. One revoke closes both doors.</p>
+          <p class="cap">caption: manual withdrawal</p>
+        </li>
+        <li class="beat closing">
+          <span class="n">end</span>
+          <p class="card-line">Nachweis helps token issuers accept digital ID wallets and carry their approval into the financial apps their customers use, without putting identity documents on chain.</p>
+          <p class="cap">closing card: no document on chain</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="row" id="how" aria-labelledby="h-how">
+    <h2 class="rail" id="h-how">How it works</h2>
+    <div class="body">
+      <div class="flow">
+        <div class="stage">
+          <h3>Input</h3>
+          <p>State ID wallet, SD-JWT PID over OpenID4VP. Issuer trust enforced, status list checked, fail-closed.</p>
+          <p class="fine">Later: mdoc with ZK proof, zkPassport as a labelled lower tier.</p>
+        </div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="stage decision">
+          <h3>Decision</h3>
+          <pre class="obj">EligibilityDecision
+  subject     address, proven by signed nonce
+  predicates  uint16 bits, no attribute in clear
+  tier        1 state PID &middot; 2 passport ZK
+  expiresAt   min(credential expiry, policy ttl)
+  policyId    keccak of the published policy
+  statusRef   points at the revocation bit</pre>
+          <p class="fine">Signed by the issuer's verifier, written to a registry on Sepolia. Names never enter the object.</p>
+        </div>
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="stage">
+          <h3>Outputs</h3>
+          <p>Fund token transfer check reads the registry. Uniswap <code>IAllowlistChecker</code> reads the same entry.</p>
+          <p class="fine">Later, one adapter each: ERC-3643 claim issuer, EAS schema, x402 challenge for APIs.</p>
+        </div>
+      </div>
+      <p class="note">One revoke in the registry closes every door at once; the consumers share nothing but the schema.</p>
+    </div>
+  </section>
+
+  <section class="row" id="real" aria-labelledby="h-real">
+    <h2 class="rail" id="h-real">What is real<span class="sub">No hackathon code exists as of 2026-09-07</span></h2>
+    <div class="body">
+      <div class="status">
+        <div class="tier real">
+          <h3><i class="key"></i>Real today</h3>
+          <ul>
+            <li>OpenID4VP verifier with sandbox issuer trust</li>
+            <li>SD-JWT PID, selective disclosure</li>
+            <li>Status-list revocation, fail-closed</li>
+            <li>Longfellow ZK verifier, software prover</li>
+            <li>Sandbox wallet presentations on a phone, 2026-06-25; this verifier's registered request end to end is gate G0, today</li>
+          </ul>
+        </div>
+        <div class="tier build">
+          <h3><i class="key"></i>Build this week</h3>
+          <ul>
+            <li>Registry and fund token contracts on Sepolia</li>
+            <li>Signed predicate endpoint, names never in the response</li>
+            <li>Ethereum address binding: nonce signed by the Privy wallet, not by the EUDI wallet</li>
+            <li>Uniswap permissioned pool, one swap from a script</li>
+            <li>Privy front end, one screen per beat</li>
+          </ul>
+        </div>
+        <div class="tier sim">
+          <h3><i class="key"></i>Simulated</h3>
+          <ul>
+            <li>Sanctions screening at the issuer</li>
+            <li>Every other customer due diligence check at the issuer</li>
+            <li>Labelled on screen in beat 3, never claimed as done</li>
+          </ul>
+        </div>
+        <div class="tier stretch">
+          <h3><i class="key"></i>Stretch or conditional</h3>
+          <ul>
+            <li>Chainlink CRE confidential workflow, kill Sep 9</li>
+            <li>zkPassport tier B, kill Sep 9 evening</li>
+            <li>On-phone ZK proof, decided at G2 on Sep 10</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row" id="why" aria-labelledby="h-why">
+    <h2 class="rail" id="h-why">Why now</h2>
+    <div class="body">
+      <div class="facts">
+        <div class="fact">
+          <span class="num">2027</span>
+          <p>From 2027, eIDAS 2.0 obliges regulated relying parties to accept the state wallet where they identify customers. Wiki reading of the regulation; the exact article and date per sector are unverified here.</p>
+        </div>
+        <div class="fact">
+          <span class="num">0 of 5,446</span>
+          <p>Showcase projects across ETHGlobal events that mention the EUDI wallet. Of 302 identity projects, 6 reached a final, each with identity inside a product a person wanted, none as a layer.</p>
+        </div>
+        <div class="fact">
+          <span class="num">0</span>
+          <p>Live products that accept an external eligibility attestation without a contract. Coinbase and Kraken each have one attester; Uniswap's permissioned factory has no adapter on mainnet.</p>
+        </div>
+      </div>
+      <p class="note">Read the third fact both ways: nobody plugs us in this year, and the issuer is therefore the only buyer.</p>
+    </div>
+  </section>
+
+  <section class="row" id="open" aria-labelledby="h-open">
+    <h2 class="rail" id="h-open">Who pays, and what is open</h2>
+    <div class="body">
+      <p class="big">The buyer is a fund issuer or transfer agent that must identify investors and already keeps an allowlist. No operator has been contacted. The after-event gate is a named operator accepting a measurable pilot by 2027-03-31.</p>
+      <h3 class="qh">Questions to the builder</h3>
+      <ol class="qs">
+        <li><b>Matching.</b> Name plus age is not a unique identifier. How does the issuer match the presentation to its investor record? Beat 3 assumes it can.</li>
+        <li><b>Binding.</b> The address binding is signed by the Privy key, not by the EUDI wallet. Is that acceptable to say on camera?</li>
+        <li><b>Privy.</b> Privy has no Continuity track; eligibility for the reused verifier is unanswered since Sep 1. Ask again, or plan without the prize?</li>
+        <li><b>Uniswap.</b> The track is "Stack Contribution" and submissions are audited. Does a checker contract on an unmodified factory count?</li>
+        <li><b>Names.</b> The moderator wanted "we hold no data". The scene sends names to the issuer. Which sentence do you say?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="row" id="week" aria-labelledby="h-week">
+    <h2 class="rail" id="h-week">The week</h2>
+    <div class="body">
+      <ol class="timeline">
+        <li><time>Sep 7</time><b>G0</b><p>Registered request end to end from the Android sandbox wallet, issuer trust enforced.</p><p class="kill">Fails: stop this plan; fallback is the small sandbox over-ask submission.</p></li>
+        <li><time>Sep 8</time><b>G1</b><p>Refuse, present, approve, bind, subscribe, swap, withdraw, both refuse, on Sepolia.</p><p class="kill">Fails: kill.</p></li>
+        <li><time>Sep 9</time><b>Kills</b><p>CRE simulator write not done: drop Chainlink, no substitute. zkPassport not proven in two attempts: drop tier B.</p></li>
+        <li><time>Sep 10</time><b>G2</b><p>On-phone ZK legs green, or the stretch is dropped.</p></li>
+        <li><time>Sep 11</time><b>G3</b><p>Feature freeze.</p></li>
+        <li><time>Sep 12</time><b>Video</b><p>Builder's voice, live screens, one caption per beat.</p></li>
+        <li><time>Sep 13</time><b>Submit</b><p>12:00 EDT. README with reuse disclosure, FEEDBACK.md, sponsor forms.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="tracks">
+      <h2 class="k">Tracks</h2>
+      <dl>
+        <div><dt>Uniswap, Best Stack Contribution</dt><dd>Public repo, FEEDBACK.md, feedback form, README pointing to the exact contract lines; reviewed and audited.</dd></div>
+        <div><dt>Privy, Best financial flow</dt><dd>At least one Privy wallet and one generally available financial flow, working demo and source.</dd></div>
+        <div><dt>Chainlink, Best Confidential Workflow (conditional)</dt><dd>A CRE workflow with a handlerInTee that processes one sensitive input inside the enclave.</dd></div>
+      </dl>
+    </div>
+    <div class="sources">
+      <h2 class="k">Sources</h2>
+      <ul>
+        <li>/Users/bioharz/git/ethglobal/new-path/eudi-zk/wiki/build-plan.md</li>
+        <li>/Users/bioharz/git/ethglobal/new-path/eudi-zk/wiki/verdict-2026-09-06.md</li>
+        <li>/Users/bioharz/git/ethglobal/new-path/eudi-zk/wiki/synthesis.md</li>
+        <li>/Users/bioharz/git/ethglobal/new-path/ai-jury/gpt-turn-10-verdict-2026-09-06.md</li>
+        <li>/Users/bioharz/git/ethglobal/new-path/eudi-zk/raw/teammate-memos/2026-09-06-pluggable-architecture.md</li>
+        <li>/Users/bioharz/git/ethglobal/new-path/eudi-zk/raw/teammate-memos/2026-09-06-live-gated-products.md</li>
+        <li>/Users/bioharz/git/ethglobal/ethonline2026/wiki/ethonline2026-prizes.md</li>
+      </ul>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
