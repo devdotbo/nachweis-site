@@ -1,4 +1,4 @@
-/* Nachweis pitch site: scroll reveals, the "Who sees what" state machine, the two doors. Vanilla JS. */
+/* Attestat pitch site (repository name nachweis-site): scroll reveals, the "Who sees what" state machine, the two doors. Vanilla JS. */
 (function () {
   "use strict";
   document.documentElement.classList.add("js");
@@ -77,7 +77,7 @@
       row(panes.you, "Over 18", "yes", "good", 240);
       row(panes.you, "Date of birth", "not shared", "struck", 320);
       row(panes.you, "Address", "not shared", "struck", 400);
-      row(panes.you, "Document image", "does not exist", "struck", 480);
+      row(panes.you, "Document image", "not requested", "struck", 480);
       flash("you");
       setTimeout(function () {
         clearEmpty(panes.issuer);

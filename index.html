@@ -3,14 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nachweis</title>
-<meta name="description" content="Nachweis helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.">
+<title>Attestat</title>
+<meta name="description" content="Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Attestat">
+<meta property="og:title" content="Attestat: your ID wallet should work where you invest">
+<meta property="og:description" content="Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.">
+<meta property="og:url" content="https://attestat.dev/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Attestat: your ID wallet should work where you invest">
+<meta name="twitter:description" content="Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.">
+<link rel="canonical" href="https://attestat.dev/">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="top">
-  <a class="brand" href="#top">Nachweis</a>
+  <a class="brand" href="#top">Attestat</a>
   <nav class="topnav" aria-label="Sections">
     <a href="#copies">Copies</a>
     <a href="#wallet">The wallet</a>
@@ -18,6 +27,7 @@
     <a href="#doors">Two doors</a>
     <a href="#proof">The proof</a>
     <a href="#why">Why now</a>
+    <a href="https://github.com/devdotbo/nachweis-app">Code</a>
   </nav>
 </header>
 
@@ -31,9 +41,9 @@
     <div class="doc d8"></div><div class="doc d9"></div>
   </div>
   <div class="hero-inner">
-    <p class="eyebrow">Nachweis <span class="dot"></span> ETHOnline 2026</p>
+    <p class="eyebrow">Attestat <span class="dot"></span> ETHOnline 2026</p>
     <h1 class="hook">How many strangers keep a copy of your <em>passport</em>?</h1>
-    <p class="lede">Every exchange, launchpad and fund asks for your ID and keeps it. Nachweis lets the state ID wallet on your phone do that job once, and puts only the issuer's decision on chain.</p>
+    <p class="lede">Every exchange, launchpad and fund asks for your ID and keeps it. Attestat lets the state ID wallet on your phone do that job once, and puts only the issuer's decision on chain.</p>
     <p class="spoken">"Your ID wallet should work where you invest."</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#demo" id="cta-demo">See what the chain sees</a>
@@ -80,8 +90,8 @@
   <div class="wrap two-col">
     <div class="col-text">
       <p class="label reveal">The turn</p>
-      <h2 class="display reveal">The first ID you <span class="yellow">hold yourself</span>.</h2>
-      <p class="body reveal">By 2027 every EU state must offer a digital identity wallet. By accident of law it is the first identity document that lives on your phone and answers to you.</p>
+      <h2 class="display reveal">An ID you <span class="yellow">hold yourself</span>.</h2>
+      <p class="body reveal">By the end of 2026 every EU state must offer a digital identity wallet (eIDAS 2, Art. 5a). By accident of law it is an identity document that lives on your phone and answers to you.</p>
       <ul class="points">
         <li class="reveal"><span class="pt">The state signs.</span> Once. Then it hands the credential to you.</li>
         <li class="reveal"><span class="pt">You hold.</span> It lives on your phone, not on a server.</li>
@@ -117,6 +127,7 @@
     <p class="label reveal">Interactive</p>
     <h2 class="display reveal">Who sees <span class="mint">what</span>.</h2>
     <p class="body reveal">Click through one onboarding with a sample identity. Watch the right pane. The chain never learns your name.</p>
+    <p class="demo-disclaimer reveal">Scripted walkthrough with sample data; the working application is separate. The panes below replay a fixed sequence in your browser and touch no wallet, no server and no chain. The application, its contracts and the step-by-step <a href="https://github.com/devdotbo/nachweis-app/blob/main/docs/demo-runbook.md">demo runbook</a> live in the <a href="https://github.com/devdotbo/nachweis-app">nachweis-app repository</a>.</p>
 
     <div class="demo" id="demo-app">
       <div class="steps" role="group" aria-label="Demo steps">
@@ -191,7 +202,7 @@
     <h2 class="display reveal">What we are <span class="coral">not</span>.</h2>
     <ul class="nots">
       <li class="reveal"><s>KYC as a service.</s><span>The issuer verifies. The issuer decides.</span></li>
-      <li class="reveal"><s>A data holder.</s><span>We store no document, because we never receive one.</span></li>
+      <li class="reveal"><s>A data holder.</s><span>We store no identity document. In the server-side proof route our verifier sees the presentation while it makes the proof; in the client-side route it never receives one.</span></li>
       <li class="reveal"><s>A wallet.</s><span>The state wallet is the wallet.</span></li>
       <li class="reveal"><em>We carry the decision.</em><span>From the issuer to every venue it controls.</span></li>
     </ul>
@@ -205,7 +216,7 @@
     <ul class="honest-strip reveal">
       <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in this build.</li>
       <li><b>Simulated checks</b>Sanctions and other checks are stubs in this build.</li>
-      <li><b>Software prover</b>The zero-knowledge exhibit runs a software prover, not the official wallet.</li>
+      <li><b>Where the proof is made</b>By our verifier (server-side route) or by your own device (client-side route). The official wallet does not produce this proof today.</li>
       <li><b>Manual withdrawal</b>Revocation is triggered by hand.</li>
     </ul>
   </div>
@@ -216,25 +227,25 @@
   <div class="wrap">
     <p class="label reveal">Deployment</p>
     <h2 class="display reveal">Where the <span class="blue">proof</span> lives.</h2>
-    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice.</p>
+    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice, and it decides who sees the presentation. Your name goes to the issuer's verifier in every route; the chain gets policy, predicate bits, tier, expiry and a bound address.</p>
     <ol class="proof-steps reveal">
       <li class="proof-step is-now">
-        <span class="proof-when">Today</span>
+        <span class="proof-when">Route 1, built</span>
         <span class="proof-where">Our verifier</span>
-        <p>Our verifier checks the presentation and generates the zero-knowledge proof. The chain sees policy, tier, expiry and a bound address. Never a name.</p>
+        <p>The issuer's verifier checks the presentation and generates the zero-knowledge proof (SP1, Groth16). The chain does not trust the server, but the server did see the presentation.</p>
       </li>
-      <li class="proof-step">
-        <span class="proof-when">Next</span>
+      <li class="proof-step is-now">
+        <span class="proof-when">Route 2, built</span>
         <span class="proof-where">Your device</span>
-        <p>The proof moves to your own device. Our server becomes a blind relay that cannot open the response. Same contract, same chain record.</p>
+        <p>Our server is a blind relay that stores only the encrypted wallet response. Your own device decrypts it and makes the proof (Noir, UltraHonk): a laptop companion today, phone apps in progress. Same contract, same chain record.</p>
       </li>
       <li class="proof-step">
         <span class="proof-when">When wallets ship provers</span>
         <span class="proof-where">The wallet</span>
-        <p>The wallet proves on the phone. Our verifier already accepts Longfellow proofs. Nothing on chain changes.</p>
+        <p>The wallet proves on the phone itself. The pre-existing verifier already accepts Longfellow proofs. Nothing on chain changes.</p>
       </li>
     </ol>
-    <p class="proof-close reveal">Three steps, <span class="blue">one interface</span>.</p>
+    <p class="proof-close reveal">Three routes, <span class="blue">one interface</span>.</p>
   </div>
 </section>
 
@@ -246,14 +257,15 @@
     <h2 class="display reveal">The wallet arrives. <span class="blue">Finance has to accept it.</span></h2>
     <div class="why-grid">
       <!-- Source: eIDAS 2, Art 5a (wallet obligation) and Art 5f(2) mandatory acceptance in banking and financial services. https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1183 -->
-      <p class="reveal">By 2027 every EU state must offer the wallet, and banks and financial services must accept it.</p>
+      <p class="reveal">Member states must offer the wallet by the end of 2026, and banks and financial services must accept it from the end of 2027 (eIDAS 2, Art. 5a and Art. 5f).</p>
       <p class="reveal">Every gated venue today filters by residence and sanctions through its own document funnel. Each funnel is another copy.</p>
-      <p class="reveal">Nachweis plugs the state wallet into on-chain finance without copying a single document. We found no other product that does.</p>
+      <p class="reveal">Attestat plugs the state wallet into on-chain finance without putting a document on chain. The issuer keeps its file; the chain keeps a decision.</p>
     </div>
     <div class="built reveal">
       <span class="built-label">Built on</span>
       <span class="chip">Uniswap Permissioned Pools</span>
       <span class="chip">SP1 zkVM</span>
+      <span class="chip">Noir</span>
       <span class="chip">EUDI sandbox wallet</span>
     </div>
   </div>
@@ -262,8 +274,9 @@
 </main>
 
 <footer class="foot">
-  <span class="brand">Nachweis <span class="foot-domain">nachweis.dev</span></span>
+  <span class="brand">Attestat <span class="foot-domain">attestat.dev</span></span>
   <span>ETHOnline 2026</span>
+  <a href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
   <span class="foot-tag">no document on chain</span>
 </footer>
 
