@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Standing order, built on Attestat</title>
+<meta name="description" content="A fund issuer runs a recurring subscription for an investor from her own wallet, without holding her identity document. The Privy policy on the signer is a copy of her on-chain eligibility decision.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Attestat">
+<meta property="og:title" content="Standing order: an automation that stops the moment the decision does">
+<meta property="og:description" content="A fund issuer runs a recurring subscription for an investor from her own wallet, without holding her identity document. The Privy policy on the signer is a copy of her on-chain eligibility decision.">
+<meta property="og:url" content="https://attestat.dev/showcase/standing-order/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://attestat.dev/showcase/standing-order/">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../../index.html">Attestat</a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="../index.html">Showcase</a>
+    <a href="#who">Who</a>
+    <a href="#why">Why Attestat</a>
+    <a href="#how">How it works</a>
+    <a href="#chain">The chain</a>
+    <a href="#demo">Demo</a>
+    <a href="https://github.com/devdotbo/nachweis-app">Code</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO: the sentence and the mirror -->
+<section class="scene so-hero" id="hero">
+  <div class="wrap">
+    <p class="eyebrow">Showcase <span class="dot"></span> Standing order</p>
+    <h1 class="hook so-hook">A standing order that stops the moment the <em>decision</em> does.</h1>
+    <p class="lede">A fund issuer runs a recurring subscription for an investor from her own wallet and never holds her identity document. Her EUDI evidence produced one eligibility decision on chain, with an expiry and a revoke flag. Privy provides her wallet, a signer on it for the issuer's automation, and a policy on that signer that is a copy of the decision: only this fund's subscribe call, only until the expiry, denied the moment the issuer revokes.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#demo">Run the month</a>
+      <a class="btn btn-ghost" href="http://localhost:5173/showcase/standing-order" data-app-path="/showcase/standing-order">Open the demo</a>
+    </div>
+  </div>
+
+  <div class="wrap mirror-wrap">
+    <figure class="mirror" id="mirror" aria-label="The on-chain decision on the left, the Privy policy on the right, with the fields that are copied across">
+      <div class="mirror-side mirror-chain">
+        <p class="mirror-title">On chain: the decision</p>
+        <p class="mirror-sub">AttestationRegistry, one record per wallet and policy. No name.</p>
+        <ol class="fields">
+          <li class="field" data-key="policyId"><span class="k">policyId</span><b class="v">0x3f9a…c21e</b><i class="note">the fund's policy hash</i></li>
+          <li class="field" data-key="bits"><span class="k">bits</span><b class="v">0b11</b><i class="note">identity evidence, over 18</i></li>
+          <li class="field" data-key="tier"><span class="k">tier</span><b class="v">1</b><i class="note">retail</i></li>
+          <li class="field is-src" data-key="expiry"><span class="k">expiry</span><b class="v">1804377600</b><i class="note">7 March 2027</i></li>
+          <li class="field" data-key="statusRef"><span class="k">statusRef</span><b class="v">0x91b0…7e44</b><i class="note">opaque status pointer</i></li>
+          <li class="field is-src" data-key="revoked"><span class="k">revoked</span><b class="v" id="m-revoked">false</b><i class="note">flipped by the issuer</i></li>
+        </ol>
+      </div>
+
+      <div class="mirror-mid" aria-hidden="true">
+        <svg class="mirror-lines" id="mirror-lines"></svg>
+        <span class="mirror-arrow"><span>copied by the issuer's automation</span></span>
+      </div>
+
+      <div class="mirror-side mirror-policy">
+        <p class="mirror-title">In Privy: the signer's policy</p>
+        <p class="mirror-sub">Override policy on the issuer's signer. Privy evaluates it, and cannot read the chain.</p>
+        <ol class="rules">
+          <li class="rule deny" data-from="expiry">
+            <span class="act">Deny</span>
+            <span class="txt">everything, once <code>current_unix_timestamp</code> reaches <b class="v">1804377600</b></span>
+          </li>
+          <li class="rule allow" data-from="policyId">
+            <span class="act">Allow</span>
+            <span class="txt"><code>eth_sendTransaction</code> when <code>to</code> is this fund's Subscription contract on chain <b>11155111</b> and the calldata is <code>subscribe()</code></span>
+          </li>
+          <li class="rule deny deny-all" data-from="revoked" id="m-denyall">
+            <span class="act">Deny</span>
+            <span class="txt">everything, no condition. <i>Added when the registry emits Revoked, removed on re-approve.</i></span>
+          </li>
+          <li class="rule default"><span class="act">Default</span><span class="txt">anything no rule resolves is denied (Privy's evaluation order: deny before allow, then deny)</span></li>
+        </ol>
+      </div>
+      <figcaption class="mirror-cap">
+        <span>Two rules while the decision is live, a third the moment it is revoked. The automation is the issuer's own system; it holds the issuer's authorization key and the app secret, and it never holds a document.</span>
+        <button class="btn btn-coral mirror-toggle" id="mirror-toggle" type="button">Revoke on chain</button>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- WHO BUYS, WHO USES -->
+<section class="scene so-who" id="who">
+  <div class="wrap">
+    <p class="label reveal">Who buys and who uses</p>
+    <h2 class="display reveal">The issuer pays. The investor <span class="yellow">holds the wallet</span>.</h2>
+    <div class="who-grid">
+      <article class="who who-issuer reveal">
+        <h3>The issuer buys</h3>
+        <p>A fund issuer, transfer agent or launchpad that already gates its token. A standing order turns a one-time subscription into recurring inflow. Today it cannot offer one on a tokenized instrument without running its own document funnel for every wallet and keeping a person in the loop for every run.</p>
+        <p class="who-gets">Gets: an automation that subscribes on schedule and is stopped by three parties without a document behind any of them: the issuer's revoke, the decision's expiry, the investor's remove.</p>
+      </article>
+      <article class="who who-investor reveal">
+        <h3>The investor uses</h3>
+        <p>She signs in by email and gets an embedded wallet by Privy. She presents her sample identity from the official test wallet once. Then she grants the issuer's automation a signer with a policy she can read in plain words, and she can remove that signer at any time.</p>
+        <p class="who-gets">Gets: a savings plan on a gated fund she can stop with one button, from a wallet she did not have to set up.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- OTHERWISE NOT POSSIBLE -->
+<section class="scene so-why" id="why">
+  <div class="wrap">
+    <p class="label reveal">Otherwise not possible</p>
+    <h2 class="display reveal">Privy can bound a signer. It cannot know who is <span class="mint">eligible</span>.</h2>
+    <ol class="reasons">
+      <li class="reason reveal">
+        <p>A Privy policy reads transaction fields, decoded calldata, typed data, message content and the system clock, and nothing on chain. "Sign only while this person is eligible" cannot be written in Privy alone; it needs an external, machine-readable fact with an expiry and a revocation signal.</p>
+        <span class="src">Source: Privy docs, policies overview, the field_source list (fetched 9 September 2026).</span>
+      </li>
+      <li class="reason reveal">
+        <p>The AttestationRegistry stores exactly that per wallet and policy: an expiry and a revoked flag, an Approved and a Revoked event, and an expiry check on every read. The fund's subscribe call checks the wallet address, not who authorised the signature, so a signer added to the investor's wallet inherits her eligibility and loses it in the same block she does.</p>
+        <span class="src">Source: contracts/src/interfaces/IEligibility.sol and contracts/src/AttestationRegistry.sol in the nachweis-app repository.</span>
+      </li>
+      <li class="reason reveal">
+        <p>No live gated product accepts an external attestation without a contract, so today every automated run needs the operator's own allowlist with an identity file behind it. With the decision on chain and the policy copied from it, the run reads a decision, not a person. The issuer keeps its compliance file; a predicate never replaces it.</p>
+        <span class="src">Source: the live-gated-products memo of 6 September 2026 (count zero) and the product-pitch-legal memo, both in the Attestat wiki.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="scene so-how" id="how">
+  <div class="wrap">
+    <p class="label reveal">How it works</p>
+    <h2 class="display reveal">Six beats, and the last one is a <span class="coral">refusal</span>.</h2>
+    <ol class="beats reveal" id="beats">
+      <li class="beat beat-you">
+        <span class="beat-who">Investor</span>
+        <h3>Present</h3>
+        <p>The official German EUDI test wallet on her phone answers the issuer's registered request with the sample identity: given name, family name, over 18. Names go to the issuer's verifier, not to the chain.</p>
+      </li>
+      <li class="beat beat-you">
+        <span class="beat-who">Her browser</span>
+        <h3>Prove</h3>
+        <p>The browser tab decrypts the wallet's response and makes a zero-knowledge proof (Noir) that the predicates hold. Proof made in this browser tab. The chain will verify the proof and nothing else.</p>
+      </li>
+      <li class="beat beat-chain">
+        <span class="beat-who">Chain</span>
+        <h3>Decide</h3>
+        <p>The issuer approves in a separate step. One Decision is written against her wallet address: policy id, predicate bits, tier, expiry, status reference, revoked flag. No name, no document.</p>
+      </li>
+      <li class="beat beat-issuer">
+        <span class="beat-who">Issuer's automation, Privy</span>
+        <h3>Mirror</h3>
+        <p>The automation sees Approved, reads the decision, and creates a Privy policy for this investor from it. She grants the issuer's signer on her embedded wallet, under that policy. The signer never sees the wallet's private key (Privy's statement).</p>
+      </li>
+      <li class="beat beat-issuer">
+        <span class="beat-who">Issuer's automation, Privy</span>
+        <h3>Run</h3>
+        <p>Each month the automation sends subscribe() from her wallet through Privy's wallet API with the issuer's authorization key. Privy checks the policy, signs, broadcasts. The fund's contract checks her decision and mints her units.</p>
+      </li>
+      <li class="beat beat-refuse">
+        <span class="beat-who">Issuer, then Privy and chain</span>
+        <h3>Revoke</h3>
+        <p>The issuer revokes on chain. The automation appends a deny-all rule to the policy. The next run is refused by Privy before anything is broadcast, and the chain would refuse it too. She can also remove the signer herself at any time; expiry closes it without anyone acting.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- WHAT THE CHAIN SEES -->
+<section class="scene so-chain" id="chain">
+  <div class="wrap two-col">
+    <div class="col-text">
+      <p class="label reveal">What the chain sees</p>
+      <h2 class="display reveal">Six fields. <span class="mint">None of them is her.</span></h2>
+      <p class="body reveal">The registry keeps one Decision per wallet address and policy. The fund's subscribe call and the fund token's transfer check both read it through isEligible: approved, not revoked, not expired, bits present. The automation's signer changes nothing here; the chain sees a transaction from her address and asks the same question it would ask her.</p>
+      <p class="chain-note reveal">Predicate bits and an expiry bound to an address are still personal data. What is not there: a name, a birth date, a document, or anything we could use to find her.</p>
+    </div>
+    <div class="col-art reveal">
+      <pre class="struct" aria-label="The Decision struct"><span class="c">// one per (subject, policyId); read by the fund and the pool</span>
+<span class="kw">struct</span> Decision {
+  <span class="t">bytes32</span> policyId;   <span class="c">// the issuer's policy hash</span>
+  <span class="t">uint256</span> bits;       <span class="c">// predicate bits the policy verified</span>
+  <span class="t">uint8</span>   tier;       <span class="c">// issuer-defined, informational</span>
+  <span class="t">uint64</span>  expiry;     <span class="c">// unix time; read-side check</span>
+  <span class="t">bytes32</span> statusRef;  <span class="c">// opaque status pointer, never a name</span>
+  <span class="t">bool</span>    revoked;    <span class="c">// set by the issuer's revoke</span>
+}</pre>
+      <p class="art-cap">contracts/src/interfaces/IEligibility.sol. The two fields the Privy policy copies are expiry and revoked.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="scene so-demo" id="demo">
+  <div class="wrap">
+    <p class="label reveal">The demo</p>
+    <h2 class="display reveal">Run the month. Then <span class="coral">revoke</span> and run it again.</h2>
+    <p class="body reveal">A scripted replay of the standing-order card and the issuer's automation log. Click through it here, or open the working demo.</p>
+    <p class="demo-disclaimer reveal">Scripted walkthrough with sample data; the working application is separate. The panes below replay a fixed sequence in your browser and touch no wallet, no server and no chain. The working demo is the route <a href="http://localhost:5173/showcase/standing-order" data-app-path="/showcase/standing-order" data-app-note="inline">/showcase/standing-order</a> in the <a href="https://github.com/devdotbo/nachweis-app">nachweis-app repository</a>, runnable locally on anvil and, with a Privy app, on Sepolia.</p>
+
+    <div class="so-widget" id="widget">
+      <div class="steps" role="group" aria-label="Demo steps">
+        <button class="step" data-step="allow" type="button"><span class="n">1</span>Allow the signer</button>
+        <button class="step" data-step="run" type="button" disabled><span class="n">2</span>Run the month</button>
+        <button class="step step-revoke" data-step="revoke" type="button" disabled><span class="n">3</span>Revoke</button>
+        <button class="step step-revoke" data-step="run2" type="button" disabled><span class="n">4</span>Run the month again</button>
+        <button class="step" data-step="remove" type="button" disabled><span class="n">5</span>Remove signer</button>
+        <button class="step step-reset" data-step="reset" type="button">Reset</button>
+      </div>
+
+      <div class="panes">
+        <section class="pane pane-you" aria-labelledby="w-you">
+          <h3 id="w-you">Investor: standing order</h3>
+          <div class="pane-body" id="w-pane-you" aria-live="polite">
+            <p class="empty">Embedded wallet by Privy, created at email sign-in. Decision live until 7 March 2027.</p>
+          </div>
+          <div class="wallet-line" id="w-wallet"><span>Fund units</span><b id="w-ndf">0 NDF</b></div>
+        </section>
+        <section class="pane pane-issuer" aria-labelledby="w-issuer">
+          <h3 id="w-issuer">Issuer: automation log</h3>
+          <div class="pane-body" id="w-pane-issuer" aria-live="polite">
+            <p class="empty">Policy created from her decision when the registry emitted Approved. Waiting for a signer.</p>
+          </div>
+          <ul class="policy-mini" id="w-policy">
+            <li class="deny"><span>Deny</span>after expiry</li>
+            <li class="allow"><span>Allow</span>subscribe() into this fund</li>
+            <li class="deny hidden" id="w-denyall"><span>Deny</span>everything (revoked)</li>
+          </ul>
+        </section>
+        <section class="pane pane-chain" aria-labelledby="w-chain">
+          <h3 id="w-chain">Chain</h3>
+          <div class="pane-body" id="w-pane-chain" aria-live="polite">
+            <p class="empty">Public. One Decision against her address. isEligible: true.</p>
+          </div>
+        </section>
+      </div>
+      <p class="demo-note" id="w-note">Step 1: she grants the issuer's signer on her wallet, under the policy above.</p>
+    </div>
+
+    <div class="shot reveal">
+      <div class="shot-frame" aria-hidden="true">
+        <div class="shot-bar"><span></span><span></span><span></span></div>
+        <div class="shot-body">
+          <div class="shot-card">
+            <p class="shot-title">Standing order</p>
+            <p class="shot-line"></p><p class="shot-line short"></p>
+            <div class="shot-btns"><span class="y">Allow</span><span>Run the month</span><span class="c">Remove signer</span></div>
+          </div>
+          <div class="shot-card shot-log">
+            <p class="shot-title">Automation</p>
+            <p class="shot-line"></p><p class="shot-line"></p><p class="shot-line short"></p>
+          </div>
+        </div>
+      </div>
+      <p class="shot-cap">Screenshot placeholder: the investor portal's standing-order card and the issuer console's automation log. Replaced by a screenshot of the Sepolia run once that run is recorded.</p>
+    </div>
+
+    <div class="screens reveal">
+      <p class="screens-title">What the two screens say, verbatim</p>
+      <div class="screen screen-you">
+        <span class="screen-who">Investor card</span>
+        <p>Wallet by Privy: an embedded wallet created at email sign-in. Your identity evidence never goes to Privy. Privy sees this address, the transactions it signs, and one policy: the issuer's automation may send subscribe() for you to this fund until your decision expires on 7 March 2027. When the issuer revokes your decision, its automation closes the policy; you can remove the signer here at any time. Sample identity from the official test wallet; testnet funds.</p>
+      </div>
+      <div class="screen screen-issuer">
+        <span class="screen-who">Issuer panel</span>
+        <p>Automation by Privy: the issuer's key signs on the investor's wallet only under a policy copied from her on-chain decision. Revoke on chain, then the automation adds a deny rule to that policy. Privy enforces the policy; Privy does not read the chain.</p>
+      </div>
+    </div>
+
+    <div class="run-local reveal">
+      <p class="run-title">Run it locally, no Privy app needed</p>
+      <pre class="cmd">scripts/standing-order-local.sh   <span class="c"># anvil, Deploy, automation in local mode, three ticks, revoke and expiry refused, re-approve; prints STANDING-ORDER-LOCAL PASS</span></pre>
+      <p class="run-note">Local mode signs with a local key and applies the same rule JSON in a small evaluator, captioned "simulated Privy policy (local)". The Privy mode on Sepolia is clicked by hand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST ABOUT THE DEMO -->
+<section class="scene so-honest" id="honest">
+  <div class="wrap">
+    <p class="label reveal">Honest about the demo</p>
+    <ul class="honest-strip so-strip reveal">
+      <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in this build.</li>
+      <li><b>Where the proof is made</b>In the investor's browser tab (Noir), on her own computer. The official wallet does not produce this proof today.</li>
+      <li><b>Simulated</b>Sanctions and similar checks are stubs. The scheduler tick is simulated by the Run the month button. In local mode the Privy policy is a local evaluator, captioned as such.</li>
+      <li><b>Manual revocation</b>The issuer revokes by hand. The demo fund's subscribe mints 100 NDF without payment.</li>
+      <li><b>On chain</b>No identity documents on chain, and nothing we could use to find her.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="brand">Attestat <span class="foot-domain">attestat.dev</span></span>
+  <a href="../index.html">All showcases</a>
+  <a href="../../index.html">Main page</a>
+  <a href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
+  <span class="foot-tag">no document on chain</span>
+</footer>
+
+<script src="../links.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

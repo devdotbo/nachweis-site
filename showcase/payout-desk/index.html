@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attestat showcase: the contractor payout desk</title>
+<meta name="description" content="A company pays its freelance contractors in stablecoins from a quorum-owned treasury wallet that can pay adults with state identity evidence and nobody else, without ever holding an identity document. Built on Attestat with Privy.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Attestat">
+<meta property="og:title" content="Attestat showcase: the contractor payout desk">
+<meta property="og:description" content="Pay freelancers from a shared treasury that checks an on-chain eligibility decision, never a passport. Built on Attestat with Privy.">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../../index.html">Attestat</a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#who">Who</a>
+    <a href="#why">Why</a>
+    <a href="#how">How it works</a>
+    <a href="#chain">The chain</a>
+    <a href="#demo">Demo</a>
+    <a href="#honest">Honest</a>
+    <a href="../index.html">Gallery</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO: the case sentence and the desk -->
+<section class="scene hero pd-hero" id="hero">
+  <div class="wrap pd-hero-grid">
+    <div class="pd-hero-text">
+      <p class="eyebrow">Attestat <span class="dot"></span> Showcase: payout desk</p>
+      <h1 class="hook pd-hook">Pay your freelancers. Never hold their <em>passports</em>.</h1>
+      <p class="lede">A company pays its freelance contractors in stablecoins from a shared treasury wallet. The treasury can pay adults who have shown state identity evidence, and nobody else. The company never holds an identity document: the contractor's EUDI presentation becomes an eligibility decision on chain, bound to the payout address, and the payout contract refuses any address without a live decision.</p>
+      <p class="spoken">"Both officers approved. Privy allowed it. The chain said no."</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="http://localhost:5173/showcase/payout-desk" data-app-path="/showcase/payout-desk">Open the demo</a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
+      </div>
+    </div>
+
+    <div class="pd-desk-col">
+      <div class="desk" id="desk" data-state="idle">
+        <div class="desk-head">
+          <div>
+            <p class="desk-title">Payout run 12</p>
+            <p class="desk-sub">Treasury <span class="mono">0x7a4c…e93f</span>, a Privy server wallet</p>
+          </div>
+          <div class="desk-chips">
+            <span class="chip-s">quorum 2 of 2</span>
+            <span class="chip-s">policy: GatedPayout on Sepolia</span>
+          </div>
+        </div>
+
+        <table class="sheet" aria-label="Payout run recipients">
+          <thead><tr><th>Recipient</th><th>Amount</th><th>Decision</th><th class="t-right">Paid</th></tr></thead>
+          <tbody>
+            <tr data-row="0"><td class="mono">0x91d2…8c4a</td><td class="mono">100 mUSD</td><td><span class="dec live">live, exp 2026-10-07</span></td><td class="t-right paid"></td></tr>
+            <tr data-row="1"><td class="mono">0x2e0b…7f88</td><td class="mono">250 mUSD</td><td><span class="dec live">live, exp 2026-10-11</span></td><td class="t-right paid"></td></tr>
+            <tr data-row="2"><td class="mono">0xb05f…1a17</td><td class="mono">100 mUSD</td><td><span class="dec live">live, exp 2026-10-02</span></td><td class="t-right paid"></td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td class="mono">450 mUSD</td><td colspan="2" class="t-right sheet-note">read from the chain, no names</td></tr></tfoot>
+        </table>
+
+        <ol class="lamps" aria-label="Checks">
+          <li class="lamp" data-lamp="a"><i></i><span>Officer A</span><small>proposes</small></li>
+          <li class="lamp" data-lamp="b"><i></i><span>Officer B</span><small>approves</small></li>
+          <li class="lamp" data-lamp="privy"><i></i><span>Privy policy</span><small>where money may go</small></li>
+          <li class="lamp" data-lamp="chain"><i></i><span>Chain gate</span><small>who may receive</small></li>
+        </ol>
+
+        <div class="desk-log" id="desk-log" aria-live="polite">
+          <p>Recipients are the addresses that hold a live decision. The desk never saw a document; it sees an address and a yes.</p>
+        </div>
+
+        <div class="desk-actions" id="desk-actions">
+          <button type="button" class="act is-next" data-act="propose">Propose run</button>
+          <button type="button" class="act" data-act="approve" disabled>Approve as officer B</button>
+          <button type="button" class="act act-warn" data-act="direct" disabled>Pay directly</button>
+          <button type="button" class="act act-warn" data-act="revoke" disabled>Revoke one contractor</button>
+          <button type="button" class="act" data-act="rerun" disabled>Run again</button>
+          <button type="button" class="act act-reset" data-act="reset">Reset</button>
+        </div>
+      </div>
+      <p class="art-cap">Scripted replay with sample data in your browser. It touches no wallet, no Privy app and no chain. Test token, testnet funds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO BUYS, WHO USES -->
+<section class="scene pd-who" id="who">
+  <div class="wrap">
+    <p class="label reveal">Who buys, who uses</p>
+    <h2 class="display reveal">The finance desk buys. Two officers and the contractor use it.</h2>
+    <div class="who-grid">
+      <article class="who reveal">
+        <h3>The buyer</h3>
+        <p>The finance function of a company with freelance contractors in the EU, or a contractor-payments vendor that sells to such companies. It already runs a payout process. It wants a rule the treasury enforces, and it does not want a folder of identity copies.</p>
+      </article>
+      <article class="who reveal">
+        <h3>The users</h3>
+        <p>Officer A proposes a payout run. Officer B approves it. The contractor presents identity evidence once from the state wallet and is paid on every run after that, as long as the decision is live.</p>
+      </article>
+      <article class="who reveal">
+        <h3>The money</h3>
+        <p>A euro or dollar stablecoin moves from the company's treasury wallet to the contractor's own address. In the demo it is mUSD, a test token with six decimals, on Sepolia.</p>
+      </article>
+      <article class="who reveal">
+        <h3>Why the desk pays for it</h3>
+        <p>Today it either runs a document funnel and keeps an ID copy for every freelancer, or it pays a bare address with no assurance about who is behind it. Neither is a rule a treasury can enforce. This desk has one: pay addresses with a live decision, stop when the decision is revoked or expires. The name for the invoice record still reaches the company from the presentation, never from the chain.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- OTHERWISE NOT POSSIBLE -->
+<section class="scene pd-why" id="why">
+  <div class="wrap">
+    <p class="label reveal">Otherwise not possible</p>
+    <h2 class="display reveal">Three facts that block this <span class="coral">today</span>.</h2>
+    <ol class="facts">
+      <li class="reveal">
+        <p>A contract with a minor stays pending until the legal representative approves it, and member states must prohibit work by children, so a company that pays a self-hosted address cannot know whether the person behind it may contract or work at all; over 18 is the predicate the law itself defines, so a predicate answer settles it.</p>
+        <cite>German Civil Code, sections 106 to 108; Council Directive 94/33/EC</cite>
+      </li>
+      <li class="reveal">
+        <p>A company paying contractors is not an obliged entity under the EU anti-money-laundering regulation, so it owes no customer due diligence, has no legal basis to collect and keep identity documents, and is told by data-minimisation to keep less; it still wants assurance about age and capacity.</p>
+        <cite>Regulation (EU) 2024/1624, Article 3; GDPR Article 5(1)(c)</cite>
+      </li>
+      <li class="reveal">
+        <p>A wallet policy engine can evaluate the transaction, the calldata, typed data and the request body, and none of those fields says who controls the recipient address, so a treasury rule about identity cannot be written in the wallet policy without an on-chain predicate to read.</p>
+        <cite>Privy policy reference, field sources ethereum_transaction, ethereum_calldata, ethereum_typed_data, action_request_body</cite>
+      </li>
+    </ol>
+    <div class="whynow reveal">
+      <p class="whynow-year" aria-hidden="true">2027</p>
+      <p>Member states must offer the wallet by the end of 2026. Private relying parties in financial services must accept it from the end of 2027 (eIDAS 2, Article 5f). A plain employer is not obliged to accept the wallet. A payment institution that runs payroll is.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="scene pd-how" id="how">
+  <div class="wrap">
+    <p class="label reveal">How it works</p>
+    <h2 class="display reveal">One decision on chain. The payout is its <span class="mint">third door</span>.</h2>
+    <p class="body reveal">The fund token and the Uniswap permissioned pool already read the same decision. The payout contract makes the same call. Privy enforces where the money may go. The chain enforces who may receive it.</p>
+
+    <ol class="flow reveal" id="flow">
+      <li class="fstep" data-actor="contractor">
+        <span class="fwho">Contractor</span>
+        <h3>Present</h3>
+        <p>The official test wallet on the phone answers the desk's registered request: given name, family name, over 18. The names go to the desk's verifier for the invoice record, not to the chain.</p>
+        <svg class="fart" viewBox="0 0 120 80" aria-hidden="true"><rect x="38" y="4" width="44" height="72" rx="8"/><rect x="48" y="18" width="24" height="5" rx="2" class="on"/><rect x="48" y="28" width="24" height="5" rx="2" class="on"/><rect x="48" y="38" width="24" height="5" rx="2" class="on"/><rect x="48" y="48" width="24" height="5" rx="2" class="off"/><rect x="48" y="58" width="24" height="5" rx="2" class="off"/></svg>
+      </li>
+      <li class="fstep" data-actor="contractor">
+        <span class="fwho">Contractor's browser</span>
+        <h3>Prove</h3>
+        <p>The contractor's own browser tab decrypts the relayed response and makes a zero-knowledge proof of identity evidence and over 18 (Noir, UltraHonk). Our server is a blind relay that holds the encrypted response and nothing readable.</p>
+        <svg class="fart" viewBox="0 0 120 80" aria-hidden="true"><rect x="10" y="12" width="100" height="56" rx="6"/><path d="M40 40h40M60 26v28" class="on"/><circle cx="60" cy="40" r="20" class="ring"/></svg>
+      </li>
+      <li class="fstep" data-actor="chain">
+        <span class="fwho">Chain, then the desk</span>
+        <h3>Decide</h3>
+        <p>The proof is verified on Sepolia and a decision is stored against the payout address: policy, bits, expiry. The finance desk approves in a separate on-chain step, by hand. No name, no document.</p>
+        <svg class="fart" viewBox="0 0 120 80" aria-hidden="true"><rect x="16" y="16" width="88" height="48" rx="6"/><rect x="26" y="28" width="30" height="8" rx="2" class="on"/><rect x="26" y="44" width="52" height="8" rx="2" class="on"/><circle cx="90" cy="32" r="7" class="on"/></svg>
+      </li>
+      <li class="fstep" data-actor="privy">
+        <span class="fwho">Privy</span>
+        <h3>Pay</h3>
+        <p>The treasury is a Privy server wallet owned by a two-officer key quorum. Its policy allows eth_sendTransaction to the GatedPayout contract on this chain and denies everything else. Officer A proposes an intent, officer B authorizes it, Privy executes the payout call.</p>
+        <svg class="fart" viewBox="0 0 120 80" aria-hidden="true"><circle cx="34" cy="40" r="14"/><circle cx="86" cy="40" r="14"/><path d="M48 40h24" class="on"/><path d="M60 8v18M60 54v18" class="on"/></svg>
+      </li>
+      <li class="fstep is-refuse" data-actor="chain">
+        <span class="fwho">Two refusals</span>
+        <h3>Refuse</h3>
+        <p>A direct transfer to a contractor is denied by the Privy policy before it reaches the chain. After the desk revokes a contractor, both officers can still approve a new run and Privy still allows it; the chain reverts with NotEligible for that address, and nothing is paid. Revoke is manual; the gate is on chain, not in our database.</p>
+        <svg class="fart" viewBox="0 0 120 80" aria-hidden="true"><rect x="40" y="10" width="40" height="60" rx="20"/><path d="M48 24l24 32M72 24L48 56" class="bad"/></svg>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- WHAT THE CHAIN SEES -->
+<section class="scene pd-chain" id="chain">
+  <div class="wrap two-col">
+    <div class="col-text">
+      <p class="label reveal">What the chain sees</p>
+      <h2 class="display reveal">Six fields. <span class="mint">None of them a name.</span></h2>
+      <p class="body reveal">One decision per address and policy. The payout contract asks the registry one question for each recipient and refuses the whole run if any answer is no.</p>
+      <ul class="points pd-points">
+        <li class="reveal"><span class="pt">Eligible means</span> identity evidence and over 18, approved, not revoked, not expired. It does not mean one person per address.</li>
+        <li class="reveal"><span class="pt">The desk sees</span> an address, an amount and a yes. The invoice name comes from the presentation it received, not from this record.</li>
+        <li class="reveal"><span class="pt">Privy sees</span> addresses, amounts and calldata. Never identity evidence.</li>
+        <li class="reveal"><span class="pt">Anyone sees</span> the six fields below. Predicate bits and an expiry bound to an address are still personal data; we say so.</li>
+      </ul>
+    </div>
+    <div class="col-art reveal">
+      <pre class="code" aria-label="The Decision struct and the payout gate"><code><span class="c">// one record per (address, policyId)</span>
+<span class="k">struct</span> Decision {
+  <span class="t">bytes32</span> policyId;   <span class="c">// which policy decided</span>
+  <span class="t">uint256</span> bits;       <span class="c">// bit 0 evidence, bit 1 over 18</span>
+  <span class="t">uint8</span>   tier;       <span class="c">// issuer-defined, informational</span>
+  <span class="t">uint64</span>  expiry;     <span class="c">// unix time, then it stops counting</span>
+  <span class="t">bytes32</span> statusRef;  <span class="c">// opaque status reference, never a name</span>
+  <span class="t">bool</span>    revoked;
+}
+
+<span class="c">// the gate, same call the fund token and the pool make</span>
+<span class="k">for</span> (recipient <span class="k">of</span> recipients)
+  <span class="k">if</span> (!registry.isEligible(recipient, policyId, <span class="n">0x3</span>))
+    <span class="k">revert</span> <span class="bad">NotEligible(recipient)</span>;
+  token.transferFrom(treasury, recipient, amount);</code></pre>
+      <p class="art-cap">Struct from the registry interface in the nachweis-app repository. The payout loop is the GatedPayout contract in prose form.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE DEMO -->
+<section class="scene pd-demo" id="demo">
+  <div class="wrap">
+    <p class="label reveal">The demo</p>
+    <h2 class="display reveal">Run it on a local chain, or on Sepolia with Privy.</h2>
+    <div class="demo-grid">
+      <div class="reveal">
+        <p class="body">The demo is a route in the Attestat product app. In local mode it runs on anvil without a Privy app and captions the second approval as simulated. In Privy mode on Sepolia the treasury is a real Privy server wallet with a key quorum and a policy, and the builder clicks through it by hand.</p>
+        <ul class="runlist">
+          <li><span class="pt">Route</span><span class="mono">/showcase/payout-desk</span></li>
+          <li><span class="pt">Local run</span><span class="mono">scripts/showcase-payout-desk-local.sh</span> prints <span class="mono">SHOWCASE-PAYOUT-DESK-LOCAL PASS</span></li>
+          <li><span class="pt">Docs</span><span class="mono">docs/showcase/payout-desk.md</span> in the nachweis-app repository</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="http://localhost:5173/showcase/payout-desk" data-app-path="/showcase/payout-desk">Open the demo</a>
+          <a class="btn btn-ghost" href="https://github.com/devdotbo/nachweis-app">Code and docs</a>
+        </div>
+      </div>
+      <figure class="shot reveal">
+        <div class="shot-frame" aria-hidden="true">
+          <div class="shot-bar"><i></i><i></i><i></i></div>
+          <div class="shot-body">
+            <div class="shot-line w60"></div>
+            <div class="shot-line w40"></div>
+            <div class="shot-rows"><div></div><div></div><div></div></div>
+            <div class="shot-line w30 mint"></div>
+          </div>
+        </div>
+        <figcaption>Screenshot placeholder. The payout desk screen after a run: intent executed, Sepolia transaction hash, contractor balance up by 100 mUSD. A capture of the real screen replaces this frame once the run is recorded.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST ABOUT THE DEMO -->
+<section class="scene pd-honest" id="honest">
+  <div class="wrap">
+    <p class="label reveal">Honest about the demo</p>
+    <ul class="honest-strip pd-strip reveal">
+      <li><b>Official test wallet, sample identity.</b>The German EUDI sandbox with sample data. No state-issued identity in this build.</li>
+      <li><b>Where the proof is made.</b>In the contractor's own browser tab, on their computer, 11.1 seconds measured on the builder's laptop. The official wallet does not produce this proof today. The chain does not trust our server, and in this route the server never sees the presentation in the clear.</li>
+      <li><b>Simulated checks.</b>Sanctions and similar checks are stubs, captioned simulated. Local mode: "Second approval simulated; Privy not connected."</li>
+      <li><b>Manual steps.</b>Approval and revoke are manual steps by the finance desk.</li>
+      <li><b>No identity documents on chain, and nothing we could use to find her.</b>Eligible means identity evidence and over 18, approved, not revoked, not expired. It does not mean one person per address.</li>
+      <li><b>Not customer due diligence.</b>A company paying contractors is not an AMLR obliged entity; this gate is capacity and age, not customer due diligence.</li>
+    </ul>
+    <p class="privy-line reveal"><b>Treasury wallet by Privy:</b> the company's payout wallet is a Privy server wallet owned by a two-officer key quorum, with a Privy policy that lets it pay only through the GatedPayout contract on this chain. Privy sees addresses, amounts and calldata, never identity evidence. Sample identity from the official test wallet; testnet funds.</p>
+    <p class="privy-note reveal">The Privy denial text shown in the replay above is illustrative. The Sepolia run records Privy's own error text.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="brand">Attestat <span class="foot-domain">showcase</span></span>
+  <a href="../index.html">All demos and use cases</a>
+  <a href="../../index.html">Attestat main page</a>
+  <a href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
+  <span class="foot-tag">no document on chain</span>
+</footer>
+
+<script src="../links.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

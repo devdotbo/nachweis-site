@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What people build with Attestat</title>
+<meta name="description" content="Attestat is the toolkit: it plugs into the EUDI wallet, optionally zkPassport, and other national identity systems where compatible, proves the statement in zero knowledge, writes one eligibility decision on chain, and lets any consumer read it. These are the demos built on it.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Attestat">
+<meta property="og:title" content="What people build with Attestat">
+<meta property="og:description" content="The toolkit's functions as one map, the demos built on it, the use cases, and what is real in each demo.">
+<meta property="og:url" content="https://attestat.dev/showcase/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://attestat.dev/showcase/">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../index.html">Attestat</a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#map">The toolkit</a>
+    <a href="#demos">Demos</a>
+    <a href="#cases">Use cases</a>
+    <a href="#honest">What is real</a>
+    <a href="../index.html">Main page</a>
+    <a href="https://github.com/devdotbo/nachweis-app">Code</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="scene g-hero" id="hero">
+  <div class="wrap">
+    <p class="eyebrow">Attestat <span class="dot"></span> Showcase</p>
+    <h1 class="hook g-hook">What people build with <em>Attestat</em>.</h1>
+    <p class="lede">Attestat is the toolkit. It plugs into the EUDI wallet, optionally into zkPassport, and into other national identity systems where they are compatible. It proves the statement in zero knowledge, writes one eligibility decision on chain, and lets any consumer read that decision: a fund token, a Uniswap permissioned pool, a payout contract, a Privy policy.</p>
+    <p class="g-frame">The pages below are demos built on the toolkit. None of them is a live product, and no named company uses one.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#demos">See the demos</a>
+      <a class="btn btn-ghost" href="#map">How the pieces fit</a>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM MAP -->
+<section class="scene g-map" id="map">
+  <div class="wrap">
+    <p class="label">The toolkit</p>
+    <h2 class="display">One decision in the middle.</h2>
+    <p class="body">Evidence comes in from the left. A proof turns it into predicate bits. The issuer approves. The decision sits on chain, and everything to the right only reads it. Everything below can close it.</p>
+
+    <div class="map reveal" id="map-grid">
+      <!-- lane 1 -->
+      <div class="lane lane-evidence">
+        <h3 class="lane-title"><span class="lane-n">1</span>Evidence in</h3>
+        <p class="lane-sub">What the person presents. Names go to the issuer's verifier, never to the chain.</p>
+        <ul class="nodes">
+          <li class="node">
+            <b>EUDI wallet</b>
+            <p>OpenID4VP request, SD-JWT PID with selective disclosure: given name, family name, over 18. Today the official German test wallet with a sample identity.</p>
+            <span class="state ok">official test wallet, browser proof, local chain: green</span>
+          </li>
+          <li class="node">
+            <b>Passport chip via zkPassport</b>
+            <p>The zkPassport app reads the chip over NFC and proves over 18 on the phone, bound to the wallet address. Verified on chain by zkPassport's contract. Not eIDAS evidence.</p>
+            <span class="state run">mock passport green on anvil; phone run pending; kept or dropped by the builder on 10 September</span>
+          </li>
+          <li class="node">
+            <b>Other national systems</b>
+            <p>Where a system speaks the same formats and protocols it can feed the same registry. Which ones do, and on what trust model, is the standards research.</p>
+            <span class="state todo">identity standards page: coming</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- lane 2 -->
+      <div class="lane lane-proof">
+        <h3 class="lane-title"><span class="lane-n">2</span>Proof</h3>
+        <p class="lane-sub">Same circuit, same statement. Only where the proof is made moves. All times measured on the builder's machines.</p>
+        <ul class="nodes">
+          <li class="node">
+            <b>Browser tab (Noir, bb.js)</b>
+            <p>The tab decrypts the wallet's answer and proves it. Our server relays the encrypted answer unopened.</p>
+            <span class="state ok">prove 11.0 to 11.3 s, click to attested 42.8 s with the official wallet (M3 Max, Chrome 152)</span>
+          </li>
+          <li class="node">
+            <b>Laptop companion (Noir)</b>
+            <p>A small program on the investor's own computer does the same job outside the browser.</p>
+            <span class="state ok">bb prove 3.96 s warm, attested in 8.2 s (M3 Max)</span>
+          </li>
+          <li class="node">
+            <b>Phone provers</b>
+            <p>Android and iOS builds of the same circuit. Measured, not yet run against the wallet's presentation on a physical phone.</p>
+            <span class="state run">Android emulator 6.7 s; Chromebook Android container 47 to 49 s; iPhone 16 Pro Max simulator 5.2 s</span>
+          </li>
+          <li class="node">
+            <b>Server route (SP1, Groth16)</b>
+            <p>Our verifier makes the proof. Boundary, stated on screen: the chain does not trust our server, but the server did see the presentation.</p>
+            <span class="state ok">Groth16 in about 270 s native; verified on a Sepolia fork at about 280k gas</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- lane 3: the decision -->
+      <div class="lane lane-decision">
+        <h3 class="lane-title"><span class="lane-n">3</span>The decision</h3>
+        <p class="lane-sub">AttestationRegistry, one record per wallet address and policy. No name, no document, no string.</p>
+        <pre class="g-struct" aria-label="The Decision struct"><span class="kw">struct</span> Decision {
+  <span class="t">bytes32</span> policyId;  <span class="c">// the policy</span>
+  <span class="t">uint256</span> bits;      <span class="c">// 1 evidence, 2 over 18</span>
+  <span class="t">uint8</span>   tier;      <span class="c">// informational</span>
+  <span class="t">uint64</span>  expiry;    <span class="c">// unix seconds</span>
+  <span class="t">bytes32</span> statusRef; <span class="c">// never a name</span>
+  <span class="t">bool</span>    revoked;   <span class="c">// by the issuer</span>
+}</pre>
+        <ul class="decision-rules">
+          <li><span class="k">written by</span>attestWithProof (a proof, permissionless) or attestByOperator (the issuer's key)</li>
+          <li><span class="k">counts only with</span>the issuer's separate approve; evidence alone opens no door</li>
+          <li><span class="k">read by</span>isEligible(subject, policyId, requiredBits): approved, not revoked, not expired, bits present</li>
+          <li><span class="k">closed by</span>expiry without anyone acting, or one revoke transaction</li>
+        </ul>
+      </div>
+
+      <!-- lane 4 -->
+      <div class="lane lane-consumers">
+        <h3 class="lane-title"><span class="lane-n">4</span>Consumers</h3>
+        <p class="lane-sub">Anything that can call isEligible. One permission, many doors, and one revoke closes them in the same block.</p>
+        <ul class="nodes">
+          <li class="node">
+            <b>Fund token transfer check</b>
+            <p>The demo fund token asks the registry before subscribe, transfer and withdraw.</p>
+            <span class="state ok">green on anvil and on a local Sepolia fork</span>
+          </li>
+          <li class="node">
+            <b>Uniswap v4 permissioned pool</b>
+            <p>An allowlist checker reads the same registry; PermissionedHooks refuses the swap after a revoke.</p>
+            <span class="state ok">scripts green on a local Sepolia fork; in-app swap door in progress; Sepolia broadcast pending</span>
+          </li>
+          <li class="node">
+            <b>GatedPayout</b>
+            <p>A payout contract that pays only attested adult addresses, fed by a quorum-owned treasury wallet.</p>
+            <span class="state run">payout desk demo in progress</span>
+          </li>
+          <li class="node">
+            <b>Privy policies mirrored from the decision</b>
+            <p>A signer's policy copies the expiry and gains a deny rule on revoke, so an automation stops when the decision does.</p>
+            <span class="state ok">standing order green locally; hand-clicked Sepolia pending</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- lane 5: controls, under the decision -->
+      <div class="lane lane-controls">
+        <h3 class="lane-title"><span class="lane-n">5</span>Controls</h3>
+        <ul class="nodes nodes-row">
+          <li class="node">
+            <b>Issuer approve and revoke</b>
+            <p>The operator key approves in a separate step and withdraws by hand. Manual, captioned manual.</p>
+          </li>
+          <li class="node">
+            <b>Privy signers and policies</b>
+            <p>Delegated signers on embedded wallets, bounded by a policy the investor can read and remove.</p>
+          </li>
+          <li class="node">
+            <b>Key quorums</b>
+            <p>The registry's operator as a Privy server wallet owned by a 2-of-2 quorum, limited to approve and revoke.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p class="map-legend"><span class="state ok">green</span> green locally per the evidence table <span class="state run">in progress</span> built or measured in part <span class="state todo">pending</span> not started or a builder step</p>
+  </div>
+</section>
+
+<!-- DEMOS -->
+<section class="scene g-demos" id="demos">
+  <div class="wrap">
+    <p class="label">Demos</p>
+    <h2 class="display">Eight demos, one registry.</h2>
+    <p class="body">Each card names what it shows, where it is green, and which prize track it addresses. The demo routes run in the product app; the landing page is its pitch.</p>
+
+    <div class="cards">
+
+      <article class="card" id="demo-eudi">
+        <div class="card-media">
+          <img src="assets/eudi-investor-flow.png" alt="The investor portal after a proof made in the browser tab: attested, awaiting the issuer's approval" loading="lazy" width="1280" height="800">
+          <span class="badge ok">green locally with the official wallet; hand-clicked Sepolia pending</span>
+        </div>
+        <div class="card-body">
+          <h3>The EUDI investor flow</h3>
+          <p>A state test wallet shows three fields to a fund issuer, the issuer approves, the approval becomes a few bits on chain that a fund token and a Uniswap pool both read, and one revoke closes both.</p>
+          <p class="track">Best Uniswap Stack Contribution (the pool is the second door)</p>
+          <div class="card-links">
+            <a href="../index.html#demo">Walkthrough</a>
+            <a data-app-path="/" href="http://localhost:5173/">Investor portal</a>
+            <a data-app-path="/issuer" href="http://localhost:5173/issuer" data-app-note-off>Issuer console</a>
+            <a href="https://github.com/devdotbo/nachweis-app/blob/main/docs/demo-runbook.md">Runbook</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="demo-swap">
+        <div class="card-media">
+          <div class="shot-ph" aria-hidden="true"><span class="ph-door"></span><span class="ph-door"></span><span class="ph-arrow"></span></div>
+          <span class="badge ok">scripts green on a local Sepolia fork; in-app door in progress; Sepolia broadcast pending</span>
+        </div>
+        <div class="card-body">
+          <h3>The Uniswap permissioned pool swap</h3>
+          <p>The same decision opens a Uniswap v4 permissioned pool. The investor swaps without a second presentation; after the revoke the identical swap reverts in the pool's hook.</p>
+          <p class="track">Best Uniswap Stack Contribution</p>
+          <div class="card-links">
+            <a href="../index.html#doors">Two doors</a>
+            <a data-app-path="/" href="http://localhost:5173/">Swap door</a>
+            <a href="https://github.com/devdotbo/nachweis-app/blob/main/FEEDBACK.md">Pool notes</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+          <p class="card-note">Screenshot pending: the in-app swap is being wired; the fork scripts swapped 100 mUSD for 90.65 NDF and were refused after the revoke.</p>
+        </div>
+      </article>
+
+      <article class="card" id="demo-standing-order">
+        <div class="card-media">
+          <img src="standing-order/preview.png" alt="Standing order landing page: the on-chain decision mirrored into a Privy policy" loading="lazy" width="1440" height="900">
+          <span class="badge ok">green locally (STANDING-ORDER-LOCAL PASS); hand-clicked Sepolia pending</span>
+        </div>
+        <div class="card-body">
+          <h3>Standing order</h3>
+          <p>The issuer's automation subscribes every month from the investor's embedded wallet through a signer whose Privy policy is a copy of her on-chain decision: until the expiry, denied on revoke.</p>
+          <p class="track">Best B2B financial product, also Best financial flow</p>
+          <div class="card-links">
+            <a href="standing-order/index.html">Landing page</a>
+            <a data-app-path="/showcase/standing-order" href="http://localhost:5173/showcase/standing-order">Open the demo</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="demo-savings-plan">
+        <div class="card-media">
+          <img src="savings-plan/preview.png" alt="Savings plan landing page: four doors closed by one revoke" loading="lazy" width="1440" height="900">
+          <span class="badge todo">landing page done; demo pending until the standing-order wiring lands</span>
+        </div>
+        <div class="card-body">
+          <h3>Savings plan</h3>
+          <p>A retail investor proves once, and a delegated signer buys into the fund on a schedule; a second issuer's instrument, a transfer to another attested wallet and the pool accept the same decision until one revoke closes every door.</p>
+          <p class="track">Best B2B financial product, also Best financial flow</p>
+          <div class="card-links">
+            <a href="savings-plan/index.html">Landing page</a>
+            <a data-app-path="/showcase/savings-plan" href="http://localhost:5173/showcase/savings-plan">Open the demo</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="demo-backoffice">
+        <div class="card-media">
+          <img src="backoffice/preview.png" alt="Back office landing page: approve the wallet, never hold the file" loading="lazy" width="1440" height="900">
+          <span class="badge run">landing page done; demo in progress</span>
+        </div>
+        <div class="card-body">
+          <h3>Back office</h3>
+          <p>The registry's operator is a Privy server wallet owned by a two-key quorum under a policy limited to approve and revoke, so no desk member holds an identity document or a free-signing key.</p>
+          <p class="track">Best B2B financial product</p>
+          <div class="card-links">
+            <a href="backoffice/index.html">Landing page</a>
+            <a data-app-path="/showcase/backoffice" href="http://localhost:5173/showcase/backoffice">Open the demo</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="demo-investor-money">
+        <div class="card-media">
+          <img src="investor-money/preview.png" alt="Investor money landing page: an email address, a state ID, and a fund that pays her" loading="lazy" width="1440" height="900">
+          <span class="badge todo">landing page done; demo pending until the standing-order wiring lands</span>
+        </div>
+        <div class="card-body">
+          <h3>Investor money</h3>
+          <p>An investor who signed in with email subscribes in a test stablecoin, claims distributions and redeems; every movement checks the one decision.</p>
+          <p class="track">Best financial flow</p>
+          <div class="card-links">
+            <a href="investor-money/index.html">Landing page</a>
+            <a data-app-path="/showcase/investor-money" href="http://localhost:5173/showcase/investor-money">Open the demo</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="demo-payout-desk">
+        <div class="card-media">
+          <img src="payout-desk/preview.png" alt="Payout desk landing page: pay your freelancers, never hold their passports" loading="lazy" width="1440" height="900">
+          <span class="badge run">landing page done; demo in progress</span>
+        </div>
+        <div class="card-body">
+          <h3>Payout desk</h3>
+          <p>A company pays contractors from a quorum-owned treasury wallet whose policy confines it to a payout contract that pays only attested adult addresses.</p>
+          <p class="track">Best B2B financial product, also Best financial flow</p>
+          <div class="card-links">
+            <a href="payout-desk/index.html">Landing page</a>
+            <a data-app-path="/showcase/payout-desk" href="http://localhost:5173/showcase/payout-desk">Open the demo</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="demo-zkpassport">
+        <div class="card-media">
+          <div class="shot-ph shot-ph-phone" aria-hidden="true"><span class="ph-phone"><span class="ph-chip"></span></span></div>
+          <span class="badge run">mock passport green on anvil; phone run pending; builder decides on 10 September whether it stays</span>
+        </div>
+        <div class="card-body">
+          <h3>The zkPassport route</h3>
+          <p>Same decision, two kinds of evidence. Passport chip: anyone with a biometric passport, today, through the zkPassport app; the proof is made on the phone by that app and checked on chain by zkPassport's verifier contract. The issuer still approves.</p>
+          <p class="track">No prize track. A second evidence route for people outside the EU wallet's reach.</p>
+          <div class="card-links">
+            <a href="https://github.com/devdotbo/nachweis-app/blob/main/docs/zkpassport.md">Phone steps</a>
+            <a data-app-path="/" href="http://localhost:5173/">Investor portal (flag VITE_ZKPASSPORT)</a>
+            <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="scene g-cases" id="cases">
+  <div class="wrap">
+    <p class="label">Use cases</p>
+    <h2 class="display">Who buys, and what becomes possible.</h2>
+    <p class="body">The buyer is always the party that already owns a gate. Attestat is its tool; the person never pays Attestat and never uploads a document to it.</p>
+    <div class="table-wrap">
+      <table class="cases-table">
+        <thead>
+          <tr><th>Who buys</th><th>What becomes possible</th><th>Demo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A fund issuer or transfer agent that gates its token behind its own allowlist</td>
+            <td>Accept the investor's state wallet once, approve once, and let the token and the pool read the same decision. Revoke once.</td>
+            <td><a href="#demo-eudi">EUDI investor flow</a></td>
+          </tr>
+          <tr>
+            <td>The same issuer, for recurring inflow</td>
+            <td>Run a standing order or savings plan from the investor's own wallet, stopped by expiry, by revoke, or by the investor, with no document behind the automation.</td>
+            <td><a href="#demo-standing-order">Standing order</a>, <a href="#demo-savings-plan">Savings plan</a></td>
+          </tr>
+          <tr>
+            <td>The issuer's compliance desk</td>
+            <td>Approve and withdraw wallets under a four-eyes rule with a quorum-owned operator wallet; no desk member holds a file or a free-signing key.</td>
+            <td><a href="#demo-backoffice">Back office</a></td>
+          </tr>
+          <tr>
+            <td>An issuer whose investors have no crypto wallet</td>
+            <td>An email sign-in gives the investor an embedded wallet; subscriptions, distributions and redemptions in a test stablecoin all check the decision.</td>
+            <td><a href="#demo-investor-money">Investor money</a></td>
+          </tr>
+          <tr>
+            <td>A company paying contractors in stablecoins</td>
+            <td>A treasury wallet confined to a payout contract that pays adults with state identity evidence and nobody else, without holding a passport copy.</td>
+            <td><a href="#demo-payout-desk">Payout desk</a></td>
+          </tr>
+          <tr>
+            <td>A second issuer or a pool operator</td>
+            <td>Accept a customer another issuer already approved, on day one, by reading the registry. Its own customer file stays its own duty.</td>
+            <td><a href="#demo-swap">Uniswap pool</a>, <a href="#demo-savings-plan">Savings plan</a></td>
+          </tr>
+          <tr>
+            <td>An issuer with investors outside the EU wallet's reach</td>
+            <td>Accept a passport-chip proof through zkPassport into the same registry, with the different trust model stated on screen.</td>
+            <td><a href="#demo-zkpassport">zkPassport route</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cases-close">Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain.</p>
+  </div>
+</section>
+
+<!-- HONEST -->
+<section class="scene g-honest" id="honest">
+  <div class="wrap">
+    <p class="label">What is real in these demos</p>
+    <ul class="honest-strip g-strip">
+      <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in any demo.</li>
+      <li><b>Where the proof is made</b>In the investor's browser tab or by the laptop companion on her own computer. In the server route our verifier makes the proof and did see the presentation. In the zkPassport route a third-party app on the phone makes it.</li>
+      <li><b>Simulated</b>Sanctions and similar checks are stubs. Demo subscriptions mint fund tokens without payment. Local runs use a local Privy policy evaluator, captioned as such.</li>
+      <li><b>Manual revocation</b>The issuer revokes by hand. Expiry is shown on a local chain, where time can be moved.</li>
+      <li><b>Sepolia by hand</b>Green means green on a local chain or fork. Every Sepolia run is a builder step and is listed as pending until recorded.</li>
+      <li><b>On chain</b>No identity documents on chain, and nothing we could use to find her. Predicate bits and an expiry bound to an address are still personal data.</li>
+      <li><b>Demos, not products</b>Nothing here is live, and no named company uses it. Sponsors appear where their software is integrated: Privy, Uniswap, zkPassport.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="brand">Attestat <span class="foot-domain">attestat.dev</span></span>
+  <a href="../index.html">Main page</a>
+  <a href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
+  <span class="foot-tag">no document on chain</span>
+</footer>
+
+<script src="links.js"></script>
+<script src="gallery.js"></script>
+</body>
+</html>

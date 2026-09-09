@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attestat showcase: the attested savings plan</title>
+<meta name="description" content="A fund issuer runs a recurring savings plan into its tokenized fund for a retail investor who proves once with the EUDI wallet. One eligibility decision on chain is re-checked at every purchase, reused by a second issuer and a permissioned pool, and closed by one revoke. Built on Attestat with a Privy embedded wallet and a delegated signer.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Attestat">
+<meta property="og:title" content="Attestat showcase: the attested savings plan">
+<meta property="og:description" content="Prove once. Save every month. One revoke closes every door. A demo built on the Attestat toolkit with Privy.">
+<meta property="og:url" content="https://attestat.dev/showcase/savings-plan/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Attestat showcase: the attested savings plan">
+<meta name="twitter:description" content="Prove once. Save every month. One revoke closes every door. A demo built on the Attestat toolkit with Privy.">
+<link rel="canonical" href="https://attestat.dev/showcase/savings-plan/">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../../index.html">Attestat</a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="../index.html">Showcase</a>
+    <a href="#who">Who</a>
+    <a href="#why">Why this needs Attestat</a>
+    <a href="#how">How it works</a>
+    <a href="#chain">The chain</a>
+    <a href="#demo">Demo</a>
+    <a href="https://github.com/devdotbo/nachweis-app">Code</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO: the case sentence and the lifecycle stage -->
+<section class="hero scene sp-hero" id="hero">
+  <div class="hero-inner sp-hero-grid">
+    <div class="sp-hero-text">
+      <p class="eyebrow">Attestat showcase <span class="dot"></span> Savings plan</p>
+      <h1 class="hook sp-hook">Prove once. Save every month. One <em>revoke</em> closes every door.</h1>
+      <p class="lede">A retail investor signs in with an email, proves once with the state ID wallet on her phone, and gets one eligibility decision on chain. Her savings plan buys fund tokens on a schedule while she is offline. A second issuer's instrument and a permissioned pool accept the same decision. When the issuer revokes, or the credential expires, every door refuses.</p>
+      <p class="spoken">"Your ID wallet should work where you invest."</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="http://localhost:5173/showcase/savings-plan" data-app-path="/showcase/savings-plan">Open the demo</a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
+      </div>
+      <p class="sp-toolkit">A demo built on the Attestat toolkit, with a Privy embedded wallet and a delegated signer. Not a live product.</p>
+    </div>
+
+    <div class="sp-hero-art">
+      <div class="stage" id="stage" data-state="live">
+        <svg class="links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line class="link l-plan" x1="50" y1="50" x2="50" y2="9"></line>
+          <line class="link l-b" x1="50" y1="50" x2="72" y2="50"></line>
+          <line class="link l-pool" x1="50" y1="50" x2="50" y2="91"></line>
+          <line class="link l-xfer" x1="50" y1="50" x2="28" y2="50"></line>
+        </svg>
+        <div class="pulse" id="pulse" aria-hidden="true"></div>
+
+        <div class="core" id="core">
+          <p class="core-head">Decision on chain</p>
+          <div class="core-row"><span>subject</span><b>0x7a3f…c41e</b></div>
+          <div class="core-row"><span>bits</span><b>evidence 1, over18 1</b></div>
+          <div class="core-row"><span>tier</span><b>A</b></div>
+          <div class="core-row"><span>expiry</span><b id="core-expiry">2026-10-07</b></div>
+          <div class="core-row core-status"><span>status</span><b id="core-status">eligible</b></div>
+          <div class="core-row struck"><span>name</span><b>not present</b></div>
+        </div>
+
+        <div class="gate g-plan" data-gate="plan">
+          <span class="leaf"></span>
+          <span class="gate-name">Plan run</span>
+          <span class="gate-state">open</span>
+        </div>
+        <div class="gate g-b" data-gate="b">
+          <span class="leaf"></span>
+          <span class="gate-name">Issuer B</span>
+          <span class="gate-state">open</span>
+        </div>
+        <div class="gate g-pool" data-gate="pool">
+          <span class="leaf"></span>
+          <span class="gate-name">Pool swap</span>
+          <span class="gate-state">open</span>
+        </div>
+        <div class="gate g-xfer" data-gate="xfer">
+          <span class="leaf"></span>
+          <span class="gate-name">Transfer</span>
+          <span class="gate-state">open</span>
+        </div>
+      </div>
+
+      <div class="runner" aria-live="polite">
+        <div class="runner-head"><span class="runner-dot"></span><span>Runner log</span><span class="runner-cap" id="runner-cap">She is not clicking.</span></div>
+        <ol class="runner-log" id="runner-log"></ol>
+      </div>
+      <div class="stage-controls">
+        <button class="btn btn-coral" id="ctl-revoke" type="button">Revoke once</button>
+        <button class="btn btn-ghost" id="ctl-expire" type="button">Let it expire</button>
+        <button class="btn btn-ghost" id="ctl-reopen" type="button" hidden>Reopen, manual</button>
+        <button class="btn btn-ghost sp-reset" id="ctl-reset" type="button">Replay</button>
+      </div>
+      <p class="stage-note">Scripted replay with sample data, in your browser. The working demo is linked below.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO BUYS, WHO USES -->
+<section class="scene sp-who" id="who">
+  <div class="wrap">
+    <p class="label reveal">Who buys, who uses</p>
+    <h2 class="display reveal">The issuer pays. <span class="yellow">The saver</span> never uploads a document.</h2>
+    <div class="who-grid">
+      <article class="who reveal">
+        <p class="who-role">Buyer</p>
+        <h3>A fund issuer or transfer agent</h3>
+        <p>It reaches savings-plan customers today through custodial brokers, and gates its token behind its own allowlist. With Attestat it takes recurring retail inflows without operating custody, and without re-checking a stored identity record before every purchase. The chain re-checks the decision at every run.</p>
+        <p class="who-later">Later, a second issuer: it wants the same customer on day one, with no allowlist relayer of its own.</p>
+      </article>
+      <article class="who reveal">
+        <p class="who-role">User</p>
+        <h3>A retail investor with an email</h3>
+        <p>She has the official test wallet on her phone and no crypto wallet. After email sign-in she has a Privy embedded wallet. She proves once, the issuer approves once, and her plan buys fund tokens on a schedule while she is offline.</p>
+        <p class="who-later">She can stop the plan herself at any time. The issuer's revoke stops it too.</p>
+      </article>
+    </div>
+    <ul class="money reveal">
+      <li><b>Recurring subscription</b><span>into the fund token. Demo subscription: mints fund tokens, no payment.</span></li>
+      <li><b>Second instrument</b><span>Issuer B mints its token to the same address, gated by the same decision.</span></li>
+      <li><b>Pool swap</b><span>in the Uniswap permissioned pool, gated by the same decision.</span></li>
+      <li><b>Transfer</b><span>of fund tokens to another attested wallet. An unattested recipient is refused.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- OTHERWISE NOT POSSIBLE -->
+<section class="scene sp-why" id="why">
+  <div class="wrap">
+    <p class="label reveal">Otherwise not possible</p>
+    <h2 class="display reveal">Three things a plan cannot do <span class="coral">today</span>.</h2>
+    <div class="facts">
+      <article class="fact reveal">
+        <p class="big mono">isEligible</p>
+        <p class="fact-src">Code: FundToken.sol and AttestationRegistry.sol</p>
+        <p class="fact-what">A recurring purchase from a self-custodial wallet needs a signer that acts while the user is away, and every receipt of the fund token is gated on the registry's approval, not revoked, not expired: the same check stops a plan run, a second issuer's mint, a swap and a transfer, with nothing running in the issuer's back office.</p>
+      </article>
+      <article class="fact reveal">
+        <p class="big">0</p>
+        <p class="fact-src">Market: live gated products memo, 2026-09-06</p>
+        <p class="fact-what">We found no live product where one on-chain attestation is consumed on chain by more than one independent app, and 0 of 5 core EU exchanges accept another venue's proof, so today a second venue re-verifies, keeps its own file and runs its own revocation loop, and a revocation at venue A never reaches venue B.</p>
+      </article>
+      <article class="fact reveal">
+        <p class="big">Art. 5a</p>
+        <p class="fact-src">Regulation: eIDAS 2, Art. 5a(8) and 5a(9)</p>
+        <p class="fact-what">The regulation gives the credential a lifecycle, revocation at the user's request, on compromise or on death, and free validation of wallet validity, but without an on-chain decision that lifecycle stops at the verifier's database and never reaches the token, the pool or the plan.</p>
+      </article>
+    </div>
+    <p class="punch reveal">A plan and a set of doors that fail closed on a decision the customer carries. <strong>No business holds her document. No business holds her key.</strong></p>
+    <p class="boundary reveal">Boundary we keep: an attestation reused by a second venue does not transfer that venue's duty. Issuer B accepts the eligibility decision as its on-chain gate; its own customer file is its own duty. This case does not claim onboarding reuse.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="scene sp-how" id="how">
+  <div class="wrap">
+    <p class="label reveal">How it works</p>
+    <h2 class="display reveal">Six beats, <span class="mint">one</span> decision.</h2>
+    <p class="body reveal">The identity part happens once. The Privy part gives the plan a signer that is bounded twice: by a policy on Privy's side, and by the chain on every run.</p>
+
+    <ol class="beats reveal" id="beats">
+      <li class="beat b-phone">
+        <span class="beat-where">Phone</span>
+        <span class="beat-name">Present</span>
+        <p>The official test wallet answers the issuer's registered request: given name, family name, over 18. Names go to the issuer's verifier, never to the chain.</p>
+      </li>
+      <li class="beat b-laptop">
+        <span class="beat-where">Browser tab</span>
+        <span class="beat-name">Prove</span>
+        <p>Proof made in your browser tab on this computer. The zero-knowledge proof binds her wallet address, the policy, the predicate bits and the credential's own expiry.</p>
+      </li>
+      <li class="beat b-chain">
+        <span class="beat-where">Chain</span>
+        <span class="beat-name">Decide</span>
+        <p>The issuer approves in a separate step. One eligibility decision is written against her address: bits, tier, expiry, status reference. No name.</p>
+      </li>
+      <li class="beat b-privy">
+        <span class="beat-where">Privy</span>
+        <span class="beat-name">Allow</span>
+        <p>She adds the issuer's key as a signer on her embedded wallet, under a policy that allows subscribe() on the Subscription contract and nothing else. She can remove it herself.</p>
+      </li>
+      <li class="beat b-runner">
+        <span class="beat-where">Runner</span>
+        <span class="beat-name">Run</span>
+        <p>The issuer's runner sends subscribe() from her wallet on schedule. Privy checks the policy. The chain checks the decision. She is not clicking.</p>
+      </li>
+      <li class="beat b-revoke">
+        <span class="beat-where">Issuer</span>
+        <span class="beat-name">Revoke or expire</span>
+        <p>One revoke transaction, and the plan run, Issuer B's mint, the pool swap and a transfer to her all revert. Expiry does the same without anyone acting. Manual: issuer revokes; issuer reopens.</p>
+      </li>
+    </ol>
+
+    <div class="bounds reveal">
+      <article class="bound bound-privy">
+        <p class="bound-head">Bound one: the Privy policy</p>
+        <pre class="policy"><code>{
+  "version": "1.0",
+  "chain_type": "ethereum",
+  "rules": [{
+    "name": "subscribe and nothing else",
+    "method": "eth_sendTransaction",
+    "conditions": [
+      { "field_source": "ethereum_transaction",
+        "field": "to",
+        "operator": "eq",
+        "value": "&lt;Subscription contract&gt;" },
+      { "field_source": "ethereum_calldata",
+        "field": "function_name",
+        "operator": "eq",
+        "value": "subscribe" },
+      { "field_source": "ethereum_transaction",
+        "field": "chain_id",
+        "operator": "eq",
+        "value": "11155111" }
+    ],
+    "action": "ALLOW"
+  }]
+}</code></pre>
+        <p class="bound-note">Shape after Privy's published calldata example. What the issuer's key may sign from her wallet.</p>
+      </article>
+      <article class="bound bound-chain">
+        <p class="bound-head">Bound two: the chain</p>
+        <pre class="policy"><code>function isEligible(subject, policyId, requiredBits)
+  returns (bool)
+{
+  Decision d = decisions[subject][policyId];
+  return approved[subject][policyId]
+      &amp;&amp; !d.revoked
+      &amp;&amp; d.expiry &gt; block.timestamp
+      &amp;&amp; (d.bits &amp; requiredBits) == requiredBits;
+}</code></pre>
+        <p class="bound-note">Whether the signed call lands. Read by the Subscription contract, both fund tokens, the pool's allowlist checker, and every transfer.</p>
+      </article>
+    </div>
+
+    <div class="privy-lines reveal">
+      <p><b>Under the connect card:</b> Wallet by Privy: an embedded wallet created at email sign-in, so an investor without a crypto wallet can hold the fund token. Your identity evidence never goes to Privy; Privy sees an address and the transactions you sign or allow. Sample identity from the official test wallet; testnet funds.</p>
+      <p><b>Under the plan card:</b> Savings plan: you allow the issuer's key to send subscribe() from your wallet and nothing else, bounded by a Privy policy and re-checked on chain at every run. Stop it here at any time; the issuer's revoke stops it too. Privy's docs say the signer never sees your key (their statement, not ours).</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT THE CHAIN SEES -->
+<section class="scene sp-chain" id="chain">
+  <div class="wrap two-col">
+    <div class="col-text">
+      <p class="label reveal">What the chain sees</p>
+      <h2 class="display reveal">One record per address. <span class="mint">No name.</span></h2>
+      <p class="body reveal">Anyone can read this. It is enough for a plan run, a mint, a swap or a transfer to decide, and not enough to know who she is.</p>
+      <ul class="points sp-points">
+        <li class="reveal"><span class="pt">bits</span>Predicate bits the policy verified. In the demo policy: identity evidence, over 18.</li>
+        <li class="reveal"><span class="pt">expiry</span>The credential's own expiry, bound by the proof. After it, every door refuses without anyone acting.</li>
+        <li class="reveal"><span class="pt">revoked</span>Set by one issuer transaction. The same transaction clears approval.</li>
+        <li class="reveal"><span class="pt">statusRef</span>An opaque reference to an off-chain status entry. Never a name.</li>
+      </ul>
+      <p class="kicker reveal">No identity documents on chain, and nothing we could use to find her.</p>
+    </div>
+    <div class="col-art reveal">
+      <pre class="struct"><code><span class="c">// One eligibility decision per (subject, policyId).</span>
+<span class="c">// No names, no strings, no personal data.</span>
+struct Decision {
+    bytes32 policyId;
+    uint256 bits;
+    uint8   tier;
+    uint64  expiry;
+    bytes32 statusRef;
+    bool    revoked;
+}</code></pre>
+      <p class="art-cap">contracts/src/interfaces/IEligibility.sol. Predicate bits and an expiry bound to an address are still personal data in the EDPB's reading; that is why the issuer keeps the file and the chain keeps the decision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE DEMO -->
+<section class="scene sp-demo" id="demo">
+  <div class="wrap">
+    <p class="label reveal">The demo</p>
+    <h2 class="display reveal">Twelve beats on a <span class="blue">local chain</span>, then Sepolia.</h2>
+    <p class="body reveal">The demo is a route in the Attestat application. It runs on a local chain with a development signer, and on Sepolia with a Privy app the builder clicks by hand.</p>
+    <div class="demo-grid">
+      <figure class="shot reveal">
+        <div class="shot-frame" aria-hidden="true">
+          <div class="shot-bar"><span></span><span></span><span></span><i>/showcase/savings-plan</i></div>
+          <div class="shot-body">
+            <p>Screenshot to follow once the demo is recorded.</p>
+          </div>
+        </div>
+        <figcaption>The investor screen with the plan card and the runner log, and the issuer console with Revoke. Captioned placeholder until the demo is green.</figcaption>
+      </figure>
+      <div class="demo-list reveal">
+        <ol class="demo-steps">
+          <li>Sign in with email. A Privy embedded wallet appears.</li>
+          <li>Bind: she signs a session nonce with the embedded wallet.</li>
+          <li>Scan the QR with the official test wallet. Proof made in the browser tab.</li>
+          <li>Issuer approves. The decision card shows bits, expiry, eligible.</li>
+          <li>Allow the plan. Privy consent, signer added under the policy.</li>
+          <li>Runs 1 and 2 confirm from her wallet. She is not clicking.</li>
+          <li>Issuer B mints its token to her. Same decision, second door.</li>
+          <li>Swap in the permissioned pool.</li>
+          <li>Transfer to an attested friend confirms; to a stranger, reverts.</li>
+          <li>Revoke. Four doors refuse. Policy set to DENY; plan stopped by issuer.</li>
+          <li>Expiry demonstrated on a local chain.</li>
+          <li>A fresh proof after revoke is refused; the operator reopens. Manual.</li>
+        </ol>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="http://localhost:5173/showcase/savings-plan" data-app-path="/showcase/savings-plan">Open the demo</a>
+          <a class="btn btn-ghost" href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST ABOUT THE DEMO -->
+<section class="scene s-honest sp-honest" id="honest">
+  <div class="wrap">
+    <p class="label reveal">Honest about the demo</p>
+    <ul class="honest-strip sp-strip reveal">
+      <li><b>Official test wallet, sample identity</b>The German EUDI sandbox with sample data. No state-issued ID in this build.</li>
+      <li><b>Where the proof is made</b>Proof made in your browser tab on this computer. The official wallet does not produce this proof today.</li>
+      <li><b>Simulated checks</b>Sanctions and other checks are stubs in this build and are captioned simulated.</li>
+      <li><b>Manual</b>Issuer revokes; issuer reopens. Second investor attested by the operator for the demo.</li>
+      <li><b>No payment</b>Demo subscription: mints fund tokens, no payment. Testnet funds.</li>
+      <li><b>Expiry</b>Expiry demonstrated on a local chain. Time cannot be moved on Sepolia.</li>
+      <li><b>What Privy sees</b>An address and the transactions you sign or allow. Your identity evidence never goes to Privy.</li>
+      <li><b>On chain</b>No identity documents on chain, and nothing we could use to find her.</li>
+    </ul>
+    <div class="built reveal">
+      <span class="built-label">Built on</span>
+      <span class="chip">Attestat toolkit</span>
+      <span class="chip">Privy embedded wallets and signers</span>
+      <span class="chip">Uniswap permissioned pools</span>
+      <span class="chip">EUDI sandbox wallet</span>
+      <span class="chip">Noir</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="brand">Attestat <span class="foot-domain">attestat.dev</span></span>
+  <a href="../index.html">All showcase cases</a>
+  <a href="../../index.html">Main page</a>
+  <a href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
+  <span class="foot-tag">no document on chain</span>
+</footer>
+
+<script src="../links.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

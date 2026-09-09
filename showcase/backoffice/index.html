@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attestat showcase: the document-blind compliance desk</title>
+<meta name="description" content="A fund issuer's compliance desk approves and withdraws investor wallets under a four-eyes rule, with no desk member holding an identity document or a free-signing key. Built on Attestat with a Privy server wallet owned by a two-key quorum.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Attestat">
+<meta property="og:title" content="Attestat showcase: the document-blind compliance desk">
+<meta property="og:description" content="Approve the wallet. Never hold the file. Four-eyes approval and revocation on the AttestationRegistry through a Privy operator wallet bound by policy.">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../../index.html">Attestat</a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#who">Who</a>
+    <a href="#why">Why not before</a>
+    <a href="#how">How it works</a>
+    <a href="#chain">The chain</a>
+    <a href="#demo">Demo</a>
+    <a href="#honest">Honest</a>
+    <a href="../index.html">Gallery</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="scene hero bo-hero" id="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Showcase <span class="dot"></span> Back office <span class="dot"></span> Built on Attestat</p>
+    <h1 class="hook">Approve the wallet. <em>Never hold</em> the file.</h1>
+    <p class="lede">A fund issuer's compliance desk approves and withdraws investor wallets under a four-eyes rule. Nobody at the desk holds an identity document, and nobody holds a key that can sign freely. The investor's EUDI evidence is already proven on chain, the registry refuses any approval without it, and the operator wallet can do exactly two things: approve and revoke.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="http://localhost:5173/showcase/backoffice" data-app-path="/showcase/backoffice">Open the demo</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
+    </div>
+  </div>
+
+  <div class="flow reveal in" aria-label="The flow: the test wallet presents, the browser proves, the chain records evidence, two keys approve, the chain records approval">
+    <div class="node n1" style="--d:.2s">
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="13" y="4" width="22" height="40" rx="5"/><rect x="16" y="9" width="16" height="26" rx="2" class="fill"/><circle cx="24" cy="40" r="1.6" class="fill"/></svg>
+      </div>
+      <p class="node-name">Test wallet</p>
+      <p class="node-sub">presents three fields</p>
+    </div>
+    <div class="wire w1" style="--d:.9s"><i></i></div>
+    <div class="node n2" style="--d:1.7s">
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 12h36v24H6z"/><path d="M6 36l10-10 8 8 6-6 12 8" class="stroke"/><path d="M18 12v-4h12v4" class="stroke"/></svg>
+      </div>
+      <p class="node-name">Browser tab</p>
+      <p class="node-sub">makes the proof</p>
+    </div>
+    <div class="wire w2" style="--d:2.4s"><i></i></div>
+    <div class="node n3" style="--d:3.2s">
+      <div class="node-icon">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="8" width="36" height="9" rx="2"/><rect x="6" y="20" width="36" height="9" rx="2"/><rect x="6" y="32" width="36" height="9" rx="2"/></svg>
+      </div>
+      <p class="node-name">Registry</p>
+      <p class="node-sub">Attested, no approval</p>
+    </div>
+    <div class="wire w3" style="--d:3.9s"><i></i></div>
+    <div class="node n4 desk" style="--d:4.7s">
+      <div class="lock" aria-hidden="true">
+        <svg class="shackle" viewBox="0 0 60 34"><path d="M14 34V20a16 16 0 0 1 32 0v14" fill="none" stroke-width="7" stroke-linecap="round"/></svg>
+        <div class="plate">
+          <span class="keyhole k1" style="--d:5.4s"><svg viewBox="0 0 12 38" aria-hidden="true"><circle cx="6" cy="6" r="5.5"/><rect x="4" y="9" width="4" height="27" rx="1"/><rect x="8" y="26" width="4" height="3"/><rect x="8" y="31" width="3" height="3"/></svg></span>
+          <span class="keyhole k2" style="--d:6.3s"><svg viewBox="0 0 12 38" aria-hidden="true"><circle cx="6" cy="6" r="5.5"/><rect x="4" y="9" width="4" height="27" rx="1"/><rect x="8" y="26" width="4" height="3"/><rect x="8" y="31" width="3" height="3"/></svg></span>
+        </div>
+      </div>
+      <p class="node-name">Compliance desk</p>
+      <p class="node-sub">two keys, one Privy wallet</p>
+    </div>
+    <div class="wire w4" style="--d:7.2s"><i></i></div>
+    <div class="node n5" style="--d:7.9s">
+      <div class="node-icon good">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="8" width="36" height="9" rx="2"/><rect x="6" y="20" width="36" height="9" rx="2"/><rect x="6" y="32" width="36" height="9" rx="2"/></svg>
+      </div>
+      <p class="node-name">Registry</p>
+      <p class="node-sub">Approved</p>
+    </div>
+    <div class="not-here" aria-hidden="true">
+      <span class="passport"></span>
+      <span>no document on this wire</span>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span></span></div>
+</section>
+
+<!-- WHO -->
+<section class="scene s-who" id="who">
+  <div class="wrap two-col">
+    <div class="col-text">
+      <p class="label reveal">Who buys, who uses</p>
+      <h2 class="display reveal">The issuer that already <span class="blue">owns the gate</span>.</h2>
+      <p class="body reveal">A fund issuer, transfer agent or launchpad gates its token behind an allowlist today. That gate is a liability it already runs: an allowlist key, an operations team, and a compliance file that both must touch. It pays for control over the gate, not for a money flow. No money moves through the operator wallet, by design.</p>
+      <p class="kicker reveal">This desk sees an address and its evidence. The issuer's compliance file stays with the issuer.</p>
+    </div>
+    <div class="col-art reveal">
+      <div class="desks">
+        <article class="desk-card">
+          <span class="desk-key" aria-hidden="true"></span>
+          <h3>Compliance desk</h3>
+          <p>Decides that an address with evidence may hold the instrument. Holds one P-256 authorization key. Cannot revoke alone, cannot send.</p>
+        </article>
+        <article class="desk-card ops">
+          <span class="desk-key" aria-hidden="true"></span>
+          <h3>Operations desk</h3>
+          <p>Co-signs approvals. Can withdraw an address alone in an emergency, until a rotation date. Holds one P-256 authorization key.</p>
+        </article>
+        <p class="desks-foot">Neither desk holds the operator's private key. Privy's enclave holds it, and the wallet is owned by the two keys together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOT BEFORE -->
+<section class="scene s-why" id="why">
+  <div class="wrap">
+    <p class="label reveal">Otherwise not possible</p>
+    <h2 class="display reveal">Today, approving an address is an act of <span class="coral">document custody</span>.</h2>
+    <ol class="reasons">
+      <li class="reveal">
+        <p>An address carries nothing, so the person who approves it must be the person who has seen the file, and the key that writes the allowlist sits with that person or with a multisig of such people.</p>
+        <span class="src">Source: the product-pitch-legal memo cited in the Attestat product page, and a count of zero live gated products that accept an external attestation without a contract (live-gated-products memo).</span>
+      </li>
+      <li class="reveal">
+        <p>With the evidence proven on chain and bound to the address, the approval act needs only the address, the evidence bits and the issuer's own record reference. The registry refuses to approve anything else: attestWithProof is permissionless and never approves, approve is operator-only and reverts NoDecision when no evidence exists.</p>
+        <span class="src">Source: contracts/src/AttestationRegistry.sol, lines 114 to 121, and contracts/test/Nachweis.t.sol in the nachweis-app repository.</span>
+      </li>
+      <li class="reveal">
+        <p>A plain multisig would still let a majority of its keys mint, move funds or change verifiers. Privy's policy is enforced inside the enclave before signing, and denies by default, so the desk wallet cannot be talked into anything but approve and revoke, even by both of its own keys.</p>
+        <span class="src">Source: Privy documentation, controls/policies/overview ("Defaults to DENY if no rules resolve"), fetched 2026-09-09.</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="scene s-how" id="how">
+  <div class="wrap">
+    <p class="label reveal">How it works</p>
+    <h2 class="display reveal">Evidence, <span class="yellow">then two keys</span>.</h2>
+    <p class="body reveal">Seven beats. Three of them are refusals, because a desk is defined by what it cannot do.</p>
+
+    <ol class="stepper reveal">
+      <li class="st">
+        <span class="st-n">1</span>
+        <h3>Presentation</h3>
+        <p>The investor's official test wallet answers the issuer's registered request with three fields: given name, family name, over 18. Sample identity. The names go to the issuer's verifier, not to the chain.</p>
+      </li>
+      <li class="st">
+        <span class="st-n">2</span>
+        <h3>Zero-knowledge proof</h3>
+        <p>The investor's browser tab proves the statement on their own computer and the bridge sends attestWithProof. The chain records evidence: policy, bits, tier, expiry. Nobody is approved yet.</p>
+      </li>
+      <li class="st privy">
+        <span class="st-n">3</span>
+        <h3>An intent, raised from the chain</h3>
+        <p>The back-office service watches the registry's Attested event and proposes an approve intent on the Privy operator wallet. The intent sits at zero of two.</p>
+      </li>
+      <li class="st privy">
+        <span class="st-n">4</span>
+        <h3>Two authorizations</h3>
+        <p>Compliance authorizes with its key: one of two. Operations authorizes with its key: two of two. Privy executes the transaction from the enclave and the registry emits Approved. The fund token and the permissioned pool open on the same record.</p>
+      </li>
+      <li class="st refuse">
+        <span class="st-n">5</span>
+        <h3>Refused by policy</h3>
+        <p>Someone tries to send 0.01 ETH from the operator wallet. The policy allows approve and revoke on the registry and nothing else, so Privy refuses before anything is signed.</p>
+      </li>
+      <li class="st refuse">
+        <span class="st-n">6</span>
+        <h3>Refused by evidence</h3>
+        <p>Both desks authorize an approval for a stranger address that never brought evidence. The transaction reverts with NoDecision and the intent ends as failed. Two signatures are not enough without evidence.</p>
+      </li>
+      <li class="st refuse">
+        <span class="st-n">7</span>
+        <h3>Emergency revoke</h3>
+        <p>Operations alone signs revoke under its time-bound emergency policy. The registry emits Revoked, the fund token refuses the next subscription, the pool checker returns no permission. Manual withdrawal, by hand.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- WHAT THE CHAIN SEES -->
+<section class="scene s-chain" id="chain">
+  <div class="wrap two-col">
+    <div class="col-text">
+      <p class="label reveal">What the chain sees</p>
+      <h2 class="display reveal">One record per address. <span class="mint">No name</span> in it.</h2>
+      <p class="body reveal">The registry stores one Decision per address and policy. The operator wallet can flip the approval flag and the revoked flag. It cannot write a name, because there is no field for one.</p>
+      <p class="kicker reveal">No identity documents on chain, and nothing we could use to find her.</p>
+    </div>
+    <div class="col-art reveal">
+      <div class="struct">
+        <div class="struct-head"><span>struct Decision</span><span>sample values</span></div>
+        <div class="f"><span>policyId</span><b>0x9c02…e7b8</b></div>
+        <div class="f"><span>bits</span><b>evidence 1, over18 1</b></div>
+        <div class="f"><span>tier</span><b>1</b></div>
+        <div class="f"><span>expiry</span><b>2026-10-07</b></div>
+        <div class="f"><span>statusRef</span><b>0x51ab…03fe</b></div>
+        <div class="f"><span>revoked</span><b>false</b></div>
+        <div class="struct-head sub"><span>set by the desk</span><span></span></div>
+        <div class="f on"><span>approved[subject][policyId]</span><b>true</b></div>
+        <div class="f on"><span>Approved.operator</span><b>the Privy wallet address</b></div>
+        <div class="struct-head sub"><span>not present</span><span></span></div>
+        <div class="f off"><span>given name, family name</span><b>no field</b></div>
+        <div class="f off"><span>document</span><b>no field</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="scene s-desk" id="demo">
+  <div class="wrap">
+    <p class="label reveal">The demo</p>
+    <h2 class="display reveal">Sit at the <span class="blue">desk</span>.</h2>
+    <p class="body reveal">Approve one investor with two keys, then try the three things the desk cannot do.</p>
+    <p class="demo-disclaimer reveal">Scripted walkthrough with sample data. This panel replays a fixed sequence in your browser and touches no wallet, no server and no chain. The working demo is the route <code>/showcase/backoffice</code> in the product app, run locally on anvil or against a Privy app on Sepolia.</p>
+
+    <div class="deskapp reveal" id="deskapp">
+      <div class="steps" role="group" aria-label="Desk steps">
+        <button class="step" data-step="evidence" type="button"><span class="n">1</span>Evidence arrives</button>
+        <button class="step" data-step="comp" type="button" disabled><span class="n">2</span>Compliance authorizes</button>
+        <button class="step" data-step="ops" type="button" disabled><span class="n">3</span>Operations authorizes</button>
+        <button class="step step-refuse" data-step="probe" type="button" disabled><span class="n">4</span>Try to send ETH</button>
+        <button class="step step-refuse" data-step="stranger" type="button" disabled><span class="n">5</span>Approve a stranger</button>
+        <button class="step step-revoke" data-step="revoke" type="button" disabled><span class="n">6</span>Emergency revoke</button>
+        <button class="step step-reset" data-step="reset" type="button">Reset</button>
+      </div>
+
+      <div class="desk-grid">
+        <section class="dpane wallet" aria-labelledby="dp-wallet">
+          <h3 id="dp-wallet">Operator wallet</h3>
+          <div class="wallet-card">
+            <div class="wrow"><span>address</span><b>0x5e1d…9a4c</b></div>
+            <div class="wrow"><span>owner</span><b>key quorum, 2 of 2</b></div>
+            <div class="wrow"><span>policy</span><b>Registry operator</b></div>
+            <div class="wrow"><span>emergency signer</span><b>operations, revoke only, until 2026-12-31</b></div>
+          </div>
+          <div class="fence" id="fence">
+            <p class="fence-title">What the policy allows</p>
+            <span class="allow">approve(subject, policyId)</span>
+            <span class="allow">revoke(subject, policyId)</span>
+            <span class="deny">everything else: denied by default</span>
+          </div>
+          <div class="roles" role="group" aria-label="Signing as">
+            <span class="roles-label">signing as</span>
+            <span class="role comp" id="role-comp">Compliance</span>
+            <span class="role ops" id="role-ops">Operations</span>
+          </div>
+        </section>
+
+        <section class="dpane intents" aria-labelledby="dp-intents">
+          <h3 id="dp-intents">Intents</h3>
+          <div class="pane-body" id="intent-list" aria-live="polite">
+            <p class="empty">Waiting for evidence. The service watches the registry's Attested event.</p>
+          </div>
+        </section>
+
+        <section class="dpane chain" aria-labelledby="dp-chain">
+          <h3 id="dp-chain">Chain</h3>
+          <div class="pane-body" id="chain-log" aria-live="polite">
+            <p class="empty">Public. Anyone can read this pane.</p>
+          </div>
+          <div class="doors-mini" id="doors-mini">
+            <div class="mini-door" data-door="fund"><span class="leaf"></span><span class="tag">Fund</span><span class="state">closed</span></div>
+            <div class="mini-door" data-door="pool"><span class="leaf"></span><span class="tag">Pool</span><span class="state">closed</span></div>
+          </div>
+        </section>
+      </div>
+      <p class="demo-note" id="demo-note">Step 1: the investor's proof lands on chain as evidence.</p>
+    </div>
+
+    <figure class="shot reveal">
+      <div class="shot-frame">
+        <span>Screenshot of the compliance desk panel in the product app. Not captured yet; the demo route is under construction.</span>
+      </div>
+      <figcaption>The issuer console with the compliance desk panel: operator wallet, policy, pending intents and the event log. Two keys on one demo server; in production each desk holds its own key.</figcaption>
+    </figure>
+
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="http://localhost:5173/showcase/backoffice" data-app-path="/showcase/backoffice">Open the demo</a>
+      <a class="btn btn-ghost" href="https://github.com/devdotbo/nachweis-app">Source and runbook</a>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST -->
+<section class="scene s-honest bo-honest" id="honest">
+  <div class="wrap">
+    <p class="label reveal">Honest about the demo</p>
+    <ul class="honest-strip reveal">
+      <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in this build.</li>
+      <li><b>Where the proof is made</b>In the investor's browser tab, on their own computer. A laptop companion route exists. The official wallet does not produce this proof today.</li>
+      <li><b>Simulated checks</b>Sanctions and similar checks are stubs in this build. Local mode simulates the two-signature count with a plain key on anvil and says so.</li>
+      <li><b>Manual withdrawal</b>Revocation is triggered by hand. Renewal before expiry is manual in this build.</li>
+    </ul>
+    <div class="privy-box reveal">
+      <p class="privy-title">The Privy part, in Privy's terms</p>
+      <p>Operator wallet by Privy: a server wallet whose key is reconstituted only inside Privy's secure enclave (Privy's wording), owned by a two-key quorum of the issuer's compliance and operations desks, and bound by a policy that allows approve and revoke on the AttestationRegistry and nothing else. Privy sees this wallet's transactions; it never sees identity evidence.</p>
+      <p class="privy-small">Two keys on one demo server; in production each desk holds its own key. Whether key quorums and the intents API are available on the free developer plan is not yet verified.</p>
+    </div>
+    <p class="closing reveal">No identity documents on chain, and nothing we could use to find her.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="brand">Attestat <span class="foot-domain">showcase</span></span>
+  <a href="../index.html">All demos and use cases</a>
+  <a href="../../index.html">Main page</a>
+  <a href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
+  <span class="foot-tag">no document on chain</span>
+</footer>
+
+<script src="../links.js"></script>
+<script src="desk.js"></script>
+</body>
+</html>

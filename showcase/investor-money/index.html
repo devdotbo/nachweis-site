@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investor money, a showcase built on Attestat</title>
+<meta name="description" content="A fund issuer takes stablecoin subscriptions, pays distributions and redemptions to an investor who signed in with email and never held a seed phrase. Every movement is gated by one on-chain decision. Wallet by Privy. A demo built on Attestat.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Attestat">
+<meta property="og:title" content="Investor money: an email address, a state ID, and a fund that pays her">
+<meta property="og:description" content="Subscribe, receive a distribution, redeem. Every movement of money is refused unless the decision on chain says the wallet is eligible at that block. Wallet by Privy. A demo built on Attestat.">
+<meta property="og:url" content="https://attestat.dev/showcase/investor-money/">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://attestat.dev/showcase/investor-money/">
+<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="../../index.html">Attestat</a>
+  <nav class="topnav" aria-label="Sections">
+    <a href="#who">Who</a>
+    <a href="#why">Why it needs this</a>
+    <a href="#how">How it works</a>
+    <a href="#chain">The chain</a>
+    <a href="#demo">The demo</a>
+    <a href="#honest">Honest</a>
+    <a href="../index.html">All showcases</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="scene hero-money" id="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+    <p class="eyebrow">Showcase, built on Attestat <span class="dot"></span> Investor money</p>
+    <h1 class="hook">An email address, a state ID, and a fund that <em>pays her</em>.</h1>
+    <p class="lede">The investor signs in with email and never holds a seed phrase. She subscribes in a test stablecoin, receives a distribution, and redeems. Every movement is refused unless the decision on chain says her wallet is eligible at that block. Wallet by Privy. Decision from her EUDI identity evidence and the issuer's approval.</p>
+    <p class="spoken">"One decision. Every movement asks it."</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="http://localhost:5173/showcase/investor-money" data-app-path="/showcase/investor-money">Open the demo</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
+    </div>
+    </div>
+
+    <div class="rail-stage">
+      <div class="rail" aria-hidden="true">
+        <div class="node node-investor">
+          <span class="node-title">Investor</span>
+          <span class="node-sub">signed in with email</span>
+          <span class="addr">0x7a3f…c41e</span>
+          <span class="node-by">wallet by Privy</span>
+          <div class="bals">
+            <div class="bal"><span>mUSD</span><span class="num n-musd"><i>1,000</i><i>900</i><i>910</i><i>960</i></span></div>
+            <div class="bal"><span>NDF</span><span class="num n-ndf"><i>0</i><i>100</i><i>50</i></span></div>
+          </div>
+        </div>
+
+        <div class="track">
+          <div class="gate">
+            <span class="gate-title">Decision on chain</span>
+            <span class="gate-bits">over18: 1 evidence: 1</span>
+            <span class="gate-state"><i class="ok">eligible</i><i class="no">revoked</i></span>
+          </div>
+          <div class="coin c-sub">100 mUSD</div>
+          <div class="coin c-units">100 NDF</div>
+          <div class="coin c-dist">10 mUSD</div>
+          <div class="coin c-claim"><span class="a">claim</span><span class="b">NotEligible</span></div>
+          <div class="coin c-redeem">50 NDF</div>
+          <div class="coin c-pay">50 mUSD</div>
+        </div>
+
+        <div class="node node-desk">
+          <span class="node-title">Fund desk</span>
+          <span class="node-sub">the issuer's contract</span>
+          <ul class="desk-log">
+            <li class="l-sub">subscribe</li>
+            <li class="l-dist">distribute</li>
+            <li class="l-claim">claim refused</li>
+            <li class="l-redeem">redeem</li>
+          </ul>
+          <span class="node-by">reads the same decision</span>
+        </div>
+      </div>
+      <p class="rail-cap">
+        <span class="ph ph-0">Signed in. Test stablecoin in the wallet.</span>
+        <span class="ph ph-1">Subscribe: 100 mUSD in, 100 NDF fund units out.</span>
+        <span class="ph ph-2">Distribution: 10 mUSD claimed by the eligible wallet.</span>
+        <span class="ph ph-3">Revoked by the issuer, by hand: the claim is refused.</span>
+        <span class="ph ph-4">Approved again: 50 NDF redeemed for 50 mUSD.</span>
+      </p>
+      <p class="rail-note">Four of the demo's ten beats, looped. Amounts are demo constants on a test network.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="scene s-who" id="who">
+  <div class="wrap">
+    <h2 class="display reveal">Who buys it, <span class="yellow">who uses it</span>.</h2>
+    <div class="who-grid">
+      <article class="who reveal">
+        <h3>The buyer</h3>
+        <p class="who-name">The issuer of a gated fund token</p>
+        <p>A fund issuer, transfer agent or launchpad. Today its primary market runs on its own document funnel and a wallet whitelist for mint and redeem, kept fresh by hand. It buys the desk because the whitelist becomes a decision the chain enforces, and because it stops asking the investor for an address it cannot trust.</p>
+      </article>
+      <article class="who reveal">
+        <h3>The user</h3>
+        <p class="who-name">An investor with an email address and a state ID wallet</p>
+        <p>No browser extension, no exchange account, no seed phrase. She has the official test wallet on her phone, with a sample identity, and an email address. She signs in, gets an address, and from then on her wallet holds the fund units and the stablecoin and signs every transaction.</p>
+      </article>
+    </div>
+    <div class="money-strip reveal">
+      <span class="ms-item"><b>mUSD</b>a test stablecoin, six decimals, anyone can mint it</span>
+      <span class="ms-item"><b>NDF</b>the demo fund's units, one mUSD per unit</span>
+      <span class="ms-item"><b>The desk</b>subscribe, distribute, claim, redeem, each behind the same check</span>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="scene s-why" id="why">
+  <div class="wrap">
+    <h2 class="display reveal">Otherwise <span class="coral">not possible</span>.</h2>
+    <div class="why-three">
+      <article class="reveal">
+        <p>In every live tokenized product we surveyed, the whitelist for mint and redeem is built from documents the issuer collected and keeps, so an investor without a crypto wallet is on no list at all.</p>
+        <p class="src">Source: survey of live gated products, 2026-09-06</p>
+      </article>
+      <article class="reveal">
+        <p>Regulation (EU) 2023/1113, Art. 14(5) and 16(2), asks a crypto-asset service provider to assess whether a self-hosted address is owned or controlled by the customer, and EBA/GL/2024/11 paragraph 83(d) accepts a message signed with that address's key.</p>
+        <p class="src">Source: Regulation (EU) 2023/1113 and EBA/GL/2024/11</p>
+      </article>
+      <article class="reveal">
+        <p>Here the address is created at email sign-in, its key signs the session binding, and the EUDI presentation carries a hash of the address and the challenge, so address ownership and the identity predicate are proven in one act while the issuer holds no document.</p>
+        <p class="src">Source: the demo's code, PresentCard.tsx and handoff.ts in nachweis-app</p>
+      </article>
+    </div>
+    <p class="limit reveal">The limit, stated: a predicate does not replace customer due diligence for an obliged entity (AMLR, Art. 22 and Art. 77). The issuer keeps its compliance file off chain. The desk carries eligibility, not onboarding.</p>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="scene s-how" id="how">
+  <div class="wrap">
+    <h2 class="display reveal">How it works, <span class="mint">in six beats</span>.</h2>
+    <p class="body reveal">Two tabs and a phone. The investor's tab on the left, the issuer's on the right, the Privy confirmation in front at every signature.</p>
+    <ol class="beats reveal">
+      <li class="beat b-privy">
+        <span class="beat-where">Privy</span>
+        <span class="beat-title">Sign in with email</span>
+        <p>One-time code. Privy creates an embedded wallet and the card shows the address. This is the address everything else binds to.</p>
+      </li>
+      <li class="beat b-phone">
+        <span class="beat-where">Phone</span>
+        <span class="beat-title">Present</span>
+        <p>The official test wallet answers the issuer's registered request: given name, family name, over 18. Sample identity. The name goes to the issuer, not to the chain.</p>
+      </li>
+      <li class="beat b-tab">
+        <span class="beat-where">Browser tab</span>
+        <span class="beat-title">Prove</span>
+        <p>The investor's own browser tab makes the zero-knowledge proof over the presentation and the address hash. The chain verifies it and does not trust our server.</p>
+      </li>
+      <li class="beat b-chain">
+        <span class="beat-where">Chain</span>
+        <span class="beat-title">Decide</span>
+        <p>The issuer matches its record and clicks Approve. A decision is written against the address: policy, bits, tier, expiry. No name, no document.</p>
+      </li>
+      <li class="beat b-privy">
+        <span class="beat-where">Privy</span>
+        <span class="beat-title">Move money</span>
+        <p>Subscribe, claim, redeem, send. Each is a transaction the embedded wallet signs. The desk checks the decision at that block before any stablecoin or unit moves.</p>
+      </li>
+      <li class="beat b-refuse">
+        <span class="beat-where">Issuer</span>
+        <span class="beat-title">Revoke</span>
+        <p>The issuer withdraws approval by hand. Claim and redeem revert with NotEligible, shown from simulation before any signature. Approve again and they open.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- CHAIN -->
+<section class="scene s-chain" id="chain">
+  <div class="wrap two-col chain-cols">
+    <div class="col-text">
+      <h2 class="display reveal">What the <span class="mint">chain</span> sees.</h2>
+      <p class="body reveal">One record per wallet and policy. The desk, the fund token's transfer hook and the pool's allowlist checker all ask the same question of it.</p>
+      <ul class="absent reveal">
+        <li><s>name</s></li>
+        <li><s>email address</s></li>
+        <li><s>date of birth</s></li>
+        <li><s>document image</s></li>
+        <li><s>the presentation</s></li>
+      </ul>
+      <p class="chain-line reveal">No identity documents on chain, and nothing we could use to find her.</p>
+    </div>
+    <div class="col-art reveal">
+      <pre class="struct" aria-label="The Decision struct"><span class="c">// one per (subject, policyId)</span>
+struct <b>Decision</b> {
+    bytes32 <span class="f">policyId</span>;   <span class="v">0x9c02…e7b8</span>
+    uint256 <span class="f">bits</span>;       <span class="v">over18: 1  evidence: 1</span>
+    uint8   <span class="f">tier</span>;       <span class="v">A</span>
+    uint64  <span class="f">expiry</span>;     <span class="v">2026-10-07</span>
+    bytes32 <span class="f">statusRef</span>;  <span class="v">opaque, never a name</span>
+    bool    <span class="f">revoked</span>;    <span class="v" id="rv">false</span>
+}
+
+<span class="c">// the desk, before any money moves</span>
+require(<b>isEligible</b>(msg.sender, policyId, bits),
+        <span class="err">NotEligible(msg.sender)</span>);</pre>
+      <p class="art-cap">The struct from the registry's read interface. The check at the top of subscribe, claim and redeem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="scene s-demo-money" id="demo">
+  <div class="wrap">
+    <h2 class="display reveal">The <span class="yellow">demo</span>.</h2>
+    <p class="body reveal">A route in the product app. Runs on a local chain without a Privy app, and on Sepolia with one. Every hash lands in the event log with an explorer link.</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="http://localhost:5173/showcase/investor-money" data-app-path="/showcase/investor-money">Open /showcase/investor-money</a>
+      <a class="btn btn-ghost" href="https://github.com/devdotbo/nachweis-app">Source and runbook</a>
+    </div>
+
+    <figure class="shot reveal">
+      <div class="shot-frame">
+        <div class="shot-bar"><span></span><span></span><span></span><span class="shot-url">/showcase/investor-money</span></div>
+        <div class="shot-body">
+          <div class="shot-pane">
+            <b>Investor</b>
+            <span>signed in with email</span>
+            <span class="shot-row"><span>mUSD</span><span>910</span></span>
+            <span class="shot-row"><span>NDF</span><span>100</span></span>
+            <span class="shot-btn">Claim distribution 1</span>
+          </div>
+          <div class="shot-modal"><b>Confirm</b><span>Privy wallet signs claim(1)</span></div>
+          <div class="shot-pane">
+            <b>Issuer</b>
+            <span>decision: eligible</span>
+            <span class="shot-row"><span>distribution 1</span><span>10 mUSD</span></span>
+            <span class="shot-btn alt">Revoke</span>
+          </div>
+        </div>
+      </div>
+      <figcaption>Screenshot placeholder. The recorded run will replace it: investor tab, issuer tab, and the Privy confirmation in front.</figcaption>
+    </figure>
+
+    <div class="ledger-wrap reveal">
+      <table class="ledger">
+        <caption>The ten beats, as the demo's event log records them</caption>
+        <thead>
+          <tr><th>Beat</th><th>Who signs</th><th>The desk checks</th><th class="n">mUSD</th><th class="n">NDF</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>Sign in with email</b>Privy creates the embedded wallet</td><td>nobody yet</td><td class="none">nothing moves</td><td class="n">0</td><td class="n">0</td></tr>
+          <tr><td><b>Get 1,000 test mUSD</b>test stablecoin, anyone can mint; on mainnet a card or bank deposit</td><td>investor, Privy</td><td class="none">nothing gated</td><td class="n">1,000</td><td class="n">0</td></tr>
+          <tr><td><b>Present and approve</b>official test wallet, sample identity; proof made in the browser tab; the issuer clicks Approve</td><td>phone, tab, issuer</td><td class="ok">decision written</td><td class="n">1,000</td><td class="n">0</td></tr>
+          <tr><td><b>Subscribe 100 mUSD</b>two confirmations: allow the desk, then subscribe</td><td>investor, Privy</td><td class="ok">eligible</td><td class="n">900</td><td class="n">100</td></tr>
+          <tr><td><b>Distribution of 10 mUSD</b>the issuer pays it in, the investor claims it</td><td>issuer, then investor</td><td class="ok">eligible</td><td class="n">910</td><td class="n">100</td></tr>
+          <tr class="refused"><td><b>Send 20 NDF to a wallet without a decision</b>the fund token's transfer hook refuses before any signature</td><td>investor</td><td class="no">NotEligible(to)</td><td class="n">910</td><td class="n">100</td></tr>
+          <tr><td><b>Send 20 NDF to a second attested wallet</b>attested by the operator route, simulated presentation</td><td>investor, Privy</td><td class="ok">recipient eligible</td><td class="n">910</td><td class="n">80</td></tr>
+          <tr class="refused"><td><b>Revoke</b>manual, by the issuer; claim and redeem close</td><td>issuer</td><td class="no">NotEligible</td><td class="n">910</td><td class="n">80</td></tr>
+          <tr><td><b>Approve again, redeem 50 NDF</b>the desk takes the units back and pays stablecoin</td><td>issuer, then investor</td><td class="ok">eligible</td><td class="n">960</td><td class="n">30</td></tr>
+          <tr><td><b>Send 100 mUSD to an address she types</b>stablecoin is not the gated asset; the decision gates the units and the desk</td><td>investor, Privy</td><td class="none">not gated</td><td class="n">860</td><td class="n">30</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ledger-note reveal">Distributions are paid per unit held at claim time, without a snapshot: a demo simplification, captioned in the app. The disabled "Add funds by card" button is captioned simulated, because card onramps do not support test networks.</p>
+  </div>
+</section>
+
+<!-- HONEST -->
+<section class="scene s-honest-money" id="honest">
+  <div class="wrap">
+    <p class="label reveal">Honest about the demo</p>
+    <ul class="honest-box reveal">
+      <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in this build.</li>
+      <li><b>Where the proof is made</b>In the investor's browser tab, on her own computer. The official wallet does not produce this proof today. The chain does not trust our server.</li>
+      <li><b>Simulated</b>Sanctions and similar checks are stubs. The second attested wallet is attested by the operator route with a simulated presentation. The card onramp button is disabled.</li>
+      <li><b>Manual revocation</b>The issuer withdraws approval by hand. One decision closes subscribe, claim, redeem and the pool.</li>
+      <li><b>On chain</b>No identity documents on chain, and nothing we could use to find her. Predicate bits and an expiry bound to an address are still personal data; we say so.</li>
+      <li><b>Wallet by Privy</b>An embedded wallet created when you sign in with email, so you can hold the fund units and the stablecoin without a seed phrase. Privy describes it as self-custodial and never sees your identity evidence; it sees this address and the transactions you confirm. Sample identity from the official test wallet; testnet funds.</li>
+    </ul>
+    <p class="toolkit-line reveal">Attestat is the toolkit. This is one demo built on it.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span class="brand">Attestat <span class="foot-domain">attestat.dev</span></span>
+  <a href="../index.html">All showcases</a>
+  <a href="../../index.html">Main page</a>
+  <a href="https://github.com/devdotbo/nachweis-app">Code and runbook</a>
+  <span class="foot-tag">no document on chain</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  document.documentElement.classList.add("js");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reveals = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.1 });
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add("in"); });
+  }
+})();
+</script>
+<script src="../links.js"></script>
+</body>
+</html>
