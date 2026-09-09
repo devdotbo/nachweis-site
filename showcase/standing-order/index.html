@@ -245,21 +245,11 @@
     </div>
 
     <div class="shot reveal">
-      <div class="shot-frame" aria-hidden="true">
+      <div class="shot-frame">
         <div class="shot-bar"><span></span><span></span><span></span></div>
-        <div class="shot-body">
-          <div class="shot-card">
-            <p class="shot-title">Standing order</p>
-            <p class="shot-line"></p><p class="shot-line short"></p>
-            <div class="shot-btns"><span class="y">Allow</span><span>Run the month</span><span class="c">Remove signer</span></div>
-          </div>
-          <div class="shot-card shot-log">
-            <p class="shot-title">Automation</p>
-            <p class="shot-line"></p><p class="shot-line"></p><p class="shot-line short"></p>
-          </div>
-        </div>
+        <img class="shot-img" src="demo.png" alt="The issuer console's automation section on a local run: the policy per investor in plain words (deny after the expiry, allow only subscribe() to the Subscription contract, deny everything after the revoke) and the tick log with TICK OK, POLICY DENY-ALL ADDED and TICK DENIED by the policy and by the chain" width="1440" height="1020" loading="lazy">
       </div>
-      <p class="shot-cap">Screenshot placeholder: the investor portal's standing-order card and the issuer console's automation log. Replaced by a screenshot of the Sepolia run once that run is recorded.</p>
+      <p class="shot-cap">The issuer console's automation section in local mode: anvil, the automation signs with a dev key and evaluates the same rule JSON it would send to Privy (simulated). A tick subscribed, the revoke added the deny-all rule, the next tick was refused by the policy and by the chain. The investor's standing-order card appears only with a Privy app id and an embedded wallet, so it is not in this local capture; the hand-clicked Sepolia run is pending.</p>
     </div>
 
     <div class="screens reveal">

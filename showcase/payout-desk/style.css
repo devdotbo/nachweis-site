@@ -142,7 +142,8 @@
 .runlist .pt{font-family:var(--display);font-weight:700;font-size:.8rem;color:var(--paper)}
 .runlist .mono{font-size:.8rem;word-break:break-all}
 .shot{margin:0}
-.shot-frame{border-radius:16px;background:#0a1030;border:1px solid var(--line);overflow:hidden;aspect-ratio:16/10;display:flex;flex-direction:column}
+.shot-frame{border-radius:16px;background:#0a1030;border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+.shot-img{display:block;width:100%;height:auto}
 .shot-bar{display:flex;gap:.4rem;padding:.7rem .9rem;border-bottom:1px solid var(--line)}
 .shot-bar i{width:9px;height:9px;border-radius:50%;background:rgba(244,241,232,.2)}
 .shot-body{padding:1.2rem;display:flex;flex-direction:column;gap:.8rem;flex:1}

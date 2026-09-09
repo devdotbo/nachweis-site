@@ -144,6 +144,7 @@
 .shot{margin-top:3.5rem;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:2rem;align-items:center}
 .shot-frame{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0a1030;box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
 .shot-bar{display:flex;gap:6px;padding:10px 12px;background:#141c48;border-bottom:1px solid var(--line)}
+.shot-img{display:block;width:100%;height:auto}
 .shot-bar span{width:10px;height:10px;border-radius:50%;background:rgba(244,241,232,.25)}
 .shot-body{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;padding:16px}
 .shot-card{border-radius:12px;padding:14px;background:rgba(244,241,232,.05);border:1px solid var(--line)}

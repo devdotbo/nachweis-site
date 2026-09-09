@@ -230,24 +230,9 @@ require(<b>isEligible</b>(msg.sender, policyId, bits),
     <figure class="shot reveal">
       <div class="shot-frame">
         <div class="shot-bar"><span></span><span></span><span></span><span class="shot-url">/showcase/investor-money</span></div>
-        <div class="shot-body">
-          <div class="shot-pane">
-            <b>Investor</b>
-            <span>signed in with email</span>
-            <span class="shot-row"><span>mUSD</span><span>910</span></span>
-            <span class="shot-row"><span>NDF</span><span>100</span></span>
-            <span class="shot-btn">Claim distribution 1</span>
-          </div>
-          <div class="shot-modal"><b>Confirm</b><span>Privy wallet signs claim(1)</span></div>
-          <div class="shot-pane">
-            <b>Issuer</b>
-            <span>decision: eligible</span>
-            <span class="shot-row"><span>distribution 1</span><span>10 mUSD</span></span>
-            <span class="shot-btn alt">Revoke</span>
-          </div>
-        </div>
+        <img class="shot-img" src="demo.png" alt="The fund desk route on a local run after the issuer's revoke: eligibility revoked, balances 860 mUSD and 150 NDF, Subscribe, Claim and Redeem closed, and the refusal: this wallet is not eligible, because the issuer revoked the decision for this address (manual revocation), nothing was signed or sent" width="1440" height="1120" loading="lazy">
       </div>
-      <figcaption>Screenshot placeholder. The recorded run will replace it: investor tab, issuer tab, and the Privy confirmation in front.</figcaption>
+      <figcaption>The fund desk route in local mode: anvil, a dev signer in place of the Privy embedded wallet, the decision written by the operator (simulated evidence). Shown after the issuer's revoke: the three doors closed and Subscribe clicked once more, refused before anything was signed. No email sign-in and no Privy confirmation in this run; the Privy path on Sepolia is pending.</figcaption>
     </figure>
 
     <div class="ledger-wrap reveal">

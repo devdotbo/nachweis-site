@@ -240,16 +240,11 @@
         </div>
       </div>
       <figure class="shot reveal">
-        <div class="shot-frame" aria-hidden="true">
+        <div class="shot-frame">
           <div class="shot-bar"><i></i><i></i><i></i></div>
-          <div class="shot-body">
-            <div class="shot-line w60"></div>
-            <div class="shot-line w40"></div>
-            <div class="shot-rows"><div></div><div></div><div></div></div>
-            <div class="shot-line w30 mint"></div>
-          </div>
+          <img class="shot-img" src="demo.png" alt="The payout desk route on a local run: run 1 executed, 100 mUSD paid to the attested contractor and the second contractor refused by GatedPayout with NotEligible; run 2 refused after the revoke; run 3 refused over the cap by the policy; a direct transfer refused by the policy; the log" width="1440" height="1280" loading="lazy">
         </div>
-        <figcaption>Screenshot placeholder. The payout desk screen after a run: intent executed, Sepolia transaction hash, contractor balance up by 100 mUSD. A capture of the real screen replaces this frame once the run is recorded.</figcaption>
+        <figcaption>The payout desk route (/showcase/payout-desk) in local mode: anvil, the treasury is a local key and the desk's own evaluator plays the Privy policy (simulated), the contractor's decision written by the operator. Run 1 paid 100 mUSD and refused the contractor without evidence, run 2 was refused after the revoke, run 3 over the cap, and "Pay directly" was refused by the policy. No Privy wallet and no Sepolia hash in this run; the Privy path on Sepolia is pending.</figcaption>
       </figure>
     </div>
   </div>

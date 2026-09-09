@@ -166,6 +166,7 @@
 .shot{margin:3rem 0 0;padding:0}
 .shot-frame{aspect-ratio:21/9;max-height:420px;border-radius:20px;border:1px dashed var(--line);display:grid;place-items:center;text-align:center;padding:2rem;background:repeating-linear-gradient(-45deg,rgba(244,241,232,.02) 0 12px,transparent 12px 24px);color:var(--paper-mute);font-size:.95rem}
 .shot-frame span{max-width:40ch}
+.shot-img{display:block;width:100%;height:auto;border-radius:20px;border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(0,0,0,.9)}
 .shot figcaption{margin-top:.9rem;font-size:.9rem;color:var(--paper-dim);max-width:70ch}
 .s-desk .cta-row{margin-top:2.4rem}
 

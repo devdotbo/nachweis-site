@@ -281,10 +281,8 @@
     </div>
 
     <figure class="shot reveal">
-      <div class="shot-frame">
-        <span>Screenshot of the compliance desk panel in the product app. Not captured yet; the demo route is under construction.</span>
-      </div>
-      <figcaption>The issuer console with the compliance desk panel: operator wallet, policy, pending intents and the event log. Two keys on one demo server; in production each desk holds its own key.</figcaption>
+      <img class="shot-img" src="demo.png" alt="The compliance desk route on a local run: the queue with the approve confirmed by both officers, the revoke, a reverted approve for an address without evidence, and a 1 wei transfer refused by the simulated policy" width="1440" height="1250" loading="lazy">
+      <figcaption>The compliance desk route (/showcase/backoffice) in local mode: anvil, a dev key as the operator wallet, the 2 of 2 quorum and the policy played by the desk itself (simulated), the investor's evidence from a mock proof verifier. The queue shows the approve after both confirmations, the manual revoke, and an approve for an address without evidence that reverted before broadcast; below it a 1 wei transfer refused by the policy. No Privy app in this run; the Privy path on Sepolia is pending.</figcaption>
     </figure>
 
     <div class="cta-row reveal">
@@ -307,7 +305,7 @@
     <div class="privy-box reveal">
       <p class="privy-title">The Privy part, in Privy's terms</p>
       <p>Operator wallet by Privy: a server wallet whose key is reconstituted only inside Privy's secure enclave (Privy's wording), owned by a two-key quorum of the issuer's compliance and operations desks, and bound by a policy that allows approve and revoke on the AttestationRegistry and nothing else. Privy sees this wallet's transactions; it never sees identity evidence.</p>
-      <p class="privy-small">Two keys on one demo server; in production each desk holds its own key. Whether key quorums and the intents API are available on the free developer plan is not yet verified.</p>
+      <p class="privy-small">Two keys on one demo server; in production each desk holds its own key. On the free developer plan, a two-key quorum, a quorum-owned policy and a server wallet were created through the API on 9 September 2026 without a sales contact; the intents API was not used, since the Node SDK has no authorize method and the dashboard has no intents page.</p>
     </div>
     <p class="closing reveal">No identity documents on chain, and nothing we could use to find her.</p>
   </div>

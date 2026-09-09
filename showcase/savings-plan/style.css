@@ -148,6 +148,7 @@
 .shot{margin:0}
 .shot-frame{border-radius:16px;border:1px solid var(--line);background:var(--ink-2);overflow:hidden;box-shadow:0 60px 100px -40px rgba(0,0,0,.8)}
 .shot-bar{display:flex;align-items:center;gap:.4rem;padding:.6rem .8rem;background:var(--surface);border-bottom:1px solid var(--line)}
+.shot-img{display:block;width:100%;height:auto}
 .shot-bar span{width:10px;height:10px;border-radius:50%;background:rgba(244,241,232,.2)}
 .shot-bar i{margin-left:.6rem;font-style:normal;font-family:var(--mono);font-size:.72rem;color:var(--paper-mute);padding:.25rem .6rem;border-radius:6px;background:rgba(244,241,232,.06);flex:1}
 .shot-body{aspect-ratio:16/10;display:grid;place-items:center;padding:2rem;background:repeating-linear-gradient(-45deg,rgba(244,241,232,.03) 0 12px,transparent 12px 24px)}

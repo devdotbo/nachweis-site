@@ -142,12 +142,12 @@
           <li class="node">
             <b>Uniswap v4 permissioned pool</b>
             <p>An allowlist checker reads the same registry; PermissionedHooks refuses the swap after a revoke.</p>
-            <span class="state ok">scripts green on a local Sepolia fork; in-app swap door in progress; Sepolia broadcast pending</span>
+            <span class="state ok">in-app swap door green on a local fork of Sepolia; Sepolia broadcast pending</span>
           </li>
           <li class="node">
             <b>GatedPayout</b>
             <p>A payout contract that pays only attested adult addresses, fed by a quorum-owned treasury wallet.</p>
-            <span class="state run">payout desk demo in progress</span>
+            <span class="state ok">payout desk demo green locally; Sepolia pending</span>
           </li>
           <li class="node">
             <b>Privy policies mirrored from the decision</b>
@@ -192,7 +192,7 @@
       <article class="card" id="demo-eudi">
         <div class="card-media">
           <img src="assets/eudi-investor-flow.png" alt="The investor portal after a proof made in the browser tab: attested, awaiting the issuer's approval" loading="lazy" width="1280" height="800">
-          <span class="badge ok">green locally with the official wallet; hand-clicked Sepolia pending</span>
+          <span class="badge ok">green on anvil with the official wallet (class W); hand-clicked Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>The EUDI investor flow</h3>
@@ -210,8 +210,8 @@
 
       <article class="card" id="demo-swap">
         <div class="card-media">
-          <div class="shot-ph" aria-hidden="true"><span class="ph-door"></span><span class="ph-door"></span><span class="ph-arrow"></span></div>
-          <span class="badge ok">scripts green on a local Sepolia fork; in-app door in progress; Sepolia broadcast pending</span>
+          <img src="assets/swap-door.png" alt="The Swap tile of the investor portal twice: swap confirmed from the dev-signer wallet, then the identical swap refused by PermissionedHooks.beforeSwap after the revoke; local anvil fork of Sepolia" loading="lazy" width="844" height="560">
+          <span class="badge ok">in-app swap door green on a local fork of Sepolia (class L); Sepolia broadcast pending</span>
         </div>
         <div class="card-body">
           <h3>The Uniswap permissioned pool swap</h3>
@@ -223,14 +223,14 @@
             <a href="https://github.com/devdotbo/nachweis-app/blob/main/FEEDBACK.md">Pool notes</a>
             <a href="https://github.com/devdotbo/nachweis-app">Repository</a>
           </div>
-          <p class="card-note">Screenshot pending: the in-app swap is being wired; the fork scripts swapped 100 mUSD for 90.65 NDF and were refused after the revoke.</p>
+          <p class="card-note">Local run on an anvil fork of Sepolia, dev signer: the swap tile before and after the revoke (docs/ui in the app repository).</p>
         </div>
       </article>
 
       <article class="card" id="demo-standing-order">
         <div class="card-media">
-          <img src="standing-order/preview.png" alt="Standing order landing page: the on-chain decision mirrored into a Privy policy" loading="lazy" width="1440" height="900">
-          <span class="badge ok">green locally (STANDING-ORDER-LOCAL PASS); hand-clicked Sepolia pending</span>
+          <img src="standing-order/demo.png" alt="The issuer console's automation section on a local run: the policy in plain words per investor and the tick log with a subscribed tick, the deny-all rule after the revoke and the refused tick" loading="lazy" width="1440" height="1020">
+          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Standing order</h3>
@@ -246,8 +246,8 @@
 
       <article class="card" id="demo-savings-plan">
         <div class="card-media">
-          <img src="savings-plan/preview.png" alt="Savings plan landing page: four doors closed by one revoke" loading="lazy" width="1440" height="900">
-          <span class="badge todo">landing page done; demo pending until the standing-order wiring lands</span>
+          <img src="savings-plan/demo.png" alt="The savings plan board on a local run after the revoke: the decision revoked in the middle, the plan, Issuer B, the pool checker and the transfer all closed" loading="lazy" width="1440" height="900">
+          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Savings plan</h3>
@@ -263,8 +263,8 @@
 
       <article class="card" id="demo-backoffice">
         <div class="card-media">
-          <img src="backoffice/preview.png" alt="Back office landing page: approve the wallet, never hold the file" loading="lazy" width="1440" height="900">
-          <span class="badge run">landing page done; demo in progress</span>
+          <img src="backoffice/demo.png" alt="The compliance desk on a local run: the queue with an approve confirmed by both officers, the revoke, and a 1 wei transfer refused by the simulated policy" loading="lazy" width="1440" height="1250">
+          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Back office</h3>
@@ -280,8 +280,8 @@
 
       <article class="card" id="demo-investor-money">
         <div class="card-media">
-          <img src="investor-money/preview.png" alt="Investor money landing page: an email address, a state ID, and a fund that pays her" loading="lazy" width="1440" height="900">
-          <span class="badge todo">landing page done; demo pending until the standing-order wiring lands</span>
+          <img src="investor-money/demo.png" alt="The fund desk on a local run after the issuer's revoke: eligibility revoked, Subscribe, Claim and Redeem closed, and the refusal in plain words" loading="lazy" width="1440" height="1120">
+          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Investor money</h3>
@@ -297,8 +297,8 @@
 
       <article class="card" id="demo-payout-desk">
         <div class="card-media">
-          <img src="payout-desk/preview.png" alt="Payout desk landing page: pay your freelancers, never hold their passports" loading="lazy" width="1440" height="900">
-          <span class="badge run">landing page done; demo in progress</span>
+          <img src="payout-desk/demo.png" alt="The contractor payout desk on a local run: run 1 executed and the unattested contractor refused by GatedPayout, run 2 refused after the revoke, run 3 refused over the cap, and a direct transfer refused by the simulated policy" loading="lazy" width="1440" height="1280">
+          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Payout desk</h3>
@@ -314,8 +314,8 @@
 
       <article class="card" id="demo-zkpassport">
         <div class="card-media">
-          <div class="shot-ph shot-ph-phone" aria-hidden="true"><span class="ph-phone"><span class="ph-chip"></span></span></div>
-          <span class="badge run">mock passport green on anvil; phone run pending; builder decides on 10 September whether it stays</span>
+          <img src="assets/zkpassport-card.png" alt="The passport chip card of the investor portal with the mock adapter on anvil: QR code from the zkPassport service, waiting for the zkPassport app; no phone scanned it" loading="lazy" width="1020" height="530">
+          <span class="badge run">mock passport green on anvil (class L); phone run pending; builder decides on 10 September whether it stays</span>
         </div>
         <div class="card-body">
           <h3>The zkPassport route</h3>

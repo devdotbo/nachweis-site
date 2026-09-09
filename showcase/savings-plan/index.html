@@ -290,13 +290,11 @@ struct Decision {
     <p class="body reveal">The demo is a route in the Attestat application. It runs on a local chain with a development signer, and on Sepolia with a Privy app the builder clicks by hand.</p>
     <div class="demo-grid">
       <figure class="shot reveal">
-        <div class="shot-frame" aria-hidden="true">
+        <div class="shot-frame">
           <div class="shot-bar"><span></span><span></span><span></span><i>/showcase/savings-plan</i></div>
-          <div class="shot-body">
-            <p>Screenshot to follow once the demo is recorded.</p>
-          </div>
+          <img class="shot-img" src="demo.png" alt="The savings plan board on a local run after the revoke: the decision revoked in the middle; the recurring plan with its deny-all rule and the run history, Issuer B's instrument, the permissioned pool checker and the transfer to a second wallet all closed" width="1440" height="900" loading="lazy">
         </div>
-        <figcaption>The investor screen with the plan card and the runner log, and the issuer console with Revoke. Captioned placeholder until the demo is green.</figcaption>
+        <figcaption>The board (/showcase/savings-plan) in local mode: anvil, a dev signer for investor A, the plan run by the automation in local mode (simulated Privy policy), the decision written by the operator. Shown after "Revoke Investor A": the decision revoked and all four doors closed; the plan's history above still lists the subscribed run from before. No Privy app in this run; the Privy path on Sepolia is pending.</figcaption>
       </figure>
       <div class="demo-list reveal">
         <ol class="demo-steps">
