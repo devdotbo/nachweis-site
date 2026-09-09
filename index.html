@@ -27,7 +27,6 @@
     <a href="#doors">Two doors</a>
     <a href="#proof">The proof</a>
     <a href="#why">Why now</a>
-    <a href="#showcase">Showcase</a>
     <a href="https://github.com/devdotbo/nachweis-app">Code</a>
   </nav>
 </header>
@@ -46,11 +45,9 @@
     <h1 class="hook">How many strangers keep a copy of your <em>passport</em>?</h1>
     <p class="lede">Every exchange, launchpad and fund asks for your ID and keeps it. Attestat lets the state ID wallet on your phone do that job once, and puts only the issuer's decision on chain.</p>
     <p class="spoken">"Your ID wallet should work where you invest."</p>
-    <p class="toolkit">Attestat is the toolkit: the wallet plugs in, the proof is made, one decision lands on chain, and any door can read it. The <a href="showcase/index.html">showcase</a> shows what is built on it: a fund token, a Uniswap pool, a standing order, a compliance desk, a payout desk.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#demo" id="cta-demo">See what the chain sees</a>
       <a class="btn btn-ghost" href="#copies">Why it matters</a>
-      <a class="btn btn-ghost" href="showcase/index.html">See the showcase</a>
     </div>
   </div>
   <div class="scroll-hint" aria-hidden="true"><span></span></div>
@@ -262,7 +259,7 @@
       <!-- Source: eIDAS 2, Art 5a (wallet obligation) and Art 5f(2) mandatory acceptance in banking and financial services. https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1183 -->
       <p class="reveal">Member states must offer the wallet by the end of 2026, and banks and financial services must accept it from the end of 2027 (eIDAS 2, Art. 5a and Art. 5f).</p>
       <p class="reveal">Every gated venue today filters by residence and sanctions through its own document funnel. Each funnel is another copy.</p>
-      <p class="reveal">Attestat plugs the state wallet into on-chain finance without putting a document on chain. The issuer keeps its file; the chain keeps a decision.</p>
+      <p class="reveal">Attestat lets the issuer accept the state wallet's evidence and apply its approval to the investor's linked crypto wallet, without putting a document on chain. The issuer keeps its file; the chain keeps a decision.</p>
     </div>
     <div class="built reveal">
       <span class="built-label">Built on</span>
@@ -277,9 +274,9 @@
 <!-- SCENE 8: SHOWCASE TEASER -->
 <section class="scene s-showcase" id="showcase">
   <div class="wrap">
-    <p class="label reveal">Showcase</p>
-    <h2 class="display reveal">What people build <span class="yellow">with it</span>.</h2>
-    <p class="body reveal">Attestat is the toolkit. Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain. These are demos built on it, not live products.</p>
+    <p class="label reveal">Engineering examples</p>
+    <h2 class="display reveal">Also built on the <span class="yellow">same decision</span>.</h2>
+    <p class="body reveal">Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain. The two examples below read that decision on a local chain. Neither is a live product.</p>
     <div class="teaser reveal">
       <a class="tease" href="showcase/index.html#demo-eudi">
         <span class="tease-img"><img src="showcase/assets/eudi-investor-flow.png" alt="" loading="lazy" width="1280" height="800"></span>
@@ -293,21 +290,9 @@
         <span class="tease-text">The same decision opens a swap; after the revoke the hook refuses it.</span>
         <span class="tease-state ok">swap door green on a local fork, Sepolia pending</span>
       </a>
-      <a class="tease" href="showcase/index.html#demo-standing-order">
-        <span class="tease-img"><img src="showcase/standing-order/preview.png" alt="" loading="lazy" width="1440" height="900"></span>
-        <span class="tease-title">Standing order</span>
-        <span class="tease-text">A Privy policy that is a copy of the on-chain decision, so the automation stops when the decision does.</span>
-        <span class="tease-state ok">green locally, Sepolia pending</span>
-      </a>
-      <a class="tease" href="showcase/index.html#demo-backoffice">
-        <span class="tease-img"><img src="showcase/backoffice/preview.png" alt="" loading="lazy" width="1440" height="900"></span>
-        <span class="tease-title">Back office</span>
-        <span class="tease-text">A quorum-owned operator wallet that can approve and revoke, and nothing else.</span>
-        <span class="tease-state ok">green locally, Sepolia pending</span>
-      </a>
     </div>
     <div class="cta-row reveal">
-      <a class="btn btn-primary" href="showcase/index.html">All demos, the toolkit map and the use cases</a>
+      <a class="btn btn-ghost" href="showcase/index.html">Engineering examples</a>
     </div>
   </div>
 </section>
