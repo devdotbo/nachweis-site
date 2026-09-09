@@ -69,9 +69,14 @@
             <span class="state run">mock passport green on anvil; phone run pending; kept or dropped by the builder on 10 September</span>
           </li>
           <li class="node">
+            <b>Swiss e-ID (swiyu)</b>
+            <p>Attestat consumes OpenID4VP presentations of SD-JWT credentials. Today that is the EU wallet; the Swiss e-ID uses the same formats and protocol, and its test credential carries the same over-18 claim. We expect our verifier to need a Swiss DID and a new issuer key rather than a new circuit, and a Beta-ID test vector is the next step.</p>
+            <span class="state run">supported now for the Beta-ID stack, one adapter change; no vector run yet</span>
+          </li>
+          <li class="node">
             <b>Other national systems</b>
-            <p>Where a system speaks the same formats and protocols it can feed the same registry. Which ones do, and on what trust model, is the standards research.</p>
-            <span class="state todo">identity standards page: coming</span>
+            <p>Mobile driving licences in Apple and Google Wallet are ISO mdocs; Google's wallet already answers age requests with a Longfellow zero-knowledge proof, which our verifier accepts off chain today. Taiwan's digital identity wallet issues SD-JWT credentials over OpenID4VP. GOV.UK Wallet is moving to mdoc and OpenID4VP; verifying it requires a certified UK digital verification service, which we are not. Singpass, Diia, UAE Pass, gov.br, Aadhaar, Korea's mobile ID and Japan's My Number Card do not hand a third party a credential it can verify against a public anchor; for those citizens the passport route applies.</p>
+            <span class="state todo">17 systems compared on 9 September 2026 from published specifications; no demo used a live national wallet other than the German EUDI test wallet and zkPassport</span>
           </li>
         </ul>
       </div>
@@ -372,8 +377,13 @@
           </tr>
           <tr>
             <td>An issuer with investors outside the EU wallet's reach</td>
-            <td>Accept a passport-chip proof through zkPassport into the same registry, with the different trust model stated on screen.</td>
+            <td>Accept a passport-chip proof through zkPassport into the same registry, with the different trust model stated on screen. A biometric passport works anywhere: the zkPassport route proves over 18 from the chip on the phone, and the same registry stores the decision.</td>
             <td><a href="#demo-zkpassport">zkPassport route</a></td>
+          </tr>
+          <tr>
+            <td>Beyond the EU: an issuer whose customers hold another state's wallet</td>
+            <td>Switzerland's e-ID is expected to go live on 1 December 2026 on SD-JWT VC and OpenID4VP 1.0; we expect our verifier to need a Swiss DID and a new issuer key rather than a new circuit. Taiwan's wallet issues SD-JWT over OpenID4VP; the same circuit should apply once we have read a sandbox credential. US and UK mobile driving licences are mdocs and need an mdoc path. No demo here used a live national wallet other than the German EUDI test wallet and zkPassport; every other statement is read from the published specifications.</td>
+            <td><a href="#map">Evidence lane</a></td>
           </tr>
         </tbody>
       </table>
