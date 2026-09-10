@@ -145,7 +145,7 @@
     { gate: "b", ok: false, text: "Issuer B mint: reverted: Expired", cls: "bad", wait: 350 },
     { gate: "pool", ok: false, text: "pool swap: reverted, allowlist refused", cls: "bad", wait: 350 },
     { gate: "xfer", ok: false, text: "transfer to her: reverted: Expired", cls: "bad", wait: 500 },
-    { text: "nobody acted. The credential's own expiry closed every door.", cls: "note" }
+    { text: "nobody acted. The credential's own expiry closed the plan, Issuer B, the pool and transfers to her.", cls: "note" }
   ];
   var REOPEN = [
     { text: "a fresh proof after revoke: attestWithProof refused", cls: "bad", wait: 600 },

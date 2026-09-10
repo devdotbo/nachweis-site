@@ -8,11 +8,11 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Attestat">
 <meta property="og:title" content="Attestat showcase: the attested savings plan">
-<meta property="og:description" content="Prove once. Save every month. One revoke closes every door. A demo built on the Attestat toolkit with Privy.">
+<meta property="og:description" content="Prove once. Save every month. One revoke closes the plan, the second issuer and the pool. An engineering example built on the Attestat decision with Privy.">
 <meta property="og:url" content="https://attestat.dev/showcase/savings-plan/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Attestat showcase: the attested savings plan">
-<meta name="twitter:description" content="Prove once. Save every month. One revoke closes every door. A demo built on the Attestat toolkit with Privy.">
+<meta name="twitter:description" content="Prove once. Save every month. One revoke closes the plan, the second issuer and the pool. An engineering example built on the Attestat decision with Privy.">
 <link rel="canonical" href="https://attestat.dev/showcase/savings-plan/">
 <link rel="stylesheet" href="../../style.css">
 <link rel="stylesheet" href="style.css">
@@ -39,14 +39,14 @@
   <div class="hero-inner sp-hero-grid">
     <div class="sp-hero-text">
       <p class="eyebrow">Attestat showcase <span class="dot"></span> Savings plan</p>
-      <h1 class="hook sp-hook">Prove once. Save every month. One <em>revoke</em> closes every door.</h1>
-      <p class="lede">A retail investor signs in with an email, proves once with the state ID wallet on her phone, and gets one eligibility decision on chain. Her savings plan buys fund tokens on a schedule while she is offline. A second issuer's instrument and a permissioned pool accept the same decision. When the issuer revokes, or the credential expires, every door refuses.</p>
+      <h1 class="hook sp-hook">Prove once. Save every month. One <em>revoke</em> closes the plan, the second issuer and the pool.</h1>
+      <p class="lede">A retail investor signs in with an email, proves once with the state ID wallet on her phone, and gets one eligibility decision on chain. Her savings plan buys fund tokens on a schedule while she is offline. A second issuer's instrument and a permissioned pool accept the same decision. When the issuer revokes, or the credential expires, the plan, the second issuer and the pool refuse, and fund tokens sent to her revert, because the fund token checks the recipient.</p>
       <p class="spoken">"Your ID wallet should work where you invest."</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="http://localhost:5173/showcase/savings-plan" data-app-path="/showcase/savings-plan">Open the demo</a>
         <a class="btn btn-ghost" href="#how">How it works</a>
       </div>
-      <p class="sp-toolkit">A demo built on the Attestat toolkit, with a Privy embedded wallet and a delegated signer. Not a live product.</p>
+      <p class="sp-toolkit">An engineering example built on the Attestat decision, with a Privy embedded wallet and a delegated signer. Parked: code and docs kept, not a live product.</p>
     </div>
 
     <div class="sp-hero-art">
@@ -260,7 +260,7 @@
       <p class="body reveal">Anyone can read this. It is enough for a plan run, a mint, a swap or a transfer to decide, and not enough to know who she is.</p>
       <ul class="points sp-points">
         <li class="reveal"><span class="pt">bits</span>Predicate bits the policy verified. In the demo policy: identity evidence, over 18.</li>
-        <li class="reveal"><span class="pt">expiry</span>The credential's own expiry, bound by the proof. After it, every door refuses without anyone acting.</li>
+        <li class="reveal"><span class="pt">expiry</span>The credential's own expiry, bound by the proof. After it, the plan, the second issuer, the pool and any transfer to her refuse without anyone acting.</li>
         <li class="reveal"><span class="pt">revoked</span>Set by one issuer transaction. The same transaction clears approval.</li>
         <li class="reveal"><span class="pt">statusRef</span>An opaque reference to an off-chain status entry. Never a name.</li>
       </ul>
@@ -294,7 +294,7 @@ struct Decision {
           <div class="shot-bar"><span></span><span></span><span></span><i>/showcase/savings-plan</i></div>
           <img class="shot-img" src="demo.png" alt="The savings plan board on a local run after the revoke: the decision revoked in the middle; the recurring plan with its deny-all rule and the run history, Issuer B's instrument, the permissioned pool checker and the transfer to a second wallet all closed" width="1440" height="900" loading="lazy">
         </div>
-        <figcaption>The board (/showcase/savings-plan) in local mode: anvil, a dev signer for investor A, the plan run by the automation in local mode (simulated Privy policy), the decision written by the operator. Shown after "Revoke Investor A": the decision revoked and all four doors closed; the plan's history above still lists the subscribed run from before. No Privy app in this run; the Privy path on Sepolia is pending.</figcaption>
+        <figcaption>The board (/showcase/savings-plan) in local mode: anvil, a dev signer for investor A, the plan run by the automation in local mode (simulated Privy policy), the decision written by the operator. Shown after "Revoke Investor A": the decision revoked; the plan, Issuer B and the pool closed. The transfer card also reads closed, but the fund token checks the recipient's decision, not the sender's, so a transfer from her to an attested wallet still goes through today; a sender check is on a branch. The plan's history above still lists the subscribed run from before. No Privy app in this run; the Privy path on Sepolia is pending.</figcaption>
       </figure>
       <div class="demo-list reveal">
         <ol class="demo-steps">
@@ -307,7 +307,7 @@ struct Decision {
           <li>Issuer B mints its token to her. Same decision, second door.</li>
           <li>Swap in the permissioned pool.</li>
           <li>Transfer to an attested friend confirms; to a stranger, reverts.</li>
-          <li>Revoke. Four doors refuse. Policy set to DENY; plan stopped by issuer.</li>
+          <li>Revoke. The plan, Issuer B and the pool refuse; tokens sent to her revert. Policy set to DENY; plan stopped by issuer.</li>
           <li>Expiry demonstrated on a local chain.</li>
           <li>A fresh proof after revoke is refused; the operator reopens. Manual.</li>
         </ol>
@@ -336,7 +336,7 @@ struct Decision {
     </ul>
     <div class="built reveal">
       <span class="built-label">Built on</span>
-      <span class="chip">Attestat toolkit</span>
+      <span class="chip">Attestat registry</span>
       <span class="chip">Privy embedded wallets and signers</span>
       <span class="chip">Uniswap permissioned pools</span>
       <span class="chip">EUDI sandbox wallet</span>

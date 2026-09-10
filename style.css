@@ -308,7 +308,7 @@ button{font:inherit;color:inherit}
 .s-showcase{background:linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%)}
 .s-showcase .display{max-width:14ch}
 .s-showcase .body{max-width:52ch}
-.teaser{margin-top:3rem;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem}
+.teaser{margin-top:3rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;max-width:44rem}
 .tease{display:flex;flex-direction:column;gap:.55rem;padding:.7rem .7rem 1.1rem;border-radius:18px;background:var(--surface);border:1px solid var(--line);text-decoration:none;color:inherit;transition:border-color .25s}
 .tease:hover{border-color:var(--yellow)}
 .tease-img{display:block;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#0a1030;border:1px solid var(--line)}

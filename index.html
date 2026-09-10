@@ -27,7 +27,6 @@
     <a href="#doors">Two doors</a>
     <a href="#proof">The proof</a>
     <a href="#why">Why now</a>
-    <a href="#showcase">Showcase</a>
     <a href="https://github.com/devdotbo/nachweis-app">Code</a>
   </nav>
 </header>
@@ -46,11 +45,9 @@
     <h1 class="hook">How many strangers keep a copy of your <em>passport</em>?</h1>
     <p class="lede">Every exchange, launchpad and fund asks for your ID and keeps it. Attestat lets the state ID wallet on your phone do that job once, and puts only the issuer's decision on chain.</p>
     <p class="spoken">"Your ID wallet should work where you invest."</p>
-    <p class="toolkit">Attestat is the toolkit: the wallet plugs in, the proof is made, one decision lands on chain, and any door can read it. The <a href="showcase/index.html">showcase</a> shows what is built on it: a fund token, a Uniswap pool, a standing order, a compliance desk, a payout desk.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#demo" id="cta-demo">See what the chain sees</a>
       <a class="btn btn-ghost" href="#copies">Why it matters</a>
-      <a class="btn btn-ghost" href="showcase/index.html">See the showcase</a>
     </div>
   </div>
   <div class="scroll-hint" aria-hidden="true"><span></span></div>
@@ -134,9 +131,9 @@
 
     <div class="demo" id="demo-app">
       <div class="steps" role="group" aria-label="Demo steps">
-        <button class="step" data-step="present" type="button"><span class="n">1</span>Present</button>
-        <button class="step" data-step="approve" type="button" disabled><span class="n">2</span>Approve</button>
-        <button class="step" data-step="bind" type="button" disabled><span class="n">3</span>Bind wallet</button>
+        <button class="step" data-step="bind" type="button"><span class="n">1</span>Bind wallet</button>
+        <button class="step" data-step="present" type="button" disabled><span class="n">2</span>Present</button>
+        <button class="step" data-step="approve" type="button" disabled><span class="n">3</span>Approve</button>
         <button class="step" data-step="use" type="button" disabled><span class="n">4</span>Subscribe and swap</button>
         <button class="step step-revoke" data-step="revoke" type="button" disabled><span class="n">5</span>Revoke</button>
         <button class="step step-reset" data-step="reset" type="button">Reset</button>
@@ -146,13 +143,13 @@
         <section class="pane pane-you" aria-labelledby="p-you">
           <h3 id="p-you">You</h3>
           <div class="pane-body" id="pane-you" aria-live="polite">
-            <p class="empty">The official test wallet, on your phone. Sample identity.</p>
+            <p class="empty">Your crypto wallet in the browser, and the official test wallet on your phone. Sample identity.</p>
           </div>
         </section>
         <section class="pane pane-issuer" aria-labelledby="p-issuer">
           <h3 id="p-issuer">The issuer</h3>
           <div class="pane-body" id="pane-issuer" aria-live="polite">
-            <p class="empty">A fund issuer. It has a customer record, no passport copy.</p>
+            <p class="empty">A fund issuer. Its server relays what the wallet sends and never opens it.</p>
           </div>
         </section>
         <section class="pane pane-chain" aria-labelledby="p-chain">
@@ -166,7 +163,7 @@
           </div>
         </section>
       </div>
-      <p class="demo-note" id="demo-note">Step 1: the test wallet answers the issuer's registered request.</p>
+      <p class="demo-note" id="demo-note">Step 1: your crypto wallet signs the session, so the evidence can only ever bind to this address.</p>
     </div>
   </div>
 </section>
@@ -219,7 +216,7 @@
     <ul class="honest-strip reveal">
       <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in this build.</li>
       <li><b>Simulated checks</b>Sanctions and other checks are stubs in this build.</li>
-      <li><b>Where the proof is made</b>By our verifier (server-side route) or by your own device (client-side route). The official wallet does not produce this proof today.</li>
+      <li><b>Where the proof is made</b>In your own browser tab (the demonstrated route) or by our verifier (server-side route). The official wallet does not produce this proof today.</li>
       <li><b>Manual withdrawal</b>Revocation is triggered by hand.</li>
     </ul>
   </div>
@@ -230,7 +227,7 @@
   <div class="wrap">
     <p class="label reveal">Deployment</p>
     <h2 class="display reveal">Where the <span class="blue">proof</span> lives.</h2>
-    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice, and it decides who sees the presentation. Your name goes to the issuer's verifier in every route; the chain gets policy, predicate bits, tier, expiry and a bound address.</p>
+    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice, and it decides who sees the presentation. In the server route the issuer's verifier sees the presentation, name included, while it makes the proof. In the browser route the issuer's server stores only the wallet's encrypted response and never opens it, so your name stays in your browser tab. In every route the chain gets policy, predicate bits, tier, expiry and a bound address, and never a name.</p>
     <ol class="proof-steps reveal">
       <li class="proof-step is-now">
         <span class="proof-when">Route 1, built</span>
@@ -240,7 +237,7 @@
       <li class="proof-step is-now">
         <span class="proof-when">Route 2, built</span>
         <span class="proof-where">Your device</span>
-        <p>Our server is a blind relay that stores only the encrypted wallet response. Your own device decrypts it and makes the proof (Noir, UltraHonk): a laptop companion today, phone apps in progress. Same contract, same chain record.</p>
+        <p>Our server is a blind relay that stores only the encrypted wallet response. Your browser tab decrypts it and makes the proof (Noir, UltraHonk). This is the route the demo runs. Same contract, same chain record.</p>
       </li>
       <li class="proof-step">
         <span class="proof-when">When wallets ship provers</span>
@@ -262,7 +259,7 @@
       <!-- Source: eIDAS 2, Art 5a (wallet obligation) and Art 5f(2) mandatory acceptance in banking and financial services. https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1183 -->
       <p class="reveal">Member states must offer the wallet by the end of 2026, and banks and financial services must accept it from the end of 2027 (eIDAS 2, Art. 5a and Art. 5f).</p>
       <p class="reveal">Every gated venue today filters by residence and sanctions through its own document funnel. Each funnel is another copy.</p>
-      <p class="reveal">Attestat plugs the state wallet into on-chain finance without putting a document on chain. The issuer keeps its file; the chain keeps a decision.</p>
+      <p class="reveal">Attestat lets the issuer accept the state wallet's evidence and apply its approval to the investor's linked crypto wallet, without putting a document on chain. The issuer keeps its file; the chain keeps a decision.</p>
     </div>
     <div class="built reveal">
       <span class="built-label">Built on</span>
@@ -277,9 +274,9 @@
 <!-- SCENE 8: SHOWCASE TEASER -->
 <section class="scene s-showcase" id="showcase">
   <div class="wrap">
-    <p class="label reveal">Showcase</p>
-    <h2 class="display reveal">What people build <span class="yellow">with it</span>.</h2>
-    <p class="body reveal">Attestat is the toolkit. Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain. These are demos built on it, not live products.</p>
+    <p class="label reveal">Engineering examples</p>
+    <h2 class="display reveal">Also built on the <span class="yellow">same decision</span>.</h2>
+    <p class="body reveal">Attestat helps token issuers accept EUDI identity evidence and apply their approval to customers' linked crypto wallets, without putting identity documents on chain. The two examples below read that decision on a local chain. Neither is a live product.</p>
     <div class="teaser reveal">
       <a class="tease" href="showcase/index.html#demo-eudi">
         <span class="tease-img"><img src="showcase/assets/eudi-investor-flow.png" alt="" loading="lazy" width="1280" height="800"></span>
@@ -290,24 +287,12 @@
       <a class="tease" href="showcase/index.html#demo-swap">
         <span class="tease-img tease-draw"><span class="ph-door"></span><span class="ph-door"></span></span>
         <span class="tease-title">The Uniswap permissioned pool</span>
-        <span class="tease-text">The same decision opens a swap; after the revoke the hook refuses it.</span>
+        <span class="tease-text">The same decision lets the investor buy fund tokens with a test stablecoin; after the revoke the hook refuses the swap.</span>
         <span class="tease-state ok">swap door green on a local fork, Sepolia pending</span>
-      </a>
-      <a class="tease" href="showcase/index.html#demo-standing-order">
-        <span class="tease-img"><img src="showcase/standing-order/preview.png" alt="" loading="lazy" width="1440" height="900"></span>
-        <span class="tease-title">Standing order</span>
-        <span class="tease-text">A Privy policy that is a copy of the on-chain decision, so the automation stops when the decision does.</span>
-        <span class="tease-state ok">green locally, Sepolia pending</span>
-      </a>
-      <a class="tease" href="showcase/index.html#demo-backoffice">
-        <span class="tease-img"><img src="showcase/backoffice/preview.png" alt="" loading="lazy" width="1440" height="900"></span>
-        <span class="tease-title">Back office</span>
-        <span class="tease-text">A quorum-owned operator wallet that can approve and revoke, and nothing else.</span>
-        <span class="tease-state ok">green locally, Sepolia pending</span>
       </a>
     </div>
     <div class="cta-row reveal">
-      <a class="btn btn-primary" href="showcase/index.html">All demos, the toolkit map and the use cases</a>
+      <a class="btn btn-ghost" href="showcase/index.html">Engineering examples</a>
     </div>
   </div>
 </section>

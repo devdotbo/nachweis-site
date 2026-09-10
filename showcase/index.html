@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What people build with Attestat</title>
-<meta name="description" content="Attestat is the toolkit: it plugs into the EUDI wallet, optionally zkPassport, and other national identity systems where compatible, proves the statement in zero knowledge, writes one eligibility decision on chain, and lets any consumer read it. These are the demos built on it.">
+<title>Attestat engineering examples</title>
+<meta name="description" content="Engineering examples built on the same on-chain decision as Attestat: the system map, the demo cards with their state, the use cases, and what is real in each. None is a product, none is live, no named company uses one.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Attestat">
-<meta property="og:title" content="What people build with Attestat">
-<meta property="og:description" content="The toolkit's functions as one map, the demos built on it, the use cases, and what is real in each demo.">
+<meta property="og:title" content="Attestat engineering examples">
+<meta property="og:description" content="The system map, the engineering examples built on the same on-chain decision, the use cases, and what is real in each.">
 <meta property="og:url" content="https://attestat.dev/showcase/">
 <meta name="twitter:card" content="summary">
 <link rel="canonical" href="https://attestat.dev/showcase/">
@@ -20,7 +20,7 @@
 <header class="top">
   <a class="brand" href="../index.html">Attestat</a>
   <nav class="topnav" aria-label="Sections">
-    <a href="#map">The toolkit</a>
+    <a href="#map">System map</a>
     <a href="#demos">Demos</a>
     <a href="#cases">Use cases</a>
     <a href="#honest">What is real</a>
@@ -34,10 +34,10 @@
 <!-- HERO -->
 <section class="scene g-hero" id="hero">
   <div class="wrap">
-    <p class="eyebrow">Attestat <span class="dot"></span> Showcase</p>
-    <h1 class="hook g-hook">What people build with <em>Attestat</em>.</h1>
-    <p class="lede">Attestat is the toolkit. It plugs into the EUDI wallet, optionally into zkPassport, and into other national identity systems where they are compatible. It proves the statement in zero knowledge, writes one eligibility decision on chain, and lets any consumer read that decision: a fund token, a Uniswap permissioned pool, a payout contract, a Privy policy.</p>
-    <p class="g-frame">The pages below are demos built on the toolkit. None of them is a live product, and no named company uses one.</p>
+    <p class="eyebrow">Attestat <span class="dot"></span> Engineering examples</p>
+    <h1 class="hook g-hook">Built on the same <em>decision</em>.</h1>
+    <p class="lede">Engineering examples built on the same on-chain decision. None is a product, none is live, no named company uses one.</p>
+    <p class="g-frame">Two cards are the product journey shown on the main page. The rest are labelled on the card: a candidate that still needs a Sepolia run, parked work whose code and docs are kept, or a route that is off by default.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#demos">See the demos</a>
       <a class="btn btn-ghost" href="#map">How the pieces fit</a>
@@ -48,7 +48,7 @@
 <!-- SYSTEM MAP -->
 <section class="scene g-map" id="map">
   <div class="wrap">
-    <p class="label">The toolkit</p>
+    <p class="label">System map</p>
     <h2 class="display">One decision in the middle.</h2>
     <p class="body">Evidence comes in from the left. A proof turns it into predicate bits. The issuer approves. The decision sits on chain, and everything to the right only reads it. Everything below can close it.</p>
 
@@ -66,17 +66,17 @@
           <li class="node">
             <b>Passport chip via zkPassport</b>
             <p>The zkPassport app reads the chip over NFC and proves over 18 on the phone, bound to the wallet address. Verified on chain by zkPassport's contract. Not eIDAS evidence.</p>
-            <span class="state run">mock passport green on anvil; phone run pending; kept or dropped by the builder on 10 September</span>
+            <span class="state run">off by default; mock passport green on anvil, phone run pending</span>
           </li>
           <li class="node">
             <b>Swiss e-ID (swiyu)</b>
             <p>Attestat consumes OpenID4VP presentations of SD-JWT credentials. Today that is the EU wallet; the Swiss e-ID uses the same formats and protocol, and its test credential carries the same over-18 claim. We expect our verifier to need a Swiss DID and a new issuer key rather than a new circuit, and a Beta-ID test vector is the next step.</p>
-            <span class="state run">supported now for the Beta-ID stack, one adapter change; no vector run yet</span>
+            <span class="state todo">research; same formats as the Beta-ID stack, no vector run yet</span>
           </li>
           <li class="node">
             <b>Other national systems</b>
             <p>Mobile driving licences in Apple and Google Wallet are ISO mdocs; Google's wallet already answers age requests with a Longfellow zero-knowledge proof, which our verifier accepts off chain today. Taiwan's digital identity wallet issues SD-JWT credentials over OpenID4VP. GOV.UK Wallet is moving to mdoc and OpenID4VP; verifying it requires a certified UK digital verification service, which we are not. Singpass, Diia, UAE Pass, gov.br, Aadhaar, Korea's mobile ID and Japan's My Number Card do not hand a third party a credential it can verify against a public anchor; for those citizens the passport route applies.</p>
-            <span class="state todo">17 systems compared on 9 September 2026 from published specifications; no demo used a live national wallet other than the German EUDI test wallet and zkPassport</span>
+            <span class="state todo">research; 17 systems compared on 9 September 2026 from published specifications, no demo used a live national wallet other than the German EUDI test wallet and zkPassport</span>
           </li>
         </ul>
       </div>
@@ -132,7 +132,7 @@
       <!-- lane 4 -->
       <div class="lane lane-consumers">
         <h3 class="lane-title"><span class="lane-n">4</span>Consumers</h3>
-        <p class="lane-sub">Anything that can call isEligible. One permission, many doors, and one revoke closes them in the same block.</p>
+        <p class="lane-sub">Anything that can call isEligible. One permission read by several contracts, and one revoke closes them in the same block.</p>
         <ul class="nodes">
           <li class="node">
             <b>Fund token transfer check</b>
@@ -185,18 +185,18 @@
   <div class="wrap">
     <p class="label">Demos</p>
     <h2 class="display">Eight demos, one registry.</h2>
-    <p class="body">Each card names what it shows, where it is green, and which prize track it addresses. The demo routes run in the product app; the landing page is its pitch.</p>
+    <p class="body">Each card carries its state: product journey, candidate, parked, or off by default, and says where it is green and which prize track it addresses. Every green is on a local chain or fork. The demo routes run in the product app; the landing page is its pitch.</p>
 
     <div class="cards">
 
       <article class="card" id="demo-eudi">
         <div class="card-media">
           <img src="assets/eudi-investor-flow.png" alt="The investor portal after a proof made in the browser tab: attested, awaiting the issuer's approval" loading="lazy" width="1280" height="800">
-          <span class="badge ok">green on anvil with the official wallet (class W); hand-clicked Sepolia pending</span>
+          <span class="badge ok">product journey; green on anvil with the official wallet (class W), hand-clicked Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>The EUDI investor flow</h3>
-          <p>A state test wallet shows three fields to a fund issuer, the issuer approves, the approval becomes a few bits on chain that a fund token and a Uniswap pool both read, and one revoke closes both.</p>
+          <p>The investor's wallet binds the session, a state test wallet answers with three fields, the proof is made in the browser tab, the issuer approves in a separate on-chain step, the approval becomes a few bits on chain that a fund token and a Uniswap pool both read, and one revoke closes both.</p>
           <p class="track">Best Uniswap Stack Contribution (the pool is the second door)</p>
           <div class="card-links">
             <a href="../index.html#demo">Walkthrough</a>
@@ -211,11 +211,11 @@
       <article class="card" id="demo-swap">
         <div class="card-media">
           <img src="assets/swap-door.png" alt="The Swap tile of the investor portal twice: swap confirmed from the dev-signer wallet, then the identical swap refused by PermissionedHooks.beforeSwap after the revoke; local anvil fork of Sepolia" loading="lazy" width="844" height="560">
-          <span class="badge ok">in-app swap door green on a local fork of Sepolia (class L); Sepolia broadcast pending</span>
+          <span class="badge ok">product journey; swap door green on a local fork of Sepolia (class L), Sepolia broadcast pending</span>
         </div>
         <div class="card-body">
           <h3>The Uniswap permissioned pool swap</h3>
-          <p>The same decision opens a Uniswap v4 permissioned pool. The investor swaps without a second presentation; after the revoke the identical swap reverts in the pool's hook.</p>
+          <p>The same decision opens a Uniswap v4 permissioned pool. The investor buys fund tokens with a test stablecoin (100 mUSD in, about 90 NDF out) without a second presentation; after the revoke the identical swap reverts in the pool's hook.</p>
           <p class="track">Best Uniswap Stack Contribution</p>
           <div class="card-links">
             <a href="../index.html#doors">Two doors</a>
@@ -230,7 +230,7 @@
       <article class="card" id="demo-standing-order">
         <div class="card-media">
           <img src="standing-order/demo.png" alt="The issuer console's automation section on a local run: the policy in plain words per investor and the tick log with a subscribed tick, the deny-all rule after the revoke and the refused tick" loading="lazy" width="1440" height="1020">
-          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
+          <span class="badge run">candidate, needs a Sepolia run; green locally (class L), Privy path hand-clicked on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Standing order</h3>
@@ -247,11 +247,11 @@
       <article class="card" id="demo-savings-plan">
         <div class="card-media">
           <img src="savings-plan/demo.png" alt="The savings plan board on a local run after the revoke: the decision revoked in the middle, the plan, Issuer B, the pool checker and the transfer all closed" loading="lazy" width="1440" height="900">
-          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
+          <span class="badge todo">parked, code and docs kept; green locally (class L), Privy path on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Savings plan</h3>
-          <p>A retail investor proves once, and a delegated signer buys into the fund on a schedule; a second issuer's instrument, a transfer to another attested wallet and the pool accept the same decision until one revoke closes every door.</p>
+          <p>A retail investor proves once, and a delegated signer buys into the fund on a schedule; a second issuer's instrument, a transfer to another attested wallet and the pool accept the same decision until one revoke closes the plan, the second issuer and the pool.</p>
           <p class="track">Best B2B financial product, also Best financial flow</p>
           <div class="card-links">
             <a href="savings-plan/index.html">Landing page</a>
@@ -264,7 +264,7 @@
       <article class="card" id="demo-backoffice">
         <div class="card-media">
           <img src="backoffice/demo.png" alt="The compliance desk on a local run: the queue with an approve confirmed by both officers, the revoke, and a 1 wei transfer refused by the simulated policy" loading="lazy" width="1440" height="1250">
-          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
+          <span class="badge todo">parked, code and docs kept; green locally (class L), Privy path on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Back office</h3>
@@ -281,7 +281,7 @@
       <article class="card" id="demo-investor-money">
         <div class="card-media">
           <img src="investor-money/demo.png" alt="The fund desk on a local run after the issuer's revoke: eligibility revoked, Subscribe, Claim and Redeem closed, and the refusal in plain words" loading="lazy" width="1440" height="1120">
-          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
+          <span class="badge todo">parked, code and docs kept; green locally (class L), Privy path on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Investor money</h3>
@@ -298,7 +298,7 @@
       <article class="card" id="demo-payout-desk">
         <div class="card-media">
           <img src="payout-desk/demo.png" alt="The contractor payout desk on a local run: run 1 executed and the unattested contractor refused by GatedPayout, run 2 refused after the revoke, run 3 refused over the cap, and a direct transfer refused by the simulated policy" loading="lazy" width="1440" height="1280">
-          <span class="badge ok">demo green locally (class L); Privy path hand-clicked on Sepolia pending</span>
+          <span class="badge todo">parked, code and docs kept; green locally (class L), Privy path on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>Payout desk</h3>
@@ -315,7 +315,7 @@
       <article class="card" id="demo-zkpassport">
         <div class="card-media">
           <img src="assets/zkpassport-card.png" alt="The passport chip card of the investor portal with the mock adapter on anvil: QR code from the zkPassport service, waiting for the zkPassport app; no phone scanned it" loading="lazy" width="1020" height="530">
-          <span class="badge run">mock passport green on anvil (class L); phone run pending; builder decides on 10 September whether it stays</span>
+          <span class="badge run">off by default (flag VITE_ZKPASSPORT); mock passport green on anvil (class L), phone run pending</span>
         </div>
         <div class="card-body">
           <h3>The zkPassport route</h3>
@@ -398,11 +398,11 @@
     <p class="label">What is real in these demos</p>
     <ul class="honest-strip g-strip">
       <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in any demo.</li>
-      <li><b>Where the proof is made</b>In the investor's browser tab or by the laptop companion on her own computer. In the server route our verifier makes the proof and did see the presentation. In the zkPassport route a third-party app on the phone makes it.</li>
+      <li><b>Where the proof is made</b>In the investor's browser tab, which is the demonstrated route; a laptop companion does the same job outside the browser. In the server route our verifier makes the proof and did see the presentation. In the zkPassport route a third-party app on the phone makes it.</li>
       <li><b>Simulated</b>Sanctions and similar checks are stubs. Demo subscriptions mint fund tokens without payment. Local runs use a local Privy policy evaluator, captioned as such.</li>
       <li><b>Manual revocation</b>The issuer revokes by hand. Expiry is shown on a local chain, where time can be moved.</li>
       <li><b>Sepolia by hand</b>Green means green on a local chain or fork. Every Sepolia run is a builder step and is listed as pending until recorded.</li>
-      <li><b>On chain</b>No identity documents on chain, and nothing we could use to find her. Predicate bits and an expiry bound to an address are still personal data.</li>
+      <li><b>On chain</b>No identity documents and no name on chain; the chain record carries an address, predicate bits and an expiry. Predicate bits and an expiry bound to an address are still personal data.</li>
       <li><b>Demos, not products</b>Nothing here is live, and no named company uses it. Sponsors appear where their software is integrated: Privy, Uniswap, zkPassport.</li>
     </ul>
   </div>
