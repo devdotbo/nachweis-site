@@ -196,7 +196,7 @@
         </div>
         <div class="card-body">
           <h3>The EUDI investor flow</h3>
-          <p>A state test wallet shows three fields to a fund issuer, the issuer approves, the approval becomes a few bits on chain that a fund token and a Uniswap pool both read, and one revoke closes both.</p>
+          <p>The investor's wallet binds the session, a state test wallet answers with three fields, the proof is made in the browser tab, the issuer approves in a separate on-chain step, the approval becomes a few bits on chain that a fund token and a Uniswap pool both read, and one revoke closes both.</p>
           <p class="track">Best Uniswap Stack Contribution (the pool is the second door)</p>
           <div class="card-links">
             <a href="../index.html#demo">Walkthrough</a>
@@ -215,7 +215,7 @@
         </div>
         <div class="card-body">
           <h3>The Uniswap permissioned pool swap</h3>
-          <p>The same decision opens a Uniswap v4 permissioned pool. The investor swaps without a second presentation; after the revoke the identical swap reverts in the pool's hook.</p>
+          <p>The same decision opens a Uniswap v4 permissioned pool. The investor buys fund tokens with a test stablecoin (100 mUSD in, about 90 NDF out) without a second presentation; after the revoke the identical swap reverts in the pool's hook.</p>
           <p class="track">Best Uniswap Stack Contribution</p>
           <div class="card-links">
             <a href="../index.html#doors">Two doors</a>
@@ -398,11 +398,11 @@
     <p class="label">What is real in these demos</p>
     <ul class="honest-strip g-strip">
       <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in any demo.</li>
-      <li><b>Where the proof is made</b>In the investor's browser tab or by the laptop companion on her own computer. In the server route our verifier makes the proof and did see the presentation. In the zkPassport route a third-party app on the phone makes it.</li>
+      <li><b>Where the proof is made</b>In the investor's browser tab, which is the demonstrated route; a laptop companion does the same job outside the browser. In the server route our verifier makes the proof and did see the presentation. In the zkPassport route a third-party app on the phone makes it.</li>
       <li><b>Simulated</b>Sanctions and similar checks are stubs. Demo subscriptions mint fund tokens without payment. Local runs use a local Privy policy evaluator, captioned as such.</li>
       <li><b>Manual revocation</b>The issuer revokes by hand. Expiry is shown on a local chain, where time can be moved.</li>
       <li><b>Sepolia by hand</b>Green means green on a local chain or fork. Every Sepolia run is a builder step and is listed as pending until recorded.</li>
-      <li><b>On chain</b>No identity documents on chain, and nothing we could use to find her. Predicate bits and an expiry bound to an address are still personal data.</li>
+      <li><b>On chain</b>No identity documents and no name on chain; the chain record carries an address, predicate bits and an expiry. Predicate bits and an expiry bound to an address are still personal data.</li>
       <li><b>Demos, not products</b>Nothing here is live, and no named company uses it. Sponsors appear where their software is integrated: Privy, Uniswap, zkPassport.</li>
     </ul>
   </div>

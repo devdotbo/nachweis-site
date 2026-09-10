@@ -131,9 +131,9 @@
 
     <div class="demo" id="demo-app">
       <div class="steps" role="group" aria-label="Demo steps">
-        <button class="step" data-step="present" type="button"><span class="n">1</span>Present</button>
-        <button class="step" data-step="approve" type="button" disabled><span class="n">2</span>Approve</button>
-        <button class="step" data-step="bind" type="button" disabled><span class="n">3</span>Bind wallet</button>
+        <button class="step" data-step="bind" type="button"><span class="n">1</span>Bind wallet</button>
+        <button class="step" data-step="present" type="button" disabled><span class="n">2</span>Present</button>
+        <button class="step" data-step="approve" type="button" disabled><span class="n">3</span>Approve</button>
         <button class="step" data-step="use" type="button" disabled><span class="n">4</span>Subscribe and swap</button>
         <button class="step step-revoke" data-step="revoke" type="button" disabled><span class="n">5</span>Revoke</button>
         <button class="step step-reset" data-step="reset" type="button">Reset</button>
@@ -143,13 +143,13 @@
         <section class="pane pane-you" aria-labelledby="p-you">
           <h3 id="p-you">You</h3>
           <div class="pane-body" id="pane-you" aria-live="polite">
-            <p class="empty">The official test wallet, on your phone. Sample identity.</p>
+            <p class="empty">Your crypto wallet in the browser, and the official test wallet on your phone. Sample identity.</p>
           </div>
         </section>
         <section class="pane pane-issuer" aria-labelledby="p-issuer">
           <h3 id="p-issuer">The issuer</h3>
           <div class="pane-body" id="pane-issuer" aria-live="polite">
-            <p class="empty">A fund issuer. It has a customer record, no passport copy.</p>
+            <p class="empty">A fund issuer. Its server relays what the wallet sends and never opens it.</p>
           </div>
         </section>
         <section class="pane pane-chain" aria-labelledby="p-chain">
@@ -163,7 +163,7 @@
           </div>
         </section>
       </div>
-      <p class="demo-note" id="demo-note">Step 1: the test wallet answers the issuer's registered request.</p>
+      <p class="demo-note" id="demo-note">Step 1: your crypto wallet signs the session, so the evidence can only ever bind to this address.</p>
     </div>
   </div>
 </section>
@@ -216,7 +216,7 @@
     <ul class="honest-strip reveal">
       <li><b>Official test wallet</b>The German EUDI sandbox with a sample identity. No state-issued ID in this build.</li>
       <li><b>Simulated checks</b>Sanctions and other checks are stubs in this build.</li>
-      <li><b>Where the proof is made</b>By our verifier (server-side route) or by your own device (client-side route). The official wallet does not produce this proof today.</li>
+      <li><b>Where the proof is made</b>In your own browser tab (the demonstrated route) or by our verifier (server-side route). The official wallet does not produce this proof today.</li>
       <li><b>Manual withdrawal</b>Revocation is triggered by hand.</li>
     </ul>
   </div>
@@ -227,7 +227,7 @@
   <div class="wrap">
     <p class="label reveal">Deployment</p>
     <h2 class="display reveal">Where the <span class="blue">proof</span> lives.</h2>
-    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice, and it decides who sees the presentation. Your name goes to the issuer's verifier in every route; the chain gets policy, predicate bits, tier, expiry and a bound address.</p>
+    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice, and it decides who sees the presentation. In the server route the issuer's verifier sees the presentation, name included, while it makes the proof. In the browser route the issuer's server stores only the wallet's encrypted response and never opens it, so your name stays in your browser tab. In every route the chain gets policy, predicate bits, tier, expiry and a bound address, and never a name.</p>
     <ol class="proof-steps reveal">
       <li class="proof-step is-now">
         <span class="proof-when">Route 1, built</span>
@@ -237,7 +237,7 @@
       <li class="proof-step is-now">
         <span class="proof-when">Route 2, built</span>
         <span class="proof-where">Your device</span>
-        <p>Our server is a blind relay that stores only the encrypted wallet response. Your own device decrypts it and makes the proof (Noir, UltraHonk): a laptop companion today, phone apps in progress. Same contract, same chain record.</p>
+        <p>Our server is a blind relay that stores only the encrypted wallet response. Your browser tab decrypts it and makes the proof (Noir, UltraHonk). This is the route the demo runs. Same contract, same chain record.</p>
       </li>
       <li class="proof-step">
         <span class="proof-when">When wallets ship provers</span>
@@ -287,7 +287,7 @@
       <a class="tease" href="showcase/index.html#demo-swap">
         <span class="tease-img tease-draw"><span class="ph-door"></span><span class="ph-door"></span></span>
         <span class="tease-title">The Uniswap permissioned pool</span>
-        <span class="tease-text">The same decision opens a swap; after the revoke the hook refuses it.</span>
+        <span class="tease-text">The same decision lets the investor buy fund tokens with a test stablecoin; after the revoke the hook refuses the swap.</span>
         <span class="tease-state ok">swap door green on a local fork, Sepolia pending</span>
       </a>
     </div>
