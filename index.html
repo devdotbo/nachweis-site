@@ -43,7 +43,7 @@
   <div class="hero-inner">
     <p class="eyebrow">Attestat <span class="dot"></span> ETHOnline 2026</p>
     <h1 class="hook">How many strangers keep a copy of your <em>passport</em>?</h1>
-    <p class="lede">Every exchange, launchpad and fund asks for your ID and keeps it. Attestat lets the state ID wallet on your phone do that job once, and puts only the issuer's decision on chain.</p>
+    <p class="lede">Every exchange, launchpad and fund asks for your ID and keeps it. Attestat lets the state ID wallet on your phone answer one issuer once, and puts only that issuer's decision on chain.</p>
     <p class="spoken">"Your ID wallet should work where you invest."</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="#demo" id="cta-demo">See what the chain sees</a>
@@ -227,7 +227,7 @@
   <div class="wrap">
     <p class="label reveal">Deployment</p>
     <h2 class="display reveal">Where the <span class="blue">proof</span> lives.</h2>
-    <p class="body reveal">The chain side is final. It verifies a proof and nothing else. Where the proof is made is a deployment choice, and it decides who sees the presentation. In the server route the issuer's verifier sees the presentation, name included, while it makes the proof. In the browser route the issuer's server stores only the wallet's encrypted response and never opens it, so your name stays in your browser tab. In every route the chain gets policy, predicate bits, tier, expiry and a bound address, and never a name.</p>
+    <p class="body reveal">The chain side is final. The registry takes a record in one of two ways: from a zero-knowledge proof checked by the policy's verifier, or signed by the issuer's operator key. The issuer's approval is a separate step in both. Where the proof is made is a deployment choice, and it decides who sees the presentation. In the server route the issuer's verifier sees the presentation, name included, while it makes the proof. In the browser route the issuer's server stores only the wallet's encrypted response and never opens it, so your name stays in your browser tab. In every route the chain gets policy, predicate bits, tier, expiry and a bound address, and never a name.</p>
     <ol class="proof-steps reveal">
       <li class="proof-step is-now">
         <span class="proof-when">Route 1, built</span>
@@ -288,7 +288,7 @@
         <span class="tease-img tease-draw"><span class="ph-door"></span><span class="ph-door"></span></span>
         <span class="tease-title">The Uniswap permissioned pool</span>
         <span class="tease-text">The same decision lets the investor buy fund tokens with a test stablecoin; after the revoke the hook refuses the swap.</span>
-        <span class="tease-state ok">swap door green on a local fork, Sepolia pending</span>
+        <span class="tease-state ok">swap door green on Sepolia, 2026-09-10</span>
       </a>
     </div>
     <div class="cta-row reveal">

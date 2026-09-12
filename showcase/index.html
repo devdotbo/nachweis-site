@@ -56,7 +56,7 @@
       <!-- lane 1 -->
       <div class="lane lane-evidence">
         <h3 class="lane-title"><span class="lane-n">1</span>Evidence in</h3>
-        <p class="lane-sub">What the person presents. Names go to the issuer's verifier, never to the chain.</p>
+        <p class="lane-sub">What the person presents. Names reach the issuer's verifier only on the server route; on the browser route they stay in the tab. Never on chain.</p>
         <ul class="nodes">
           <li class="node">
             <b>EUDI wallet</b>
@@ -142,7 +142,7 @@
           <li class="node">
             <b>Uniswap v4 permissioned pool</b>
             <p>An allowlist checker reads the same registry; PermissionedHooks refuses the swap after a revoke.</p>
-            <span class="state ok">in-app swap door green on a local fork of Sepolia; Sepolia broadcast pending</span>
+            <span class="state ok">in-app swap door green on Sepolia, 2026-09-10</span>
           </li>
           <li class="node">
             <b>GatedPayout</b>
@@ -192,7 +192,7 @@
       <article class="card" id="demo-eudi">
         <div class="card-media">
           <img src="assets/eudi-investor-flow.png" alt="The investor portal after a proof made in the browser tab: attested, awaiting the issuer's approval" loading="lazy" width="1280" height="800">
-          <span class="badge ok">product journey; green on anvil with the official wallet (class W), hand-clicked Sepolia pending</span>
+          <span class="badge ok">product journey; green on anvil with the official wallet (class W); no-phone operator journey green on Sepolia 2026-09-10, phone leg on Sepolia pending</span>
         </div>
         <div class="card-body">
           <h3>The EUDI investor flow</h3>
@@ -211,7 +211,7 @@
       <article class="card" id="demo-swap">
         <div class="card-media">
           <img src="assets/swap-door.png" alt="The Swap tile of the investor portal twice: swap confirmed from the dev-signer wallet, then the identical swap refused by PermissionedHooks.beforeSwap after the revoke; local anvil fork of Sepolia" loading="lazy" width="844" height="560">
-          <span class="badge ok">product journey; swap door green on a local fork of Sepolia (class L), Sepolia broadcast pending</span>
+          <span class="badge ok">product journey; swap door green on Sepolia, 2026-09-10 (no-phone operator journey)</span>
         </div>
         <div class="card-body">
           <h3>The Uniswap permissioned pool swap</h3>
