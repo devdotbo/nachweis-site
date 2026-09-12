@@ -61,23 +61,23 @@
     <p class="body reveal">You upload your passport. They keep it. Dozens of copies of you sit in dozens of databases, and every one of them is a target.</p>
 
     <div class="breaches">
+      <!-- Source: docs/wiki/incidents-idscan-revolut-2026-09.md in the nachweis-app repository (Revolut section), https://www.coindesk.com/tech/2026/09/12/bitcoin-activity-passports-exposed-after-revolut-falls-for-fake-government-request , retention from Revolut's Irish branch AML data collection notice -->
+      <article class="breach reveal">
+        <p class="big">11 Sep</p>
+        <p class="when">Revolut, September 2026</p>
+        <p class="what">customers' passport copies, onboarding selfies, addresses and bitcoin transaction histories handed to a fraudulent request from a real government email domain. Its own notice says the law requires it to keep the document copy.</p>
+      </article>
+      <!-- Source: docs/wiki/incidents-idscan-revolut-2026-09.md in the nachweis-app repository (IDScan.net section), https://krebsonsecurity.com/2026/09/fbi-probes-service-selling-153m-drivers-licenses/ , https://support.idscan.net/veriscan-cloud-portal/data-collection-and-retention -->
+      <article class="breach reveal">
+        <p class="big">153 million</p>
+        <p class="when">IDScan.net, September 2026</p>
+        <p class="what">driver's licence scans, as advertised by a dark-web service, from an ID-scanning vendor whose cloud keeps every record by default. The vendor confirmed unauthorized access; the count is the seller's.</p>
+      </article>
       <!-- Source: https://www.cm-alliance.com/coinbase-cyber-attack-timeline (69,461 affected, Maine AG filing) and https://www.coinbase.com/blog/protecting-our-customers-standing-up-to-extortionists (government ID images, USD 20 million demand, bribed support contractors) -->
       <article class="breach reveal">
         <p class="big">69,461</p>
         <p class="when">Coinbase, May 2025</p>
         <p class="what">customers' records, including government ID images, copied by bribed support contractors. The extortion demand: 20 million dollars.</p>
-      </article>
-      <!-- Source: https://www.ledger.com/message-ledgers-ceo-data-leak (1 million email addresses, 272,000 names, home addresses and phone numbers, dumped 2020-12-20) -->
-      <article class="breach reveal">
-        <p class="big">272,000</p>
-        <p class="when">Ledger, December 2020</p>
-        <p class="what">customers' names, home addresses and phone numbers dumped on a public forum, next to more than a million email addresses.</p>
-      </article>
-      <!-- Source: https://cybernews.com/security/iranian-crypto-exchange-leaks-passports/ (230,000 users, passports, ID cards and selfies, misconfigured storage, January 2024) -->
-      <article class="breach reveal">
-        <p class="big">230,000</p>
-        <p class="when">Bit24.cash, January 2024</p>
-        <p class="what">users' passports, ID cards and selfies exposed by an exchange's misconfigured KYC storage.</p>
       </article>
     </div>
 
@@ -201,7 +201,7 @@
   <div class="wrap">
     <h2 class="display reveal">What we are <span class="coral">not</span>.</h2>
     <ul class="nots">
-      <li class="reveal"><s>KYC as a service.</s><span>The issuer verifies. The issuer decides.</span></li>
+      <li class="reveal"><s>Identity checks as a service.</s><span>The issuer approves. The issuer revokes.</span></li>
       <li class="reveal"><s>A data holder.</s><span>We store no identity document. In the server-side proof route our verifier sees the presentation while it makes the proof; in the client-side route it never receives one.</span></li>
       <li class="reveal"><s>A wallet.</s><span>The state wallet is the wallet.</span></li>
       <li class="reveal"><em>We carry the decision.</em><span>From the issuer to every venue it controls.</span></li>
@@ -227,12 +227,12 @@
   <div class="wrap">
     <p class="label reveal">Deployment</p>
     <h2 class="display reveal">Where the <span class="blue">proof</span> lives.</h2>
-    <p class="body reveal">The chain side is final. The registry takes a record in one of two ways: from a zero-knowledge proof checked by the policy's verifier, or signed by the issuer's operator key. The issuer's approval is a separate step in both. Where the proof is made is a deployment choice, and it decides who sees the presentation. In the server route the issuer's verifier sees the presentation, name included, while it makes the proof. In the browser route the issuer's server stores only the wallet's encrypted response and never opens it, so your name stays in your browser tab. In every route the chain gets policy, predicate bits, tier, expiry and a bound address, and never a name.</p>
+    <p class="body reveal">The chain side is final. The registry accepts evidence checked by a policy verifier, followed by a separate issuer approval. Its operator fallback stores a decision and approves it in one transaction, without a proof. Where the proof is made is a deployment choice, and it decides who sees the presentation. In the server route our verifier sees the presentation, name included, while it makes the proof. In the demonstrated browser route, the investor's tab decrypts the presentation and generates the proof. The relay receives the encrypted response, and the on-chain verifier checks the proof. The issuer separately approves eligibility. In every route the chain gets policy, predicate bits, tier, expiry and a bound address. No name or identity document is published; the public address may still be linked to a person.</p>
     <ol class="proof-steps reveal">
       <li class="proof-step is-now">
         <span class="proof-when">Route 1, built</span>
         <span class="proof-where">Our verifier</span>
-        <p>The issuer's verifier checks the presentation and generates the zero-knowledge proof (SP1, Groth16). The chain does not trust the server, but the server did see the presentation.</p>
+        <p>Our verifier checks the presentation and generates the zero-knowledge proof (SP1, Groth16). The chain does not trust the server, but the server did see the presentation.</p>
       </li>
       <li class="proof-step is-now">
         <span class="proof-when">Route 2, built</span>
@@ -240,12 +240,12 @@
         <p>Our server is a blind relay that stores only the encrypted wallet response. Your browser tab decrypts it and makes the proof (Noir, UltraHonk). This is the route the demo runs. Same contract, same chain record.</p>
       </li>
       <li class="proof-step">
-        <span class="proof-when">When wallets ship provers</span>
+        <span class="proof-when">Route 3, not built</span>
         <span class="proof-where">The wallet</span>
-        <p>The wallet proves on the phone itself. The pre-existing verifier already accepts Longfellow proofs. Nothing on chain changes.</p>
+        <p>Future wallet-generated proofs could use the registry interface through a compatible verifier adapter. That integration is not implemented or demonstrated here.</p>
       </li>
     </ol>
-    <p class="proof-close reveal">Three routes, <span class="blue">one interface</span>.</p>
+    <p class="proof-close reveal">Two routes built, <span class="blue">one interface</span>.</p>
   </div>
 </section>
 
@@ -254,10 +254,10 @@
   <div class="wrap">
     <p class="label reveal">Why now</p>
     <p class="year reveal" aria-hidden="true">2027</p>
-    <h2 class="display reveal">The wallet arrives. <span class="blue">Finance has to accept it.</span></h2>
+    <h2 class="display reveal">The wallet arrives. <span class="blue">Listed services must accept it from 2027.</span></h2>
     <div class="why-grid">
-      <!-- Source: eIDAS 2, Art 5a (wallet obligation) and Art 5f(2) mandatory acceptance in banking and financial services. https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1183 -->
-      <p class="reveal">Member states must offer the wallet by the end of 2026, and banks and financial services must accept it from the end of 2027 (eIDAS 2, Art. 5a and Art. 5f).</p>
+      <!-- Source: eIDAS 2, Art 5a (wallet obligation) and Art 5f(2): from 24 December 2027, private relying parties in listed sectors (banking and financial services among them) that must use strong user authentication by law or contract also accept the wallet. https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1183 -->
+      <p class="reveal">From 24 December 2027, eIDAS 2 Article 5f requires private relying parties in listed sectors, banking and financial services among them, that must use strong user authentication by law or contract, to also accept the EUDI wallet. Whether a given issuer falls under that duty depends on its service and its member state. Article 5f creates no investment eligibility and no universal acceptance duty.</p>
       <p class="reveal">Every gated venue today filters by residence and sanctions through its own document funnel. Each funnel is another copy.</p>
       <p class="reveal">Attestat lets the issuer accept the state wallet's evidence and apply its approval to the investor's linked crypto wallet, without putting a document on chain. The issuer keeps its file; the chain keeps a decision.</p>
     </div>
