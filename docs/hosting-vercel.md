@@ -6,7 +6,7 @@ Written 2026-09-13 (about 15:10 Vienna) after the deployment was executed. Evide
 
 - Vercel project `attestat-site` in the team `7118eth-protonmes-projects` (team id `team_4tMJVcmU2CwbLxWlrMj4aMXM`, project id `prj_P2N0O7f0nhvXpvtte69BTj1Iml6n`). Created with `vercel link --yes --project attestat-site` on 2026-09-13 from this directory, CLI 50.1.3, logged in as `7118eth-3301`. FACT (CLI output).
 - Framework preset "Other", no build command, output directory `.` (the repository root is served as is). FACT (`vercel project inspect attestat-site`).
-- `vercel link` also connected the GitHub repository https://github.com/devdotbo/nachweis-site to the project on its own ("Connecting GitHub repository ... Connected"). Whether a push to `main` now triggers a production deployment on its own: unverified (the connection was reported by the CLI, no push-triggered build was observed yet; the deployments in this file were made with the CLI).
+- `vercel link` also connected the GitHub repository https://github.com/devdotbo/nachweis-site to the project on its own ("Connecting GitHub repository ... Connected"). A push to `main` triggers a production deployment on its own: FACT, the push of commit 0ee0e58 on 2026-09-13 produced a deployment with source `git` (Vercel API `/v6/deployments`), next to the CLI deployment of the same commit.
 - Production alias: https://attestat-site.vercel.app (public, no login). FACT (curl 2026-09-13, `HTTP/2 200`).
 - Per-deployment URLs look like https://attestat-site-6aksoqa3e-7118eth-protonmes-projects.vercel.app. They are behind Vercel deployment protection (curl returns a 302 to a Vercel SSO page), so do not paste those into the submission; use the alias or the custom domain. FACT (curl 2026-09-13, `HTTP/2 302`, location `https://vercel.com/sso-api?...`).
 - `vercel.json` at the repository root: `cleanUrls`, `trailingSlash: false`, `X-Content-Type-Options: nosniff` and `Referrer-Policy: strict-origin-when-cross-origin` on every path, `Cache-Control: public, max-age=31536000, immutable` on `/fonts/*`. No rewrites, no redirects.
@@ -45,7 +45,7 @@ Not added. `vercel domains add` has no redirect option in CLI 50.1.3 (only `--fo
 ## Redeploying
 
 - From this directory: `vercel deploy --prod --yes`. The CLI uploads the working tree (respecting `.gitignore` because there is no `.vercelignore`), builds nothing, and moves the `attestat-site.vercel.app` alias and the custom domains to the new deployment.
-- The GitHub connection made by `vercel link` should make a push to `main` deploy on its own; unverified today. If it does, the CLI deploy is still fine, both routes update the same production alias.
+- A push to `main` on GitHub deploys on its own (FACT, see above). The CLI deploy is still fine; both routes update the same production alias and domains.
 - A preview deployment (no alias move): `vercel deploy --yes`.
 
 ## Fallback URL for the submission
