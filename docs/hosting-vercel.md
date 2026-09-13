@@ -14,12 +14,15 @@ Written 2026-09-13 (about 15:10 Vienna) after the deployment was executed. Evide
 - Domains `attestat.dev` and `www.attestat.dev` are added to the project (`vercel domains add`, both "Success! Domain ... added to project attestat-site"). The Vercel API reports both as `verified: true` (no TXT ownership challenge is required) and `misconfigured: true` (DNS still points at the Porkbun parking host). FACT (`GET /v9/projects/attestat-site/domains/<name>` and `GET /v6/domains/<name>/config`, 2026-09-13).
 - `vercel domains inspect attestat.dev` and `vercel domains ls` answer with "You don't have access to the domain attestat.dev under 7118eth-protonmes-projects" (403) and "0 Domains found". That is the CLI view of team-level domains; the project-level domain assignment above is what serves traffic. Whether the CLI view changes after DNS is live: unverified.
 
-## Porkbun records to set for attestat.dev (builder)
+## DNS at Porkbun: set by API on 2026-09-13
 
-Porkbun, Domain Management, attestat.dev, Details, DNS Records. Current state (dig 2026-09-13): apex resolves to 207.207.210.107 and 207.207.210.229 (Porkbun parking), `www` is a CNAME to `pixie.porkbun.com`, nameservers are the four `*.ns.porkbun.com` hosts.
+DNS for attestat.dev was changed by the Porkbun API v3 (`dns/retrieve`, `dns/delete`, `dns/create`) on 2026-09-13 at about 15:03 Vienna, with the builder's authorization. Nameservers stay at Porkbun.
 
-1. Delete the Porkbun defaults for the apex (the ALIAS or A records pointing at the parking host) and the `www` CNAME to `pixie.porkbun.com`. They conflict with the records below.
-2. Add, TTL 600:
+Records found before the change (FACT, `dns/retrieve`): ALIAS apex to `pixie.porkbun.com`, CNAME `*.attestat.dev` to `pixie.porkbun.com` (the parking wildcard, which also covered www), and the four Porkbun NS records. No MX, no TXT.
+
+Deleted: the ALIAS on the apex and the wildcard CNAME (both parking records). The NS records were not touched.
+
+Created, TTL 600 (FACT, `dns/create` returned SUCCESS for each; `dns/retrieve` afterwards shows exactly these plus the NS records):
 
    | Type | Host | Answer |
    |---|---|---|
@@ -27,13 +30,15 @@ Porkbun, Domain Management, attestat.dev, Details, DNS Records. Current state (d
    | A | (blank, apex) | 64.29.17.1 |
    | CNAME | www | 474811c67fd4534c.vercel-dns-017.com |
 
-   These are the values the Vercel API returned as `recommendedIPv4` rank 1 and `recommendedCNAME` rank 1 for this project on 2026-09-13 (FACT, verbatim from `/v6/domains/attestat.dev/config`). Vercel's rank 2 alternatives, also valid: A `76.76.21.21` for the apex and CNAME `cname.vercel-dns.com` for `www`. Use one set, not both.
-3. No TXT record is needed: the API shows `verified: true` for both names and an empty `acceptedChallenges` list. If the Vercel dashboard (Project, Settings, Domains) nevertheless shows a `_vercel` TXT record, add exactly what the dashboard shows.
-4. No nameserver change. DNS stays at Porkbun.
+These are the values the Vercel API returned as `recommendedIPv4` rank 1 and `recommendedCNAME` rank 1 for this project (FACT, `/v6/domains/attestat.dev/config`, 2026-09-13). Vercel's rank 2 alternatives, not used: A `76.76.21.21`, CNAME `cname.vercel-dns.com`.
 
-## What happens after the records are saved
+No TXT record was needed: the API reports `verified: true` for both names and an empty `acceptedChallenges` list, and `vercel domains inspect` never asked for one (the CLI answers 403 for team-level domain data before and after; the project-level assignment is what serves traffic).
 
-- Vercel detects the records on its next check (the dashboard shows the domain as "Valid Configuration") and issues a Let's Encrypt certificate on its own, no click needed. Time to propagate: depends on Porkbun and the resolver, typically minutes at TTL 600; the old parking records may be cached longer where they were already looked up.
+Result (FACT, 2026-09-13 about 15:08 Vienna): the Vercel config endpoint reports `misconfigured: false`, `configuredBy: A` for the apex and `configuredBy: CNAME` for www. `dig +short attestat.dev A` returns 216.198.79.1 and 64.29.17.1. `curl -sI https://attestat.dev/` returns `HTTP/2 200`, `server: Vercel`, the nosniff and referrer-policy headers from vercel.json, and the page contains the hero line once. Certificate: Let's Encrypt, CN attestat.dev, valid 2026-09-13 to 2026-12-12, issued by Vercel without any manual step. https://www.attestat.dev also answers `HTTP/2 200` with its own Let's Encrypt certificate (CN www.attestat.dev, same validity), checked with `curl --resolve` against 216.198.79.1 because the local resolver still had the parking CNAME cached at that moment.
+
+## What happens after (observed and remaining)
+
+- Vercel detected the records within about four minutes and issued the Let's Encrypt certificate on its own (observed 2026-09-13). Resolvers that cached the old parking records at TTL 600 keep serving them until expiry; the local resolver here still showed the parking addresses for a few minutes after Porkbun's own nameservers had the new records.
 - `.dev` is on the HSTS preload list, so browsers refuse plain `http://attestat.dev`. The site is reachable only once the certificate exists. Vercel itself also sends `strict-transport-security: max-age=63072000; includeSubDomains; preload` (FACT, curl of the alias 2026-09-13).
 - `www.attestat.dev` is added as its own domain and serves the same project; Vercel does not redirect it to the apex unless a redirect is set in Project, Settings, Domains. Not set today.
 - Check from a terminal once DNS is live: `dig +short attestat.dev A` lists 216.198.79.1 and 64.29.17.1; `curl -sI https://attestat.dev | head -3` returns `HTTP/2 200`; `curl -s https://attestat.dev | grep -c "How many strangers"` is 1.
@@ -50,10 +55,9 @@ Not added. `vercel domains add` has no redirect option in CLI 50.1.3 (only `--fo
 
 ## Fallback URL for the submission
 
-If attestat.dev does not resolve to Vercel by 17:30 Vienna on 2026-09-13, paste https://attestat-site.vercel.app into the submission. It serves the same content, is public, and does not depend on DNS at Porkbun.
+https://attestat.dev is live (FACT, 2026-09-13 15:08 Vienna) and is the URL for the submission. If it ever stops resolving, https://attestat-site.vercel.app serves the same content, is public, and does not depend on DNS at Porkbun.
 
 ## Not done here, on purpose
 
-- No DNS change at Porkbun (builder action).
 - No repository visibility change.
 - No www-to-apex redirect, no defensive-domain redirects.
