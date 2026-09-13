@@ -1,5 +1,7 @@
 # Hosting attestat.dev
 
+2026-09-13: the site is deployed on Vercel instead; see docs/hosting-vercel.md. The GitHub Pages plan below is kept as history.
+
 Written 2026-09-08 for the builder. Nothing in this file has been executed: no DNS record was changed, no hosting was enabled, nothing was bought. Every step is the builder's. Evidence labels follow the wiki convention (FACT with source and date, unverified where not checked).
 
 ## What is hosted
