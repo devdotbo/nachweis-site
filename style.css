@@ -72,6 +72,9 @@ button{font:inherit;color:inherit}
 .btn-coral.is-restore{background:var(--mint);color:var(--mint-ink)}
 .cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.2rem}
 .cta-row.center{justify-content:center}
+.cta-link{align-self:center;padding:.4rem .2rem;font-family:var(--display);font-weight:500;font-size:.85rem;letter-spacing:.04em;color:var(--paper-dim);text-decoration:underline;text-underline-offset:.2em}
+.cta-link:hover{color:var(--paper)}
+.cta-note{margin-top:1rem;font-size:.9rem;color:var(--paper-mute);max-width:44ch}
 
 /* ---------- HERO ---------- */
 .hero{min-height:92vh;display:grid;place-items:center;background:radial-gradient(120% 90% at 80% 10%,rgba(59,109,255,.35),transparent 60%),radial-gradient(70% 60% at 10% 90%,rgba(255,77,109,.18),transparent 60%),var(--ink)}
@@ -285,6 +288,7 @@ button{font:inherit;color:inherit}
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;align-items:center;padding:2rem var(--pad);border-top:1px solid var(--line);font-size:.9rem;color:var(--paper-dim);max-width:100%}
 .foot a{color:var(--paper-dim);text-decoration:underline}
 .foot-domain{font-family:var(--text);font-weight:400;color:var(--paper-mute);margin-left:.6rem}
+.foot a.foot-domain{color:var(--paper-mute)}
 .foot-tag{font-family:var(--display);font-weight:700;color:var(--mint);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
 
 /* scroll reveal: resting state visible without JS; JS parks and reveals */
